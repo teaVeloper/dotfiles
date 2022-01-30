@@ -1,0 +1,4 @@
+Host host
+        HostName hostname
+        User username
+        IdentityFile ~/.ssh/id_file

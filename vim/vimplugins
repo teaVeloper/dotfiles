@@ -1,0 +1,57 @@
+call plug#begin()
+
+
+" Default settings from sensible plugin
+Plug 'tpope/vim-sensible'
+
+" Nerdtree
+"Plug 'preservim/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'ryanoasis/vim-devicons'
+" Status Line
+Plug 'itchyny/lightline.vim'
+" Undo History Tree
+"Plug 'mbbill/undotree'
+" Commenter
+Plug 'preservim/nerdcommenter'
+" Edit surroundings
+Plug 'tpope/vim-surround'
+Plug 'vim-syntastic/syntastic'
+Plug 'nvie/vim-flake8'
+Plug 'jnurmine/Zenburn'
+Plug 'altercation/vim-colors-solarized'
+Plug 'itspriddle/vim-shellcheck'
+
+Plug 'dracula/vim', { 'as': 'dracula' }
+
+" TMUX and VIM Navigation
+"Plug 'christoomey/vim-tmux-navigator'
+
+Plug 'junegunn/fzf.vim'
+
+"Plug 'majutsushi/tagbar'
+
+"Plug 'terryma/vim-multiple-cursors'
+
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-endwise'
+
+Plug 'bmustiata/vim-uc4'
+" autocomplete
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+
+Plug 'davidhalter/jedi-vim'
+
+Plug 'tpope/vim-unimpaired'
+
+" Docstring Formater
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
+
+" VIM only, no nvim support
+"Plug 'sillybun/vim-repl'
+"
+call plug#end()

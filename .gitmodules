@@ -1,0 +1,40 @@
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
+	ignore = dirty
+[submodule "bin/gibo"]
+	path = bin/gibo
+	url = https://github.com/simonwhitaker/gibo
+[submodule "dotbot-pip"]
+	path = dotbot-pip
+	url = https://github.com/sobolevn/dotbot-pip
+[submodule "submodule_tools/stderred"]
+	path = submodule_tools/stderred
+	url = https://github.com/sickill/stderred.git
+[submodule "submodule_tools/forgit"]
+	path = submodule_tools/forgit
+	url = https://github.com/wfxr/forgit
+[submodule "submodule_tools/zsh-bin"]
+	path = submodule_tools/zsh-bin
+	url = https://github.com/romkatv/zsh-bin.git
+[submodule "submodule_tools/lesspipe"]
+	path = submodule_tools/lesspipe
+	url = https://github.com/wofr06/lesspipe
+[submodule "submodule_tools/diff-so-fancy"]
+	path = submodule_tools/diff-so-fancy
+	url = https://github.com/so-fancy/diff-so-fancy.git
+[submodule "submodule_tools/bat-extras"]
+	path = submodule_tools/bat-extras
+	url = https://github.com/eth-p/bat-extras.git
+[submodule "submodule_tools/k9s"]
+	path = submodule_tools/k9s
+	url = https://github.com/derailed/k9s.git
+[submodule "submodule_tools/jenv"]
+	path = submodule_tools/jenv
+	url = https://github.com/jenv/jenv.git
+[submodule "submodule_tools/zsh-syntax-highlighting"]
+	path = submodule_tools/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "submodule_tools/zsh-git-prompt"]
+	path = submodule_tools/zsh-git-prompt
+	url = https://github.com/olivierverdier/zsh-git-prompt

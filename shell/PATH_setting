@@ -1,0 +1,2 @@
+export PATH=/home/$USER/.local/bin:$PATH
+export PATH=$PATH:/home/$USER/dotfiles/bin

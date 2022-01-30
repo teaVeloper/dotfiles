@@ -1,0 +1,66 @@
+[user]
+	email = berti.sedlak@gmail.com
+	name = Bertold Sedlak
+
+
+[credential]
+	helper = cache --timeout 7200000
+
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+[merge]
+  tool = nvim
+[mergetool]
+  prompt = false
+
+[core]
+  editor = nvim
+
+[difftool]
+    prompt = true
+[diff]
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = line-numbers decorations
+    whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+
+[alias]
+        ; Abbreviations
+        s = status
+        d = diff
+        dt = difftool
+        sw = switch
+        a = add
+        c = commit
+        c = commit --verbose
+        co = checkout
+        cob = checkout -b
+        br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+        ; l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+        ; Log
+        l = !git log --pretty=format:\"%C(magenta)%h %ad%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --decorate --date=short --abbrev-commit
+        ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+        ; Own functions
+        la = "!git config -l | grep alias | cut -c 7- | less"
+        lf = "!git ls-tree -r HEAD --name-only | less"
+        done = !git push origin HEAD
+        ll = "!ls -lahrt --color=always | grep --color=never \"$(git ls-files)\""
+[help]
+	autocorrect = 20

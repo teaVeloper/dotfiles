@@ -1,0 +1,13 @@
+# .bash_profile
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+export PATH
+export TMOUT=30000
+
+
+if [ -f ~/.zshrc ] && [ -n "$PS1" ]; then
+        ~/.local/bin/zsh
+fi
+. "$HOME/.cargo/env"
