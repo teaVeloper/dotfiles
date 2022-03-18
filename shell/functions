@@ -8,9 +8,8 @@ function xcfile
 }
 function xpfile
 {
-    cat << EOT >> $1
-$(xclip -selection clipboard -o)
-EOT
+        local filename=$1
+        xclip -o > $filename
 }
 
 function xcpipe
@@ -54,7 +53,7 @@ function addalias
 
 function proxy
 {
-    export {http,https}_proxy=${H_PROXY}
+    export {http,https}_proxy=proxy
 }
 
 function unproxy
@@ -74,5 +73,29 @@ create_python_venv () {
 
 activate_python_venv () {
     source "${PYTHON_VENVS}/$(basename $(pwd))/bin/activate"
+}
+
+dbfsl () {
+        dbfs ls dbfs:$1
+}
+
+
+vpn () {
+        local opt=$1
+        case $opt
+        in
+                start)
+                        sudo systemctl start vpn
+                        ;;
+                stop)
+                        sudo systemctl stop vpn
+                        ;;
+                status)
+                        systemctl status vpn
+                        ;;
+                restart)
+                        sudo systemctl restart vpn
+                        ;;
+        esac
 }
 

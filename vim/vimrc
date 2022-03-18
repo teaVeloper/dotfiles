@@ -96,6 +96,8 @@ Plug 'tpope/vim-endwise'
 Plug 'bmustiata/vim-uc4'
 
 Plug 'tpope/vim-unimpaired'
+Plug 'cespare/vim-toml', { 'branch': 'main' }
+
 
 " VIM only, no nvim support
 "Plug 'sillybun/vim-repl'

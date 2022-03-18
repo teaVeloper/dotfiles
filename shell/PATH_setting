@@ -1,2 +1,4 @@
 export PATH=/home/$USER/.local/bin:$PATH
 export PATH=$PATH:/home/$USER/dotfiles/bin
+export PATH=$PATH:/home/bertold/go/bin
+export PATH=~/.npm-global/bin:$PATH

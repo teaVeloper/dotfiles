@@ -174,6 +174,10 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'integralist/vim-mypy'
 
 Plug 'martinda/Jenkinsfile-vim-syntax'
+
+
+Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
+Plug 'cespare/vim-toml', { 'branch': 'main' }
 " {{ Java related
 
 " }}
@@ -214,7 +218,7 @@ let g:lightline = {
 
 " too long lines, 100 character, will be colored
 highlight OverLength ctermbg=DarkGrey ctermfg=white guibg=#592929
-match OverLength /\%>100v.\+/
+" match OverLength /\%>100v.\+/
 
 
 " {{ Tab Settings
@@ -370,6 +374,7 @@ nnoremap <Leader>v :vs<Enter>
 autocmd BufWritePre *.py :%s/\s\+$//e
 autocmd BufWritePre *.py execute ':Black'
 autocmd BufWritePre *.py execute ':Isort'
+autocmd BufWritePre *.yaml :%s/\s\+$//e
 autocmd BufWritePre *.yaml :%s/\s\+$//e
 
 " Hack Neoterm to use ptipython instead of ipython
