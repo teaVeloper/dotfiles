@@ -22,4 +22,4 @@ export GITLAB_HOST="https://gitlab.plob.cz/"
 export PASSWORD_STORE_X_SELECTION="primary"
 export PATH="$HOME/.jenv/bin:$PATH"
 export PYSPARK_PYTHON="/home/bertold/.local/bin/ptipython"
-export POWERLEVEL9K_VPN_IP_INTERFACE=ppp0
+export POWERLEVEL9K_VPN_IP_INTERFACE="ppp0"
