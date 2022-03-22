@@ -120,7 +120,10 @@ alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source /home/bertold/dotfiles/submodule_tools/zsh-git-prompt/zshrc.sh
 source $ZSH/oh-my-zsh.sh
-source ~/dotfiles/shell/shrc
+
+source $HOME/dotfiles/shell/aliases.sh
+source $HOME/dotfiles/shell/functions.sh
+
 
 # ZSH specific global aliases
 alias -g L='| less'
@@ -139,6 +142,7 @@ source /home/bertold/dotfiles/submodule_tools/zsh-syntax-highlighting/zsh-syntax
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+source ~/dotfiles/submodule_tools/forgit/forgit.plugin.zsh
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 eval "$(jenv init -)"
