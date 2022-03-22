@@ -124,8 +124,6 @@ Plug 'altercation/vim-colors-solarized'
 
 Plug 'dracula/vim', { 'as': 'dracula' }
 
-" TMUX and VIM Navigation
-Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -136,7 +134,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-endwise'
 
-Plug 'bmustiata/vim-uc4'
 " autocomplete
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
@@ -148,7 +145,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'tpope/vim-unimpaired'
 
 " Docstring Formater
-Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
+" Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 
 " projectionist - project specific mappings
 Plug 'tpope/vim-projectionist'
@@ -157,7 +154,7 @@ Plug 'tpope/vim-projectionist'
 Plug 'mileszs/ack.vim'
 
 " Black python formatter
-Plug 'psf/black', { 'branch': 'stable' }
+Plug 'psf/black'
 Plug 'fisadev/vim-isort'
 
 " Terminal
@@ -173,11 +170,13 @@ Plug 'editorconfig/editorconfig-vim'
 
 Plug 'integralist/vim-mypy'
 
-Plug 'martinda/Jenkinsfile-vim-syntax'
-
 
 Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
 Plug 'cespare/vim-toml', { 'branch': 'main' }
+
+Plug 'christoomey/vim-tmux-navigator' 
+Plug 'preservim/vimux'
+Plug 'jgdavey/tslime.vim'
 " {{ Java related
 
 " }}
