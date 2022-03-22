@@ -62,5 +62,6 @@
         lf = "!git ls-tree -r HEAD --name-only | less"
         done = !git push origin HEAD
         ll = "!ls -lahrt --color=always | grep --color=never \"$(git ls-files)\""
+        base-path = "rev-parse --show-toplevel"
 [help]
 	autocorrect = 20
