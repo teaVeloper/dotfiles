@@ -99,3 +99,10 @@ vpn () {
         esac
 }
 
+_is_git_repo () {
+    git rev-parse --is-inside-work-tree
+}
+
+_git_base_path() {
+    git rev-parse --show-toplevel
+}
