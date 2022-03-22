@@ -142,3 +142,8 @@ source /home/bertold/dotfiles/submodule_tools/zsh-syntax-highlighting/zsh-syntax
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 eval "$(jenv init -)"
+
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+source "${ZINIT_HOME}/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
