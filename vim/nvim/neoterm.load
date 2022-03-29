@@ -1,5 +1,0 @@
-source ~/dotfiles/init.vim
-
-"call plug#begin()
-"Plug 'kassio/neoterm'
-"call plug#end()

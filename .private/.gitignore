@@ -1,0 +1,5 @@
+# ignore basically everything, but the .gitignore file
+*.sh
+*.zsh
+/*
+!.gitignore

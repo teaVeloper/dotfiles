@@ -7,7 +7,6 @@ export PATH
 export TMOUT=30000
 
 
-if [ -f ~/.zshrc ] && [ -n "$PS1" ]; then
-        ~/.local/bin/zsh
-fi
 . "$HOME/.cargo/env"
+
+export PATH="$HOME/.poetry/bin:$PATH"

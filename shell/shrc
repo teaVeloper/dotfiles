@@ -5,7 +5,6 @@ source ~/dotfiles/shell/PATH_setting
 source ~/dotfiles/shell/env
 source ~/dotfiles/shell/aliases
 source ~/dotfiles/shell/functions
-# source ~/dotfiles/complete/*
 
 # LS_COLOURS https://github.com/trapd00r/LS_COLORS
 # . "~/.local/share/lscolors.sh"

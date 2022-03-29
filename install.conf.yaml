@@ -1,6 +1,6 @@
 - defaults:
-        link:
-                relink: true
+    link:
+      relink: true
 
 - clean: ['~']
 
@@ -9,18 +9,20 @@
       recursive: true
 
 - link:
-        ~/.tmux.conf: tmux/tmux.conf
-        ~/.ssh/config: ssh/ssh_config
-        ~/.config/ptpython/config.py: python/ptpython.config
-        ~/.bash_profile: bash/bash_profile
-        ~/.bashrc: bash/bashrc
-        #~/.fzf.zsh: zsh/fzf.zsh
-        ~/.shrc: shell/shrc
-        ~/.vimrc: vim/vimrc
-        ~/.zshrc: zsh/zshrc
-        ~/.config/nvim/init.vim: vim/init.vim
-        ~/.gitconfig: git/gitconfig
-        ~/.p10k.zsh: zsh/p10k.zsh
+    ~/.zshenv: zsh/zshenv.zsh
+    # Refactor after setup with XDG_CONFIG_HOME
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.ssh/config: ssh/ssh_config
+    ~/.config/ptpython/config.py: python/ptpython.config
+    ~/.bash_profile: bash/bash_profile
+    ~/.bashrc: bash/bashrc
+    #~/.fzf.zsh: zsh/fzf.zsh
+    ~/.shrc: shell/shrc
+    ~/.vimrc: vim/vimrc
+    ~/.zshrc: zsh/zshrc
+    ~/.config/nvim/init.vim: vim/init.vim
+    ~/.gitconfig: git/gitconfig
+    ~/.p10k.zsh: zsh/p10k.zsh
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
@@ -29,10 +31,10 @@
 - pip:
     file: requirements.txt
     user: true    # Like --user
-    stdout: false # Print the execution stdout
+    stdout: true # Print the execution stdout
     stderr: true  # Print the execution stderr
 
 - pipx:
     file: requirements-pipx.txt
-    stdout: false
+    stdout: true
     stderr: true

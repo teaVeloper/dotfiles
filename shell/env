@@ -1,7 +1,7 @@
 export EDITOR='nvim'
 export VISUAL=nvim
-export TERM="xterm-256color"
-export XTERM="xterm-256color"
+#export TERM="xterm-256color"
+#export XTERM="xterm-256color"
 # settings for less
 export LESS='--quit-if-one-screen --ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --window=-4'
 # Set colors for less. Borrowed from https://wiki.archlinux.org/index.php/Color_output_in_console#less .
@@ -17,3 +17,9 @@ export BASHRC="~/dotfiles/bash/bashrc"
 export SHRC="~/dotfiles/shell/shrc"
 export DOTFILE="~/dotfiles"
 export SHELL_CONFIG="~/dotfiles/shell"
+
+export GITLAB_HOST="https://gitlab.plob.cz/"
+export PASSWORD_STORE_X_SELECTION="primary"
+export PATH="$HOME/.jenv/bin:$PATH"
+export PYSPARK_PYTHON="/home/bertold/.local/bin/ptipython"
+export POWERLEVEL9K_VPN_IP_INTERFACE="ppp0"
