@@ -20,3 +20,6 @@
 [submodule "submodule_tools/gibo"]
 	path = submodule_tools/gibo
 	url = https://github.com/simonwhitaker/gibo
+[submodule "submodule_tools/pyenv"]
+	path = submodule_tools/pyenv
+	url = https://github.com/pyenv/pyenv.git
