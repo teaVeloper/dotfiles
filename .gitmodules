@@ -29,3 +29,9 @@
 [submodule "submodule_tools/PathPicker"]
 	path = submodule_tools/PathPicker
 	url = https://github.com/facebook/PathPicker.git
+[submodule "submodule_tools/pyenv"]
+	path = submodule_tools/pyenv
+	url = https://github.com/pyenv/pyenv.git
+[submodule "submodule_tools/fzf-notes"]
+	path = submodule_tools/fzf-notes
+	url = https://github.com/alichtman/fzf-notes.git

@@ -1,22 +1,26 @@
-" Default vimrc loading todo
+" ------------------------------------
+" 
+" NeoVim Configs, mayve also used for vim
 "
-"
-"TODO (Berti):  write a version compatible with vim - bit more basic and an
-"extended neovim version
-set nocompatible
-"set tgc
-"
-let localnvim = 'nvim-0.5.0-dev+1115-gc1fbc2ddf'
-let g:python3_host_prog = expand('/usr/bin/python3')
-" Below is a sample how to make adaptions only for newest (local) nvim version
-" if has(localnvim)
-        " set relativenumber
-" endif
+" Plugins managed via vim-plug https://github.com/junegunn/vim-plug
+"-------------------------------------
 
+" Import Plugins first
+source /home/bertold/dotfiles/vim/vimplugins.vim
+
+" Basic settings {{
+
+set nocompatible
 set encoding=utf-8
+
+let g:python3_host_prog = expand('/usr/bin/python3')
+
 set hidden
 
-colorscheme peachpuff
+" Enable termguicolors, as is more beautiful
+set termguicolors
+" Solarized theme works well in my terminal config
+colorscheme solarized
 syntax enable
 set tabstop=2
 set softtabstop=2
@@ -26,162 +30,64 @@ set number
 set wildmenu
 set showmatch
 set wrap
+
 " Prevent vim from creating swap files - most of the time they simply are
 " annoying
 set noswapfile
 
 
 
+" first \ is escape sequence, thus \ is leader
 let mapleader = "\\"
-let maplocalleader = "^H"
+" set - as localleader
+let maplocalleader = "-"
 
-"if has('gui_running')
-    "set background=dark
-    "colorscheme solarized
-"else
-    "colorscheme zenburn
-"end
+" Search Options and Mappings {{
 
-" set mouse=a " Not sure about this option
-
-" {{ search Options and Mappings
 " Startup with no search Highlighting
-    set nohlsearch
+set nohlsearch
 
 " Toggle HL Search
-    nnoremap <silent> <Leader>h :set invhlsearch<CR>
+nnoremap <silent> <Leader>h :set invhlsearch<CR>
 
 " realign search Results
-    nnoremap <Leader>n nzz
-    nnoremap <Leader>N Nzz
+nnoremap <Leader>n nzz
+nnoremap <Leader>N Nzz
 
 " }}
 
+" Edit vim settings
 nnoremap <leader>ev :split $MYVIMRC<cr>
 
 " Copy and Paste to system buffer to use in other tmux panes
-nnoremap <leader>y "+y
-nnoremap <leader>p "+p
+nnoremap <leader>y "*y
+nnoremap <leader>p "*p
 
-" Unmap Arrow Keys in normal, to get rid of habbit 
-" nnoremap <Up> <nop>
-" nnoremap <Down> <nop> 
-" nnoremap <Left> <nop> 
-" nnoremap <Right> <nop>
-
-"inoremap <Up> <nop>
-"inoremap <Down> <nop> 
-"inoremap <Left> <nop> 
-"inoremap <Right> <nop>
 
 " {{ movement customization
 
 " switch visual line and per line movement
-    nnoremap j gj
-    nnoremap gj j
-    nnoremap k gk
-    nnoremap gk k
+nnoremap j gj
+nnoremap gj j
+nnoremap k gk
+nnoremap gk k
 " use easier bindings for begining and end of line
-    nnoremap H ^
-    nnoremap L $
+" nnoremap H ^
+" nnoremap L $
 
 
+" annoyed me when pressing unintentional.. mauybe will change
 nnoremap Q <nop>
+
+"Save on <Leader>w to not have to press :
+noremap <Leader>w :write<CR>
+noremap <Leader>wq :wq<CR>
+
+
 set laststatus=2
 let python_highlight_all=1
 syntax on
 
-" {{ Plugins using vim-plug:
-call plug#begin()
-
-
-" Default settings from sensible plugin
-Plug 'tpope/vim-sensible'
-
-" Syntax Highlighting
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-"Plug 'Xuyuanp/nerdtree-git-plugin'
-"Plug 'ryanoasis/vim-devicons'
-"
-" Status Line
-Plug 'itchyny/lightline.vim'
-
-" Undo History Tree
-"Plug 'mbbill/undotree'
-"
-" Comments
-Plug 'preservim/nerdcommenter'
-" Edit surroundings
-Plug 'tpope/vim-surround'
-" Syntax
-Plug 'vim-syntastic/syntastic'
-Plug 'nvie/vim-flake8'
-Plug 'itspriddle/vim-shellcheck'
-" ?
-Plug 'jnurmine/Zenburn'
-
-Plug 'altercation/vim-colors-solarized'
-
-Plug 'dracula/vim', { 'as': 'dracula' }
-
-
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-"Plug 'majutsushi/tagbar'
-
-
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-endwise'
-
-" autocomplete
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-
-Plug 'davidhalter/jedi-vim'
-
-Plug 'tpope/vim-unimpaired'
-
-" Docstring Formater
-" Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
-
-" projectionist - project specific mappings
-Plug 'tpope/vim-projectionist'
-"
-" Ack-Grep Wrapper
-Plug 'mileszs/ack.vim'
-
-" Black python formatter
-Plug 'psf/black'
-Plug 'fisadev/vim-isort'
-
-" Terminal
-if has('nvim-0.5.0-dev+1115-gc1fbc2ddf')
-        Plug 'kassio/neoterm'
-endif
-
-" Tests
-Plug 'vim-test/vim-test'
-
-" For editorconfig project
-Plug 'editorconfig/editorconfig-vim'
-
-Plug 'integralist/vim-mypy'
-
-
-Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
-Plug 'cespare/vim-toml', { 'branch': 'main' }
-
-Plug 'christoomey/vim-tmux-navigator' 
-Plug 'preservim/vimux'
-Plug 'jgdavey/tslime.vim'
-" {{ Java related
-
-" }}
-"
-call plug#end()
 
 let g:syntastic_python_checker = ['flake8']
 let g:syntastic_python_checkers = ['python']
@@ -193,6 +99,12 @@ let g:NERDSpaceDelims = 1
 let g:NERDAltDelims_python = 1
 
 
+" ALE Settings
+" Allow longer lines .e.g. 120 can be changed later
+" ignore C0330 hanging indents, as black formats different
+let g:ale_python_flake8_options = '--max-line-length=120 --ignore=C0330'
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
 
 let g:lightline = { 
    \     'colorscheme': 'wombat',
@@ -206,6 +118,7 @@ let g:lightline = {
    \ }
 
 " Insert customized todo
+" " TODO (Berti): rething mappings!
     nnoremap <Leader>td :call NERDComment(0, "append")<C-m>TODO (Berti): 
     inoremap <C-t> <Esc>:call NERDComment(0, "append")<C-m>TODO (Berti): 
 
@@ -216,6 +129,7 @@ let g:lightline = {
     set completeopt=noinsert,menuone,noselect
 
 " too long lines, 100 character, will be colored
+" " TODO (Berti): annoyed me, need to refactor
 highlight OverLength ctermbg=DarkGrey ctermfg=white guibg=#592929
 " match OverLength /\%>100v.\+/
 
@@ -331,40 +245,32 @@ nnoremap <S-F8> :call NextColor(-1)<CR>
 nnoremap <A-F8> :call NextColor(0)<CR>
 
 " Terminal Mode escaping with Esc - 
-if has('nvim')
-        tnoremap <Esc> <C-\><C-n>
-        tnoremap <C-v><Esc> <Esc>
-endif
+" if has('nvim')
+        " tnoremap <Esc> <C-\><C-n>
+        " tnoremap <C-v><Esc> <Esc>
+" endif
 
 
-" }}
-"
-"
-" {{ Remap Windows Movements 
-nnoremap <M-Left> <c-w>h
-nnoremap <M-Down> <c-w>j
-nnoremap <M-Up> <c-w>k
-nnoremap <M-Right> <c-w>l
-inoremap <M-Left> <Esc><c-w>h
-inoremap <M-Down> <Esc><c-w>j
-inoremap <M-Up> <Esc><c-w>k
-inoremap <M-Right> <Esc><c-w>l
-nnoremap <M-h> <c-w>h
-nnoremap <M-j> <c-w>j
-nnoremap <M-k> <c-w>k
-nnoremap <M-l> <c-w>l
-inoremap <M-h> <Esc><c-w>h
-inoremap <M-j> <Esc><c-w>j
-inoremap <M-k> <Esc><c-w>k
-inoremap <M-l> <Esc><c-w>l
-if has('nvim')
-        tnoremap <M-h> <c-\><c-n><c-w>h
-        tnoremap <M-j> <c-\><c-n><c-w>j
-        tnoremap <M-k> <c-\><c-n><c-w>k
-        tnoremap <M-l> <c-\><c-n><c-w>l
-        autocmd WinEnter term://* startinsert
-        autocmd TermOpen * startinsert
-endif
+
+
+"  Remap Windows Movements {{
+inoremap <C-Left> <Esc><c-w>h
+inoremap <C-Down> <Esc><c-w>j
+inoremap <C-Up> <Esc><c-w>k
+inoremap <C-Right> <Esc><c-w>l
+
+inoremap <C-h> <Esc><c-w>h
+inoremap <C-j> <Esc><c-w>j
+inoremap <C-k> <Esc><c-w>k
+inoremap <C-l> <Esc><c-w>l
+" if has('nvim')
+        " tnoremap <M-h> <c-\><c-n><c-w>h
+        " tnoremap <M-j> <c-\><c-n><c-w>j
+        " tnoremap <M-k> <c-\><c-n><c-w>k
+        " tnoremap <M-l> <c-\><c-n><c-w>l
+        " autocmd WinEnter term://* startinsert
+        " autocmd TermOpen * startinsert
+" endif
 
 " vertical split
 nnoremap <Leader>v :vs<Enter>
@@ -376,15 +282,12 @@ autocmd BufWritePre *.py execute ':Isort'
 autocmd BufWritePre *.yaml :%s/\s\+$//e
 autocmd BufWritePre *.yaml :%s/\s\+$//e
 
-" Hack Neoterm to use ptipython instead of ipython
-" let g:neoterm_repl_python = ['ptipython', '"""', 'ipython', '"""', '', 'clear']
-
 
 " {{ Mapping for NEOTERM REPL
-if has(localnvim)
-    nnoremap <Leader><CR> :TREPLSendLine<CR>
-    vnoremap <Leader><CR> :TREPLSendSelection<CR>
-endif
+" if has(localnvim)
+    " nnoremap <Leader><CR> :TREPLSendLine<CR>
+    " vnoremap <Leader><CR> :TREPLSendSelection<CR>
+" endif
 
 " Make Vim take hql files as sql
-au BufNewFile,BufRead *.hql set filetype=sql
+" au BufNewFile,BufRead *.hql set filetype=sql
