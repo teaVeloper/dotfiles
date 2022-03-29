@@ -5,6 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+export FPP_DISABLE_SPLIT=1
 fpath=(/home/bertold/dotfiles/completion/zsh $fpath)
 # Settings for all shells
 #
@@ -145,9 +146,20 @@ source /home/bertold/dotfiles/submodule_tools/zsh-syntax-highlighting/zsh-syntax
 source ~/dotfiles/submodule_tools/forgit/forgit.plugin.zsh
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
-eval "$(jenv init -)"
+# eval "$(jenv init -)"
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
+
+if hash pyenv; then
+    eval "$(pyenv init -)"
+fi
+
+
+# PATH="/home/bertold/perl5/bin${PATH:+:${PATH}}"; export PATH;
+# PERL5LIB="/home/bertold/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+# PERL_LOCAL_LIB_ROOT="/home/bertold/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+# PERL_MB_OPT="--install_base \"/home/bertold/perl5\""; export PERL_MB_OPT;
+# PERL_MM_OPT="INSTALL_BASE=/home/bertold/perl5"; export PERL_MM_OPT;

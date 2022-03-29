@@ -56,7 +56,6 @@ alias vc="create_python_venv"
 alias va="activate_python_venv"
 alias vd="deactivate"
 
-alias bat='batcat'
 alias fd='fdfind'
 
 alias python='python3'
@@ -66,3 +65,4 @@ alias aptu='sudo apt update'
 alias aptug='sudo apt upgrade'
 alias play='cd /home/bertold/projects/playground'
 alias vim='nvim'
+alias poetenv='poetry env info -p'

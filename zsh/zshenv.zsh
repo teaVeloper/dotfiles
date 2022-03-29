@@ -23,6 +23,7 @@ export WORKSPACE="$HOME/workspace"
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CACHE_HOME=$HOME/.cache
+export XDG_STATE_HOME=$HOME/.local/state
 export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 # TODO (Berti): XDG_DATA_DIRS
 #
@@ -33,8 +34,8 @@ export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
 export EDITOR='nvim'
 export VISUAL='nvim'
-export PAGER='bat'
-# export MANPAGER='nvim +Man!'
+# export PAGER='batcat'
+export MANPAGER='nvim +Man!'
 
 # -----------------------
 # Applications
@@ -54,7 +55,7 @@ export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 
 # #--------- Python Stack
 # Python
-# export PYENV_ROOT=/usr/local/var/pyenv
+export PYENV_ROOT=$HOME/.local/pyenv
 # export PYLINTHOME="$XDG_CACHE_HOME"/pylint.d
 # export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
 export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
@@ -109,6 +110,7 @@ export NVM_DIR="$HOME/.config/nvm"
 # Tmux stack
 # export TMUXP_CONFIGDIR="$XDG_CONFIG_HOME/tmuxp"
 export TMUX_PLUGIN_MANAGER_PATH="$XDG_CONFIG_HOME"/tmux/plugins/
+export TMUXP_CONFIGDIR="$XDG_CONFIG_HOME"/tmux/tmuxp
 
 # zsh + tools
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
@@ -134,4 +136,7 @@ export PATH="$PATH:/usr/local"
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:/usr/sbin"
-# export PATH="$PYENV_ROOT/bin:$PATH"
+
+if hash pyenv; then
+    eval "$(pyenv init --path)"
+fi
