@@ -13,6 +13,8 @@ source /home/bertold/dotfiles/vim/vimplugins.vim
 set nocompatible
 set encoding=utf-8
 
+
+
 let g:python3_host_prog = expand('/usr/bin/python3')
 
 set hidden
@@ -83,6 +85,16 @@ nnoremap Q <nop>
 noremap <Leader>w :write<CR>
 noremap <Leader>wq :wq<CR>
 
+" Accidently running :W for saving shall create desired result
+command! W w
+
+" Shortcut for fuzzfinder
+noremap <Leader>ed :FZF<CR>
+
+" behaviour of FZF search
+let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
+
+
 
 set laststatus=2
 let python_highlight_all=1
@@ -103,8 +115,8 @@ let g:NERDAltDelims_python = 1
 " Allow longer lines .e.g. 120 can be changed later
 " ignore C0330 hanging indents, as black formats different
 let g:ale_python_flake8_options = '--max-line-length=120 --ignore=C0330'
-let g:ale_sign_error = '●'
-let g:ale_sign_warning = '.'
+" let g:ale_sign_error = '●'
+" let g:ale_sign_warning = '.'
 
 let g:lightline = { 
    \     'colorscheme': 'wombat',

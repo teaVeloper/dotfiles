@@ -84,6 +84,9 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'preservim/vimux'
 Plug 'jgdavey/tslime.vim'
 
+" seek with s and two characters like f
+Plug 'goldfeld/vim-seek'
+
 " Vim ale
 Plug 'dense-analysis/ale'
 call plug#end()
