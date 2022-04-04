@@ -116,6 +116,14 @@ export TMUXP_CONFIGDIR="$XDG_CONFIG_HOME"/tmux/tmuxp
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export _Z_DATA="$XDG_CACHE_HOME"/.z
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
+export HISTSIZE=1000000
+export SAVEHIST=$HISTSIZE
+#append into history file
+setopt INC_APPEND_HISTORY
+#save only one command if 2 common are same and consistent
+setopt HIST_IGNORE_DUPS
+#add timestamp for each entry
+setopt EXTENDED_HISTORY
 
 # zinit
 declare -A ZINIT
