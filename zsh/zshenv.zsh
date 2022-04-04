@@ -145,6 +145,6 @@ export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:/usr/sbin"
 
-if hash pyenv; then
-    eval "$(pyenv init --path)"
+if hash pyenv 2>/dev/null; then
+   eval "$(pyenv init --path)"
 fi

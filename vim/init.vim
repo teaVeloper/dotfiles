@@ -6,7 +6,7 @@
 "-------------------------------------
 
 " Import Plugins first
-source /home/bertold/dotfiles/vim/vimplugins.vim
+source $HOME/dotfiles/vim/vimplugins.vim
 
 " Basic settings {{
 
