@@ -15,6 +15,7 @@
 
 [core]
   editor = nvim
+	excludesfile = /home/bertold/.gitignore
 
 [difftool]
     prompt = true
