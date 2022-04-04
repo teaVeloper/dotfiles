@@ -89,4 +89,15 @@ Plug 'goldfeld/vim-seek'
 
 " Vim ale
 Plug 'dense-analysis/ale'
+
+" Filetypes
+Plug '/sheerun/vim-polyglot'
+
+" Colorscheme and Management
+Plug 'whatever555/vanity'
+Plug 'flazz/vim-colorschemes'
+" Plug 'rafi/awesome-vim-colorschemes'
+" Plug 'rainglow/vim'
+" Plug 'mswift42/vim-themes'
+
 call plug#end()

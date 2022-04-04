@@ -52,13 +52,13 @@ set nohlsearch
 " Toggle HL Search
 nnoremap <silent> <Leader>h :set invhlsearch<CR>
 
-" realign search Results
-nnoremap <Leader>n nzz
-nnoremap <Leader>N Nzz
+" realign search Results - conflicts with some Plugin and never use
+" nnoremap <Leader>n nzz
+" nnoremap <Leader>N Nzz
 
 " }}
 
-" Edit vim settings
+" Edit vim settings " TODO (Berti): Change to localleader..
 nnoremap <leader>ev :split $MYVIMRC<cr>
 
 " Copy and Paste to system buffer to use in other tmux panes
@@ -73,19 +73,15 @@ nnoremap j gj
 nnoremap gj j
 nnoremap k gk
 nnoremap gk k
-" use easier bindings for begining and end of line
-" nnoremap H ^
-" nnoremap L $
-
 
 " annoyed me when pressing unintentional.. mauybe will change
 nnoremap Q <nop>
 
 "Save on <Leader>w to not have to press :
 noremap <Leader>w :write<CR>
-noremap <Leader>wq :wq<CR>
 
 " Accidently running :W for saving shall create desired result
+" Also W command annoyed me
 command! W w
 
 " Shortcut for fuzzfinder
@@ -93,7 +89,6 @@ noremap <Leader>ed :FZF<CR>
 
 " behaviour of FZF search
 let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
-
 
 
 set laststatus=2
@@ -152,109 +147,10 @@ hi TabLineSel   guifg=#666 guibg=#222 gui=bold ctermfg=231 ctermbg=235 cterm=bol
 hi TabLineFill  guifg=#999 guibg=#222 gui=none ctermfg=254 ctermbg=238 cterm=none
 
 
-" {{  Colorscheme stuff copied:
-
-" Change the color scheme from a list of color scheme names.
-" Version 2010-09-12 from http://vim.wikia.com/wiki/VimTip341
-" Press key:
-"   F8                next scheme
-"   Shift-F8          previous scheme
-"   Alt-F8            random scheme
-" Set the list of color schemes used by the above (default is 'all'):
-"   :SetColors all              (all $VIMRUNTIME/colors/*.vim)
-"   :SetColors my               (names built into script)
-"   :SetColors blue slate ron   (these schemes)
-"   :SetColors                  (display current scheme names)
-" Set the current color scheme based on time of day:
-"   :SetColors now
-if v:version < 700 || exists('loaded_setcolors') || &cp
-  finish
-endif
-
-let loaded_setcolors = 1
-let s:mycolors = [ 'blue', 'darkblue', 'default', 'delek', 'desert', 'dracula', 'elflord', 'evening', 'industry', 'koehler', 'morning', 'murphy', 'pablo', 'peachpuff', 'ron', 'shine', 'slate', 'solarized', 'torte', 'zellner', 'zenburn' ] 
-" colorscheme names that we use to set color
-
-
-" Set list of color scheme names that we will use, except
-" argument 'now' actually changes the current color scheme.
-function! s:SetColors(args)
-  if len(a:args) == 0
-    echo 'Current color scheme names:'
-    let i = 0
-    while i < len(s:mycolors)
-      echo '  '.join(map(s:mycolors[i : i+4], 'printf("%-14s", v:val)'))
-      let i += 5
-    endwhile
-  elseif a:args == 'all'
-    let paths = split(globpath(&runtimepath, 'colors/*.vim'), "\n")
-    let s:mycolors = uniq(sort(map(paths, 'fnamemodify(v:val, ":t:r")')))
-    echo 'List of colors set from all installed color schemes'
-  elseif a:args == 'my'
-    let c1 = 'default elflord peachpuff desert256 breeze morning'
-    let c2 = 'darkblue gothic aqua earth black_angus relaxedgreen'
-    let c3 = 'darkblack freya motus impact less chocolateliquor'
-    let s:mycolors = split(c1.' '.c2.' '.c3)
-    echo 'List of colors set from built-in names'
-  elseif a:args == 'now'
-    call s:HourColor()
-  else
-    let s:mycolors = split(a:args)
-    echo 'List of colors set from argument (space-separated names)'
-  endif
-endfunction
-
-command! -nargs=* SetColors call s:SetColors('<args>')
-
-" Set next/previous/random (how = 1/-1/0) color from our list of colors.
-" The 'random' index is actually set from the current time in seconds.
-" Global (no 's:') so can easily call from command line.
-function! NextColor(how)
-  call s:NextColor(a:how, 1)
-endfunction
-
-" Helper function for NextColor(), allows echoing of the color name to be
-" disabled.
-function! s:NextColor(how, echo_color)
-  if len(s:mycolors) == 0
-    call s:SetColors('all')
-  endif
-  if exists('g:colors_name')
-    let current = index(s:mycolors, g:colors_name)
-  else
-    let current = -1
-  endif
-  let missing = []
-  let how = a:how
-  for i in range(len(s:mycolors))
-    if how == 0
-      let current = localtime() % len(s:mycolors)
-      let how = 1  " in case random color does not exist
-    else
-      let current += how
-      if !(0 <= current && current < len(s:mycolors))
-        let current = (how>0 ? 0 : len(s:mycolors)-1)
-      endif
-    endif
-    try
-      execute 'colorscheme '.s:mycolors[current]
-      break
-    catch /E185:/
-      call add(missing, s:mycolors[current])
-    endtry
-  endfor
-  redraw
-  if len(missing) > 0
-    echo 'Error: colorscheme not found:' join(missing)
-  endif
-  if (a:echo_color)
-    echo g:colors_name
-  endif
-endfunction
-
-nnoremap <F8> :call NextColor(1)<CR>
-nnoremap <S-F8> :call NextColor(-1)<CR>
-nnoremap <A-F8> :call NextColor(0)<CR>
+" TODO (Berti): Review Vanity.. not really nice working..
+nnoremap <F8> :VanityNextCol<CR>
+nnoremap <F9> :VanityPrevCol<CR>
+let g:vanity_default_colors = {'allFiles': 'solarized'}
 
 " Terminal Mode escaping with Esc - 
 " if has('nvim')
@@ -289,10 +185,10 @@ nnoremap <Leader>v :vs<Enter>
 
 " delete trailiing whitespaces before saving py or yaml files
 autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre *.yaml :%s/\s\+$//e
+" Run Black and Isort on Python files
 autocmd BufWritePre *.py execute ':Black'
 autocmd BufWritePre *.py execute ':Isort'
-autocmd BufWritePre *.yaml :%s/\s\+$//e
-autocmd BufWritePre *.yaml :%s/\s\+$//e
 
 
 " {{ Mapping for NEOTERM REPL
@@ -300,6 +196,3 @@ autocmd BufWritePre *.yaml :%s/\s\+$//e
     " nnoremap <Leader><CR> :TREPLSendLine<CR>
     " vnoremap <Leader><CR> :TREPLSendSelection<CR>
 " endif
-
-" Make Vim take hql files as sql
-" au BufNewFile,BufRead *.hql set filetype=sql
