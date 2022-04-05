@@ -122,7 +122,7 @@ alias zshconfig="vim ~/.zshrc"
 source $HOME/dotfiles/submodule_tools/zsh-git-prompt/zshrc.sh
 source $ZSH/oh-my-zsh.sh
 
-source $HOME/dotfiles/shell/aliases.sh
+source $HOME/dotfiles/shell/alias.sh
 source $HOME/dotfiles/shell/functions.sh
 
 

@@ -8,9 +8,8 @@ function xcfile
 }
 function xpfile
 {
-    cat << EOT >> $1
-$(xclip -selection clipboard -o)
-EOT
+        local filename=$1
+        xclip -o > $filename
 }
 
 function xcpipe
@@ -85,18 +84,19 @@ vpn () {
         local opt=$1
         case $opt
         in
-                start)
-                        sudo systemctl start vpn
-                        ;;
-                stop)
-                        sudo systemctl stop vpn
-                        ;;
                 status)
                         systemctl status vpn
                         ;;
-                restart)
-                        sudo systemctl restart vpn
+                *)
+                        sudo systemctl $opt vpn
                         ;;
         esac
 }
 
+_is_git_repo () {
+    git rev-parse --is-inside-work-tree
+}
+
+_git_base_path() {
+    git rev-parse --show-toplevel
+}
