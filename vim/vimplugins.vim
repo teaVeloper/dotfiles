@@ -94,7 +94,8 @@ Plug 'dense-analysis/ale'
 Plug '/sheerun/vim-polyglot'
 
 " Colorscheme and Management
-Plug 'whatever555/vanity'
+" Vanity is very annoying and aggresive
+" Plug 'whatever555/vanity'
 Plug 'flazz/vim-colorschemes'
 " Plug 'rafi/awesome-vim-colorschemes'
 " Plug 'rainglow/vim'

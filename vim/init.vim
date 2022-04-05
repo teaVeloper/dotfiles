@@ -1,34 +1,49 @@
-" ------------------------------------
-" 
-" NeoVim Configs, mayve also used for vim
+" -----------------------------------------------------------------------
+" NeoVim Configs, maybe also used for vim
 "
 " Plugins managed via vim-plug https://github.com/junegunn/vim-plug
-"-------------------------------------
+" -----------------------------------------------------------------------
 
-" Import Plugins first
+" Import Plugins {{{
 source $HOME/dotfiles/vim/vimplugins.vim
 
-" Basic settings {{
+" }}}
 
+" -----------------------------------------------------------------------
+" Basic Settings {{{
+
+" Not compatible with vi - open up more featues
 set nocompatible
+
+" Basic encoding
 set encoding=utf-8
 
-
-
-let g:python3_host_prog = expand('/usr/bin/python3')
-
+" allow hidden buffers
 set hidden
 
 " Enable termguicolors, as is more beautiful
 set termguicolors
 " Solarized theme works well in my terminal config
-colorscheme solarized
+colorscheme solarized8_dark_flat
+
+" Syntax Highlighting
 syntax enable
+
+" Tabsettings
 set tabstop=2
 set softtabstop=2
 set expandtab
+
+" Show ruler in statusline
 set ruler
+
+" Add line numbers by default
 set number
+
+
+set laststatus=2
+let python_highlight_all=1
+
 set wildmenu
 set showmatch
 set wrap
@@ -37,36 +52,38 @@ set wrap
 " annoying
 set noswapfile
 
+" Startup with no search Highlighting - annoys me, can be toggled
+set nohlsearch
 
+let g:python3_host_prog = expand('/usr/bin/python3')
+
+" Set folding on markers by default
+set foldmethod=marker
+
+" }}}
+" -----------------------------------------------------------------------
+
+" -----------------------------------------------------------------------
+" Key Bindings / Mappings {{{
 
 " first \ is escape sequence, thus \ is leader
 let mapleader = "\\"
 " set - as localleader
 let maplocalleader = "-"
 
-" Search Options and Mappings {{
-
-" Startup with no search Highlighting
-set nohlsearch
-
 " Toggle HL Search
 nnoremap <silent> <Leader>h :set invhlsearch<CR>
 
-" realign search Results - conflicts with some Plugin and never use
-" nnoremap <Leader>n nzz
-" nnoremap <Leader>N Nzz
+" Edit vim settings 
+nnoremap <localleader>ev :split $MYVIMRC<cr>
 
-" }}
-
-" Edit vim settings " TODO (Berti): Change to localleader..
-nnoremap <leader>ev :split $MYVIMRC<cr>
-
-" Copy and Paste to system buffer to use in other tmux panes
+" Copy and Paste to system buffers 
 nnoremap <leader>y "*y
 nnoremap <leader>p "*p
 
+nnoremap <localleader>y "+y
+nnoremap <localleader>p "+p
 
-" {{ movement customization
 
 " switch visual line and per line movement
 nnoremap j gj
@@ -85,21 +102,48 @@ noremap <Leader>w :write<CR>
 command! W w
 
 " Shortcut for fuzzfinder
-noremap <Leader>ed :FZF<CR>
+nnoremap <Leader>e :FZF<CR>
+
+"  Remap Windows Movements {{{
+inoremap <C-Left> <Esc><c-w>h
+inoremap <C-Down> <Esc><c-w>j
+inoremap <C-Up> <Esc><c-w>k
+inoremap <C-Right> <Esc><c-w>l
+
+inoremap <C-h> <Esc><c-w>h
+inoremap <C-j> <Esc><c-w>j
+inoremap <C-k> <Esc><c-w>k
+inoremap <C-l> <Esc><c-w>l
+
+" vertical split
+nnoremap <Leader>v :vs<Enter>
+
+"}}} 
+
+" Insert customized todo
+" " TODO (Berti): rething mappings!
+    nnoremap <Leader>td :call NERDComment(0, "append")<C-m>TODO (Berti): 
+    inoremap <C-t> <Esc>:call NERDComment(0, "append")<C-m>TODO (Berti): 
+
+" TODO (Berti): Review Vanity.. not really nice working..
+nnoremap <F8> :VanityNextCol<CR>
+nnoremap <F9> :VanityPrevCol<CR>
+
+" }}}
+" -----------------------------------------------------------------------
+
+" -----------------------------------------------------------------------
+"  Plugin Config {{{
 
 " behaviour of FZF search
 let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
 
-
-set laststatus=2
-let python_highlight_all=1
-syntax on
-
-
+" Linting {{{
 let g:syntastic_python_checker = ['flake8']
 let g:syntastic_python_checkers = ['python']
 let g:syntastic_python_python_exec = 'python3'
 
+" Comments (now NERDComment change to vim-comment)
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 " Use alternative Format for Python as default (no space as is added already)
@@ -113,6 +157,8 @@ let g:ale_python_flake8_options = '--max-line-length=120 --ignore=C0330'
 " let g:ale_sign_error = '●'
 " let g:ale_sign_warning = '.'
 
+"  }}}
+
 let g:lightline = { 
    \     'colorscheme': 'wombat',
    \     'active': {
@@ -124,10 +170,6 @@ let g:lightline = {
    \     },
    \ }
 
-" Insert customized todo
-" " TODO (Berti): rething mappings!
-    nnoremap <Leader>td :call NERDComment(0, "append")<C-m>TODO (Berti): 
-    inoremap <C-t> <Esc>:call NERDComment(0, "append")<C-m>TODO (Berti): 
 
 " enable ncm2 for all buffers
     autocmd BufEnter * call ncm2#enable_for_buffer()
@@ -135,53 +177,23 @@ let g:lightline = {
 " IMPORTANT: :help Ncm2PopupOpen for more information
     set completeopt=noinsert,menuone,noselect
 
-" too long lines, 100 character, will be colored
-" " TODO (Berti): annoyed me, need to refactor
-highlight OverLength ctermbg=DarkGrey ctermfg=white guibg=#592929
-" match OverLength /\%>100v.\+/
+" let g:vanity_default_colors = {'allFiles': 'solarized'}
 
+" }}}
+" -----------------------------------------------------------------------
 
-" {{ Tab Settings
+" -----------------------------------------------------------------------
+" Layout {{{
+"  Tab Settings
 hi TabLine      guifg=#333 guibg=#222 gui=none ctermfg=254 ctermbg=238 cterm=none
 hi TabLineSel   guifg=#666 guibg=#222 gui=bold ctermfg=231 ctermbg=235 cterm=bold
 hi TabLineFill  guifg=#999 guibg=#222 gui=none ctermfg=254 ctermbg=238 cterm=none
 
+" }}}
+" -----------------------------------------------------------------------
 
-" TODO (Berti): Review Vanity.. not really nice working..
-nnoremap <F8> :VanityNextCol<CR>
-nnoremap <F9> :VanityPrevCol<CR>
-let g:vanity_default_colors = {'allFiles': 'solarized'}
-
-" Terminal Mode escaping with Esc - 
-" if has('nvim')
-        " tnoremap <Esc> <C-\><C-n>
-        " tnoremap <C-v><Esc> <Esc>
-" endif
-
-
-
-
-"  Remap Windows Movements {{
-inoremap <C-Left> <Esc><c-w>h
-inoremap <C-Down> <Esc><c-w>j
-inoremap <C-Up> <Esc><c-w>k
-inoremap <C-Right> <Esc><c-w>l
-
-inoremap <C-h> <Esc><c-w>h
-inoremap <C-j> <Esc><c-w>j
-inoremap <C-k> <Esc><c-w>k
-inoremap <C-l> <Esc><c-w>l
-" if has('nvim')
-        " tnoremap <M-h> <c-\><c-n><c-w>h
-        " tnoremap <M-j> <c-\><c-n><c-w>j
-        " tnoremap <M-k> <c-\><c-n><c-w>k
-        " tnoremap <M-l> <c-\><c-n><c-w>l
-        " autocmd WinEnter term://* startinsert
-        " autocmd TermOpen * startinsert
-" endif
-
-" vertical split
-nnoremap <Leader>v :vs<Enter>
+" -----------------------------------------------------------------------
+" Autocommand Groups {{{
 
 " delete trailiing whitespaces before saving py or yaml files
 autocmd BufWritePre *.py :%s/\s\+$//e
@@ -190,9 +202,5 @@ autocmd BufWritePre *.yaml :%s/\s\+$//e
 autocmd BufWritePre *.py execute ':Black'
 autocmd BufWritePre *.py execute ':Isort'
 
-
-" {{ Mapping for NEOTERM REPL
-" if has(localnvim)
-    " nnoremap <Leader><CR> :TREPLSendLine<CR>
-    " vnoremap <Leader><CR> :TREPLSendSelection<CR>
-" endif
+" }}} 
+" -----------------------------------------------------------------------
