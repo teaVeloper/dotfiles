@@ -15,7 +15,7 @@
 
 [core]
   editor = nvim
-	excludesfile = /home/bertold/.gitignore
+	excludesfile = ~/.vcsignore
 
 [difftool]
     prompt = true
@@ -64,5 +64,8 @@
         done = !git push origin HEAD
         ll = "!ls -lahrt --color=always | grep --color=never \"$(git ls-files)\""
         base-path = "rev-parse --show-toplevel"
+        ctags = !.git/hooks/ctags
 [help]
 	autocorrect = 20
+[init]
+	templatedir = ~/dotfiles/git/git_template
