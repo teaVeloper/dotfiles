@@ -60,6 +60,17 @@ let g:python3_host_prog = expand('/usr/bin/python3')
 " Set folding on markers by default
 set foldmethod=marker
 
+
+" Persisten Undo Files
+set undofile
+if !has('nvim')
+    set undodir=$XDG_DATA_HOME/nvim/undo
+endif
+augroup pers_undo
+    autocmd!
+    autocmd BufWritePre /tmp/* setlocal noundofile
+augroup END
+
 " }}}
 " -----------------------------------------------------------------------
 
@@ -74,10 +85,10 @@ let maplocalleader = "-"
 " Toggle HL Search
 nnoremap <silent> <Leader>h :set invhlsearch<CR>
 
-" Edit vim settings 
+" Edit vim settings
 nnoremap <localleader>ev :split $MYVIMRC<cr>
 
-" Copy and Paste to system buffers 
+" Copy and Paste to system buffers
 nnoremap <leader>y "*y
 nnoremap <leader>p "*p
 
@@ -118,12 +129,12 @@ inoremap <C-l> <Esc><c-w>l
 " vertical split
 nnoremap <Leader>v :vs<Enter>
 
-"}}} 
+"}}}
 
 " Insert customized todo
 " " TODO (Berti): rething mappings!
-    nnoremap <Leader>td :call NERDComment(0, "append")<C-m>TODO (Berti): 
-    inoremap <C-t> <Esc>:call NERDComment(0, "append")<C-m>TODO (Berti): 
+    nnoremap <Leader>td :call NERDComment(0, "append")<C-m>TODO (Berti):
+    inoremap <C-t> <Esc>:call NERDComment(0, "append")<C-m>TODO (Berti):
 
 " TODO (Berti): Review Vanity.. not really nice working..
 nnoremap <F8> :VanityNextCol<CR>
@@ -154,12 +165,12 @@ let g:NERDAltDelims_python = 1
 " Allow longer lines .e.g. 120 can be changed later
 " ignore C0330 hanging indents, as black formats different
 let g:ale_python_flake8_options = '--max-line-length=120 --ignore=C0330'
-" let g:ale_sign_error = '●'
-" let g:ale_sign_warning = '.'
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
 
 "  }}}
 
-let g:lightline = { 
+let g:lightline = {
    \     'colorscheme': 'wombat',
    \     'active': {
    \         'left': [['mode', 'paste' ], ['gitbranch', 'readonly', 'filename', 'modified']],
@@ -196,11 +207,17 @@ hi TabLineFill  guifg=#999 guibg=#222 gui=none ctermfg=254 ctermbg=238 cterm=non
 " Autocommand Groups {{{
 
 " delete trailiing whitespaces before saving py or yaml files
-autocmd BufWritePre *.py :%s/\s\+$//e
-autocmd BufWritePre *.yaml :%s/\s\+$//e
-" Run Black and Isort on Python files
-autocmd BufWritePre *.py execute ':Black'
-autocmd BufWritePre *.py execute ':Isort'
+augroup trailspace
+    autocmd!
+    autocmd BufWritePre *.py,*.yml,*.yaml :%s/\s\+$//e
+augroup END
 
-" }}} 
+" autoformat python
+augroup pyformat
+    autocmd!
+    autocmd BufWritePre *.py execute ':Black'
+    autocmd BufWritePre *.py execute ':Isort'
+augroup END
+
+" }}}
 " -----------------------------------------------------------------------

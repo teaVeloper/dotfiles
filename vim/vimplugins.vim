@@ -4,7 +4,7 @@
 "
 " ----------------------------------------
 
-" Maybe its annoying to have this separate 
+" Maybe its annoying to have this separate
 " to init.vim?
 
 call plug#begin()
@@ -80,7 +80,7 @@ Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
 Plug 'cespare/vim-toml', { 'branch': 'main' }
 
 " TMux
-Plug 'christoomey/vim-tmux-navigator' 
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'preservim/vimux'
 Plug 'jgdavey/tslime.vim'
 
@@ -100,5 +100,9 @@ Plug 'flazz/vim-colorschemes'
 " Plug 'rafi/awesome-vim-colorschemes'
 " Plug 'rainglow/vim'
 " Plug 'mswift42/vim-themes'
+"
+
+" No leakage of passwords from pass
+Plug 'https://gitlab.com/craftyguy/vim-redact-pass.git'
 
 call plug#end()
