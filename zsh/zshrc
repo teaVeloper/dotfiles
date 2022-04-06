@@ -6,9 +6,13 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 export FPP_DISABLE_SPLIT=1
-fpath=($HOME/dotfiles/completion/zsh $fpath)
+fpath=($HOME/dotfiles/zsh/functions $fpath)
 # Settings for all shells
-#
+source $HOME/dotfiles/zsh/completion/*
+
+export GITLAB_HOST="https://gitlab.plob.cz/"
+export PASSWORD_STORE_X_SELECTION="primary"
+export PYSPARK_PYTHON="$HOME/.local/bin/ptipython"
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
