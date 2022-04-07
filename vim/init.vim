@@ -174,7 +174,7 @@ let g:lightline = {
    \     'colorscheme': 'wombat',
    \     'active': {
    \         'left': [['mode', 'paste' ], ['gitbranch', 'readonly', 'filename', 'modified']],
-   \         'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding']]
+   \         'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding'], ['bufnum']]
    \     },
    \     'component_function': {
    \         'gitbranch': 'FugitiveHead'
