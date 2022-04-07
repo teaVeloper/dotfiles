@@ -10,14 +10,24 @@
 # This file is symlinked or otherwise available at
 #   $HOME/.zshenv
 # It will setup $ZDOTDIR and thus zsh know where to find other configs
-# Most settings make even for bash sense - identical, so it can 
+# Most settings make even for bash sense - identical, so it can
 # be sourced within .bash_profile or .bashrc
 
 
 export DOTFILES="$HOME/dotfiles"
 export WORKSPACE="$HOME/workspace"
 
-# Folder structure follows XDG - Standard 
+export VIMRC="$DOTFILES/vim/init.vim"
+export ZSHRC="$DOTFILES/zsh/zshrc"
+export MYALIAS="$DOTFILES/shell/alias.sh"
+export MYFUNCTIONS="$DOTFILES/shell/alias.sh"
+export MYENV="$DOTFILES/zsh/zshenv"
+export TMUXCONF="$DOTFILES/tmux/tmux.conf"
+export GITCONF="$DOTFILES/git/gitconfig"
+export VCSIGNORE="$DOTFILES/git/globalignore"
+export EDITORCONFIG="$DOTFILES/.editorconfig"
+
+# Folder structure follows XDG - Standard
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 
 export XDG_CONFIG_HOME=$HOME/.config
@@ -60,7 +70,7 @@ export PYENV_ROOT=$HOME/.local/pyenv
 # export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
 export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
 # Conda
-export CONDARC="$XDG_CONFIG_HOME/conda/condarc" 
+export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
 # Mypy
 export MYPY_CACHE_DIR="$XDG_CACHE_HOME"/mypy
 # venvs

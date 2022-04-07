@@ -59,6 +59,20 @@ alias play='cd /home/bertold/projects/playground'
 # I am used to type vim, but want nvim
 alias vim='nvim'
 
+# convenience
+alias vpy='v $(find . -name "*.py")'
+alias vgi='v $(git ls-files)'
+
+# edit configs
+alias myvim='nvim "$VIMRC"'
+alias myzsh='nvim "$ZSHRC"'
+alias myalias='nvim "$MYALIAS"'
+alias myfunctions='nvim "$MYFUNCTIONS"'
+alias myenv='nvim "$MYENV"'
+alias mytmux='nvim "$TMUXCONF"'
+alias mygit='nvim "$GITCONF"'
+alias myvcsignore='nvim "$VCSIGNORE"'
+alias myeditorconfig='nvim "$EDITORCONFIG"'
 
 # git
 alias g='git'
