@@ -1,3 +1,13 @@
+# ========================================================================
+#
+# ZSH Config - after running ~/.zshenv for setting the base environment
+#
+# ========================================================================
+
+
+# ------------------------------------------------------------------------
+# Prompt powerlevel10k {{{
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -5,29 +15,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export FPP_DISABLE_SPLIT=1
-fpath=($HOME/dotfiles/zsh/functions $fpath)
-# Settings for all shells
-source $HOME/dotfiles/zsh/completion/*
-
-export GITLAB_HOST="https://gitlab.plob.cz/"
-export PASSWORD_STORE_X_SELECTION="primary"
-export PYSPARK_PYTHON="$HOME/.local/bin/ptipython"
-
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-# export XTERM="xterm-256color"
-#export TERM="xterm-256color"
-#export XTERM="xterm-256color"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
 #powerlevel custom settings
 POWERLEVEL9K_MODE='awesome-fontconfig'
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(background_jobs context dir vcs)
@@ -38,6 +25,65 @@ POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="yellow"
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND="black"
+
+# }}}
+
+# ------------------------------------------------------------------------
+# Configurations for Tools and Environment {{{
+
+# path and fpath adaptions
+fpath=($HOME/dotfiles/zsh/functions $fpath)
+
+
+export FPP_DISABLE_SPLIT=1
+
+export GITLAB_HOST="https://gitlab.plob.cz/"
+
+export PASSWORD_STORE_X_SELECTION="primary"
+
+export PYSPARK_PYTHON="$HOME/.local/bin/ptipython"
+
+export ZSH="$HOME/.oh-my-zsh"
+
+# }}}
+
+
+# ------------------------------------------------------------------------
+# Global aliases {{{{{{
+
+# pipe to less
+alias -g L='| less'
+# pipe to less with line numbers
+alias -g LN='| less -N'
+# Grep output
+alias -g G='| grep'
+# RipGrep output
+alias -g G='| rg'
+# send output to bat as json
+alias -g J='| bat -l json'
+# pipe output to xclip but keep stdout there
+alias -g X='| tee /dev/tty | xclip -i'
+# show helpmessage in manpager
+alias -g H='--help | nvim +Man!' # nice help viewer
+# pipe STDOUT + STDERR into xclip
+alias -g XA='2>&1 | tee /dev/tty | xclip -i'
+# }}}}}}
+
+# ------------------------------------------------------------------------
+# ZSH Settings {{{
+local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+
+
+
+# }}}
+
+# ------------------------------------------------------------------------
+# OH MY ZSH Settings {{{
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="powerlevel10k/powerlevel10k"
 # Plugins=(git z)
 #include fonts
 # source ~/.fonts/*.sh
@@ -120,50 +166,61 @@ VI_MODE_SET_CURSOR=true
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-alias zshconfig="vim ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-source $HOME/dotfiles/submodule_tools/zsh-git-prompt/zshrc.sh
+# }}}
+
+
+# ------------------------------------------------------------------------
+#  Sourcing of oh my zsh has to be after configuration, otherwise it does not load
+#  the right way!
+#
+#  sourcing of aliases has to be done after oh-my-zsh otherwise it might be overwritten
+#  and not the desired outcome!
+# Source of other files {{{
 source $ZSH/oh-my-zsh.sh
+source $HOME/dotfiles/zsh/completion/*
+
+source $HOME/dotfiles/submodule_tools/zsh-git-prompt/zshrc.sh
 
 source $HOME/dotfiles/shell/alias.sh
 source $HOME/dotfiles/shell/functions.sh
 
-
-# ZSH specific global aliases
-alias -g L='| less'
-alias -g LN='| less -N'
-alias -g G='| grep'
-alias -g J='| bat -l json'
-alias -g X='| tee /dev/tty | xclip -i'
-alias -g H='--help | nvim +Man!' # nice help viewer
-alias -g XA='2>&1 | tee /dev/tty | xclip -i'
-local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
-
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 source $HOME/dotfiles/submodule_tools/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# load p10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 source ~/dotfiles/submodule_tools/forgit/forgit.plugin.zsh
+# }}}
+# ------------------------------------------------------------------------
+# Autoload and run for completions
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 # eval "$(jenv init -)"
 
+# ------------------------------------------------------------------------
+# ZINIT {{{
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [[ ! -f  "${ZINIT_HOME}/zinit.zsh" ]] || source "${ZINIT_HOME}/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
+# }}}
+
+# ------------------------------------------------------------------------
+# PYENV {{{
 if hash pyenv 2>/dev/null; then
     eval "$(pyenv init -)"
 fi
+# }}}
 
-
+# ------------------------------------------------------------------------
+# PERL {{{
 # PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
 # PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 # PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 # PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
 # PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
+# }}}
