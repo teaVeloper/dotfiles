@@ -78,6 +78,7 @@ alias myeditorconfig='nvim "$EDITORCONFIG"'
 alias g='git'
 alias gs='git status'
 alias gdo='git done'
+alias gdu='git dune'
 
 
 #alias diff='colordiff'
