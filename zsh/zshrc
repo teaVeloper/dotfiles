@@ -58,7 +58,7 @@ alias -g LN='| less -N'
 # Grep output
 alias -g G='| grep'
 # RipGrep output
-alias -g G='| rg'
+alias -g R='| rg'
 # send output to bat as json
 alias -g J='| bat -l json'
 # pipe output to xclip but keep stdout there
