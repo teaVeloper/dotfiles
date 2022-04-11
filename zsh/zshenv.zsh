@@ -20,8 +20,8 @@ export WORKSPACE="$HOME/workspace"
 export VIMRC="$DOTFILES/vim/init.vim"
 export ZSHRC="$DOTFILES/zsh/zshrc"
 export MYALIAS="$DOTFILES/shell/alias.sh"
-export MYFUNCTIONS="$DOTFILES/shell/alias.sh"
-export MYENV="$DOTFILES/zsh/zshenv"
+export MYFUNCTIONS="$DOTFILES/shell/functions.sh"
+export MYENV="$DOTFILES/zsh/zshenv.zsh"
 export TMUXCONF="$DOTFILES/tmux/tmux.conf"
 export GITCONF="$DOTFILES/git/gitconfig"
 export VCSIGNORE="$DOTFILES/git/globalignore"
@@ -69,6 +69,7 @@ export PYENV_ROOT=$HOME/.local/pyenv
 # export PYLINTHOME="$XDG_CACHE_HOME"/pylint.d
 # export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
 export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
+export PYTHON_VENVS="$XDG_CACHE_HOME"/python-venvs
 # Conda
 export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
 # Mypy
