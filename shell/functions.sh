@@ -82,12 +82,12 @@ activate_python_venv () {
 
 python::venv::name () {
   dir_=$1
-  hash_=$(echo "$PWD" | md5sum | head -c 10)
   git_base_path=$(_git_base_path "$dir_")
+  hash_=$(echo "$git_base_path" | md5sum | head -c 10)
   base_path=$(basename "$git_base_path")
   venv_name="$base_path-$hash_"
   venv_path=$PYTHON_VENVS/$venv_name
-  print $venv_path
+  print "$venv_path"
 }
 
 python::venv::create () {
@@ -95,9 +95,14 @@ python::venv::create () {
   python3 -m venv "$venv_path"
 }
 
+python::venv::delete () {
+  venv_path=$(python::venv::name "$PWD")
+  rm -rf "$venv_path"
+}
+
 python::venv::activate () {
   venv_path=$(python::venv::name "$PWD")
-  source $venv_path/bin/activate
+  source "$venv_path/bin/activate"
 }
 
 python::venv::pactivate () {

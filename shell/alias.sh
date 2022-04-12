@@ -85,6 +85,7 @@ alias gdu='git dune'
 alias ct='countdown'
 alias vc="python::venv::create"
 alias va="python::venv::activate"
+alias vrm="python::venv::delete"
 alias vp="python::venv::pactivate"
 alias vd="deactivate"
 
