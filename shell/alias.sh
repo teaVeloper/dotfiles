@@ -8,7 +8,7 @@
 # detailed option - always used
 alias l='exa -FalhH --git --time-style long-iso -g --icons'
 # show detailed with tree
-alias ltr='l --tree --git-ignore --ignore-glob=".git|__pycache__"'
+alias ltr='l --tree --git-ignore --ignore-glob=".git|__pycache__|.venv"'
 # deprecated, but  fallback
 alias ll='l'
 # sort by modification date
@@ -83,8 +83,10 @@ alias gdu='git dune'
 
 #alias diff='colordiff'
 alias ct='countdown'
-alias vc="create_python_venv"
-alias va="activate_python_venv"
+alias vc="python::venv::create"
+alias va="python::venv::activate"
+alias vrm="python::venv::delete"
+alias vp="python::venv::pactivate"
 alias vd="deactivate"
 
 # Apt

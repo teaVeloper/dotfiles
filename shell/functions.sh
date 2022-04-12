@@ -71,13 +71,44 @@ create_python_venv () {
 }
 
 activate_python_venv () {
-  source "${PYTHON_VENVS}/$(basename $(pwd))/bin/activate"
+  source "$(poetenv)/bin/activate"
+  # source "$PYTHON_VENVS}/$(basename $(pwd))/bin/activate"
 }
 # TODO (Berti): function group python:venv:*
 # create - options for custom folder, otherwise $PYTHON_VENVS
 # activate - option to use poetry venv, if exists, custom or default
 # deactivate (only alias!)
 # delete - option to use poetry, custom or default
+
+python::venv::name () {
+  dir_=$1
+  git_base_path=$(_git_base_path "$dir_")
+  hash_=$(echo "$git_base_path" | md5sum | head -c 10)
+  base_path=$(basename "$git_base_path")
+  venv_name="$base_path-$hash_"
+  venv_path=$PYTHON_VENVS/$venv_name
+  print "$venv_path"
+}
+
+python::venv::create () {
+  venv_path=$(python::venv::name "$PWD")
+  python3 -m venv "$venv_path"
+}
+
+python::venv::delete () {
+  venv_path=$(python::venv::name "$PWD")
+  rm -rf "$venv_path"
+}
+
+python::venv::activate () {
+  venv_path=$(python::venv::name "$PWD")
+  source "$venv_path/bin/activate"
+}
+
+python::venv::pactivate () {
+  source "$(poetenv)/bin/activate"
+}
+
 
 dbfsl () {
   dbfs ls dbfs:$1
@@ -102,7 +133,8 @@ _is_git_repo () {
 }
 
 _git_base_path() {
-  git rev-parse --show-toplevel
+  base_path=$(git rev-parse --show-toplevel)
+  print "$base_path"
 }
 
 vplug () {
