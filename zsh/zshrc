@@ -73,6 +73,12 @@ alias -g XA='2>&1 | tee /dev/tty | xclip -i'
 # ZSH Settings {{{
 local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
 
+#append into history file
+setopt INC_APPEND_HISTORY
+#save only one command if 2 common are same and consistent
+setopt HIST_IGNORE_DUPS
+#add timestamp for each entry
+setopt EXTENDED_HISTORY
 
 
 # }}}
