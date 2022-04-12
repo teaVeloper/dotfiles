@@ -136,6 +136,9 @@ setopt HIST_IGNORE_DUPS
 #add timestamp for each entry
 setopt EXTENDED_HISTORY
 
+# TMUXP
+export DISABLE_AUTO_TITLE='true'
+
 # zinit
 declare -A ZINIT
 ZINIT[HOME_DIR]="$ZDOTDIR"/.zinit
