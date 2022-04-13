@@ -95,3 +95,7 @@ alias aptu='sudo apt update'
 alias aptug='sudo apt upgrade'
 alias aptung='aptu && aptug -y'
 
+# zsh without ~/.zshenv, zshrc or zsh_profile
+alias czsh='zsh -d -f -i'
+# clean bash
+alias cbash='bash --noprofile --norc'
