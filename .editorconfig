@@ -11,20 +11,25 @@ indent_style = space
 indent_size = 4
 insert_final_newline = true
 trim_trailing_whitespace = true
-max_line_length = 120
+
+
+# max_line_length = 120
 
 # 4 space indentation
 [*.{py}]
 indent_style = space
 indent_size = 4
+max_line_length = 120
 
 [*.{yml,yaml,sh,zsh}]
 indent_style = space
 indent_size = 2
+max_line_length = 120
 
 # Markdown Files
 [*.{md,mdx}]
 trim_trailing_whitespace = false
+max_line_length = 120
 
 # Tab indentation (no size specified)
 [Makefile]
