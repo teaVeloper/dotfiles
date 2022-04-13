@@ -129,12 +129,6 @@ export _Z_DATA="$XDG_CACHE_HOME"/.z
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export HISTSIZE=1000000
 export SAVEHIST=$HISTSIZE
-#append into history file
-setopt INC_APPEND_HISTORY
-#save only one command if 2 common are same and consistent
-setopt HIST_IGNORE_DUPS
-#add timestamp for each entry
-setopt EXTENDED_HISTORY
 
 # TMUXP
 export DISABLE_AUTO_TITLE='true'
@@ -151,6 +145,7 @@ ZINIT[ZCOMPDUMP_PATH]="$XDG_CACHE_HOME"/zcompdump/zcompdump-zinit
 export PATH="$PATH:$CARGO_HOME/bin"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$HOME/.poetry/bin"
 # export PATH="$PATH:$HOME/Applications"
 export PATH="$PATH:/sbin"
