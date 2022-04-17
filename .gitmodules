@@ -17,21 +17,9 @@
 [submodule "submodule_tools/zsh-git-prompt"]
 	path = submodule_tools/zsh-git-prompt
 	url = https://github.com/olivierverdier/zsh-git-prompt
-[submodule "submodule_tools/gibo"]
-	path = submodule_tools/gibo
-	url = https://github.com/simonwhitaker/gibo
 [submodule "submodule_tools/todo.txt-cli"]
 	path = submodule_tools/todo.txt-cli
 	url = https://github.com/todotxt/todo.txt-cli.git
-[submodule "submodule_tools/tmux-powerline"]
-	path = submodule_tools/tmux-powerline
-	url = https://github.com/erikw/tmux-powerline.git
 [submodule "submodule_tools/PathPicker"]
 	path = submodule_tools/PathPicker
 	url = https://github.com/facebook/PathPicker.git
-[submodule "submodule_tools/pyenv"]
-	path = submodule_tools/pyenv
-	url = https://github.com/pyenv/pyenv.git
-[submodule "submodule_tools/fzf-notes"]
-	path = submodule_tools/fzf-notes
-	url = https://github.com/alichtman/fzf-notes.git
