@@ -2,20 +2,21 @@
 	email = bertold.sedlak@cyansecurity.com
 	name = Bertold Sedlak
 
-
 [credential]
 	helper = cache --timeout 7200000
 
-[mergetool "nvim"]
-  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 [merge]
-  tool = nvim
+	tool = fugitive
 [mergetool]
-  prompt = false
+    prompt = false
+[mergetool "nvim"]
+    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+[mergetool "fugitive"]
+	cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 
 [core]
-  editor = nvim
-	excludesfile = ~/.vcsignore
+    editor = nvim
+    excludesfile = ~/.vcsignore
 
 [difftool]
     prompt = true
@@ -44,32 +45,34 @@
     file-decoration-style = none
 
 [alias]
-        ; Abbreviations
-        s = status
-        d = diff
-        dt = difftool
-        sw = switch
-        a = add
-        c = commit
-        c = commit --verbose
-        co = checkout
-        cob = checkout -b
-        br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
-        ; l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-        ; Log
-        l = !git log --pretty=format:\"%C(magenta)%h %ad%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --decorate --date=short --abbrev-commit
-        ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-        ; Own functions
-        la = "!git config -l | grep alias | cut -c 7- | less"
-        lf = "!git ls-tree -r HEAD --name-only | less"
-        done = !git push origin HEAD
-        dune = !git push upstream HEAD
-        ll = "!ls -lahrt --color=always | grep --color=never \"$(git ls-files)\""
-        base-path = "rev-parse --show-toplevel"
-        ctags = !.git/hooks/ctags
+    ; Abbreviations
+    s = status
+    d = diff
+    dt = difftool
+    sw = switch
+    a = add
+    c = commit
+    c = commit --verbose
+    m = merge
+    mt = mergetool
+    co = checkout
+    cob = checkout -b
+    br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+    ; l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    ; Log
+    l = !git log --pretty=format:\"%C(magenta)%h %ad%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --decorate --date=short --abbrev-commit
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    ; Own functions
+    la = "!git config -l | grep alias | cut -c 7- " ; list aliases
+    done = !git push origin HEAD
+    dune = !git push upstream HEAD
+    base-path = "rev-parse --show-toplevel"
+    ctags = !.git/hooks/ctags
 [help]
 	autocorrect = 20
+
 [init]
 	templatedir = ~/dotfiles/git/git_template
+
 [pull]
 	rebase = true
