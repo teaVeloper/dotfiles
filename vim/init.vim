@@ -1,15 +1,15 @@
-" -----------------------------------------------------------------------
-" NeoVim Configs, maybe also used for vim
-"
-" Plugins managed via vim-plug https://github.com/junegunn/vim-plug
-" -----------------------------------------------------------------------
+" ==========================================================================
+"                                                                           |
+"                        NVIM Configuration                                 |
+"                                                                           |
+"   Plugins managed via vim-plug https://github.com/junegunn/vim-plug       |
+" ==========================================================================
 
 " Import Plugins {{{
 source $HOME/dotfiles/vim/vimplugins.vim
 
 " }}}
 
-" -----------------------------------------------------------------------
 " Basic Settings {{{
 
 " Not compatible with vi - open up more featues
@@ -72,9 +72,7 @@ augroup pers_undo
 augroup END
 
 " }}}
-" -----------------------------------------------------------------------
 
-" -----------------------------------------------------------------------
 " Key Bindings / Mappings {{{
 
 " first \ is escape sequence, thus \ is leader
@@ -141,9 +139,7 @@ nnoremap <F8> :VanityNextCol<CR>
 nnoremap <F9> :VanityPrevCol<CR>
 
 " }}}
-" -----------------------------------------------------------------------
 
-" -----------------------------------------------------------------------
 "  Plugin Config {{{
 
 " behaviour of FZF search
@@ -191,9 +187,7 @@ let g:lightline = {
 " let g:vanity_default_colors = {'allFiles': 'solarized'}
 
 " }}}
-" -----------------------------------------------------------------------
 
-" -----------------------------------------------------------------------
 " Layout {{{
 "  Tab Settings
 hi TabLine      guifg=#333 guibg=#222 gui=none ctermfg=254 ctermbg=238 cterm=none
@@ -201,9 +195,7 @@ hi TabLineSel   guifg=#666 guibg=#222 gui=bold ctermfg=231 ctermbg=235 cterm=bol
 hi TabLineFill  guifg=#999 guibg=#222 gui=none ctermfg=254 ctermbg=238 cterm=none
 
 " }}}
-" -----------------------------------------------------------------------
 
-" -----------------------------------------------------------------------
 " Autocommand Groups {{{
 
 " delete trailiing whitespaces before saving py or yaml files
@@ -220,4 +212,3 @@ augroup pyformat
 augroup END
 
 " }}}
-" -----------------------------------------------------------------------
