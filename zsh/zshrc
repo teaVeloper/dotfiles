@@ -185,20 +185,20 @@ VI_MODE_SET_CURSOR=true
 source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/zsh/completion/*
 
-source $HOME/dotfiles/submodule_tools/zsh-git-prompt/zshrc.sh
+source $HOME/dotfiles/zsh/modules/zsh-git-prompt/zshrc.sh
 
 source $HOME/dotfiles/shell/alias.sh
 source $HOME/dotfiles/shell/functions.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source $HOME/dotfiles/submodule_tools/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/dotfiles/zsh/modules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # load p10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-source ~/dotfiles/submodule_tools/forgit/forgit.plugin.zsh
+source ~/dotfiles/cli_modules/forgit/forgit.plugin.zsh
 # }}}
 # ------------------------------------------------------------------------
 # Autoload and run for completions

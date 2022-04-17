@@ -6,20 +6,20 @@
 	path = dotbot-pip
 	url = https://github.com/sobolevn/dotbot-pip
 [submodule "submodule_tools/forgit"]
-	path = submodule_tools/forgit
+	path = cli_modules/forgit
 	url = https://github.com/wfxr/forgit
 [submodule "submodule_tools/bat-extras"]
-	path = submodule_tools/bat-extras
+	path = cli_modules/bat-extras
 	url = https://github.com/eth-p/bat-extras.git
 [submodule "submodule_tools/zsh-syntax-highlighting"]
-	path = submodule_tools/zsh-syntax-highlighting
+	path = zsh/modules/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "submodule_tools/zsh-git-prompt"]
-	path = submodule_tools/zsh-git-prompt
+	path = zsh/modules/zsh-git-prompt
 	url = https://github.com/olivierverdier/zsh-git-prompt
 [submodule "submodule_tools/todo.txt-cli"]
-	path = submodule_tools/todo.txt-cli
+	path = cli_modules/todo.txt-cli
 	url = https://github.com/todotxt/todo.txt-cli.git
 [submodule "submodule_tools/PathPicker"]
-	path = submodule_tools/PathPicker
+	path = cli_modules/PathPicker
 	url = https://github.com/facebook/PathPicker.git
