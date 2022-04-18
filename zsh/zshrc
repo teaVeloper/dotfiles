@@ -72,6 +72,9 @@ alias -g XA='2>&1 | tee /dev/tty | xclip -i'
 
 # ZSH Settings {{{
 
+# Automatically cd into folder - needed for .. and ... etc aliases to work globally
+setopt AUTO_CD
+
 #append into history file
 setopt INC_APPEND_HISTORY
 #save only one command if 2 common are same and consistent
@@ -134,7 +137,9 @@ bindkey -M visual S add-surround
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
-
+source $DOTFILES/zsh/functions/fg_bg.sh
+zle -N fg-bg
+bindkey '^Z' fg-bg
 # }}}
 
 # OH MY ZSH Settings {{{
