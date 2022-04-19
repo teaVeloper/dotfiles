@@ -178,7 +178,7 @@ linstall() {
   # Create Softlin in local bin
   # force, create backup and use custom suffix .lbk
   # TODO (Berti): add a folder and database for linstalled binaries
-  binary=$1
+  binary="${PWD}/$1"
   ln -sfb -S .lbk "$binary" "$HOME/.local/bin"
 }
 
