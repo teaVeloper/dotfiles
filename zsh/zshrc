@@ -82,6 +82,8 @@ setopt HIST_IGNORE_DUPS
 #add timestamp for each entry
 setopt EXTENDED_HISTORY
 
+setopt share_history
+
 setopt AUTO_PUSHD           # Push the current directory visited on the stack.
 setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
 setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
@@ -102,6 +104,11 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
+
+
+# emacs keybindings in insert mode
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
 
 # use v for loading to vim instead visual mode
 autoload -Uz edit-command-line
@@ -134,8 +141,11 @@ bindkey -M vicmd ys add-surround
 bindkey -M visual S add-surround
 
 # incremental search with up and down as in omz
-bindkey '^[[A' up-line-or-search
-bindkey '^[[B' down-line-or-search
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+# the below version only uses first command, but ignores later
+# bindkey '^[[A' up-line-or-search
+# bindkey '^[[B' down-line-or-search
 
 source $DOTFILES/zsh/functions/fg_bg.sh
 zle -N fg-bg
