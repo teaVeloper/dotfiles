@@ -1,11 +1,10 @@
-# ========================================================================
-#
-# ZSH Config - after running ~/.zshenv for setting the base environment
-#
-# ========================================================================
+# ==========================================================================
+#                                                                           |
+#   ZSH Config - after running ~/.zshenv for setting the base environment   |
+#                                                                           |
+# ==========================================================================
 
 
-# ------------------------------------------------------------------------
 # Prompt powerlevel10k {{{
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -28,7 +27,6 @@ POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND="black"
 
 # }}}
 
-# ------------------------------------------------------------------------
 # Configurations for Tools and Environment {{{
 
 # path and fpath adaptions
@@ -47,9 +45,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # }}}
 
-
-# ------------------------------------------------------------------------
-# Global aliases {{{{{{
+# Global aliases {{{
 
 # pipe to less
 alias -g L='| less'
@@ -60,18 +56,24 @@ alias -g G='| grep'
 # RipGrep output
 alias -g R='| rg'
 # send output to bat as json
-alias -g J='| bat -l json'
+alias -g J='| bat -p -l json'
+# send output to bat
+alias -g B='| bat'
+# send output to bat with choosing language
+alias -g BL='| bat -l'
 # pipe output to xclip but keep stdout there
 alias -g X='| tee /dev/tty | xclip -i'
 # show helpmessage in manpager
 alias -g H='--help | nvim +Man!' # nice help viewer
 # pipe STDOUT + STDERR into xclip
 alias -g XA='2>&1 | tee /dev/tty | xclip -i'
-# }}}}}}
 
-# ------------------------------------------------------------------------
+# }}}
+
 # ZSH Settings {{{
-local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+
+# Automatically cd into folder - needed for .. and ... etc aliases to work globally
+setopt AUTO_CD
 
 #append into history file
 setopt INC_APPEND_HISTORY
@@ -80,10 +82,66 @@ setopt HIST_IGNORE_DUPS
 #add timestamp for each entry
 setopt EXTENDED_HISTORY
 
+setopt AUTO_PUSHD           # Push the current directory visited on the stack.
+setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
+setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
 
+# create nice aliases for jumping in the last folders
+# taken from https://thevaluable.dev/zsh-install-configure-mouseless/
+alias d='dirs -v'
+for index ({1..9}) alias "$index"="cd +${index}"; unset index
+
+bindkey -v
+export KEYTIMEOUT=1
+
+source $DOTFILES/zsh/functions/cursor_mode.zsh
+source $DOTFILES/zsh/completion.zsh
+
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
+# use v for loading to vim instead visual mode
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
+# vim commands like da" or ci(
+autoload -Uz select-bracketed select-quoted
+zle -N select-quoted
+zle -N select-bracketed
+for km in viopp visual; do
+  bindkey -M $km -- '-' vi-up-line-or-history
+  for c in {a,i}${(s..)^:-\'\"\`\|,./:;=+@}; do
+    bindkey -M $km $c select-quoted
+  done
+  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+    bindkey -M $km $c select-bracketed
+  done
+done
+
+
+# mimic vim surroung in shell
+autoload -Uz surround
+zle -N delete-surround surround
+zle -N add-surround surround
+zle -N change-surround surround
+bindkey -M vicmd cs change-surround
+bindkey -M vicmd ds delete-surround
+bindkey -M vicmd ys add-surround
+bindkey -M visual S add-surround
+
+# incremental search with up and down as in omz
+bindkey '^[[A' up-line-or-search
+bindkey '^[[B' down-line-or-search
+
+source $DOTFILES/zsh/functions/fg_bg.sh
+zle -N fg-bg
+bindkey '^Z' fg-bg
 # }}}
 
-# ------------------------------------------------------------------------
 # OH MY ZSH Settings {{{
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -175,54 +233,72 @@ VI_MODE_SET_CURSOR=true
 # }}}
 
 
-# ------------------------------------------------------------------------
-#  Sourcing of oh my zsh has to be after configuration, otherwise it does not load
-#  the right way!
-#
-#  sourcing of aliases has to be done after oh-my-zsh otherwise it might be overwritten
-#  and not the desired outcome!
+# --------------------------------------------------------------------------------------
+#  Sourcing of oh my zsh has to be after configuration, otherwise it does not load      |
+#  the right way!                                                                       |
+#                                                                                       |
+#  sourcing of aliases has to be done after oh-my-zsh otherwise it might be overwritten |
+#  and not the desired outcome!                                                         |
+# --------------------------------------------------------------------------------------
 # Source of other files {{{
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/zsh/completion/*
-
-source $HOME/dotfiles/submodule_tools/zsh-git-prompt/zshrc.sh
 
 source $HOME/dotfiles/shell/alias.sh
 source $HOME/dotfiles/shell/functions.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source $HOME/dotfiles/submodule_tools/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # load p10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-source ~/dotfiles/submodule_tools/forgit/forgit.plugin.zsh
+source ~/dotfiles/cli_modules/forgit/forgit.plugin.zsh
 # }}}
-# ------------------------------------------------------------------------
-# Autoload and run for completions
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/terraform terraform
+
+
 # eval "$(jenv init -)"
 
-# ------------------------------------------------------------------------
 # ZINIT {{{
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [[ ! -f  "${ZINIT_HOME}/zinit.zsh" ]] || source "${ZINIT_HOME}/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
+
+# ----------------- PLugins ---------------------------
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ pick"zsh-interactive-cd.plugin.zsh" \
+    changyuheng/zsh-interactive-cd \
+ pick"z.sh" \
+    rupa/z \
+ pick"fz.plugin.zsh" \
+    changyuheng/fz \
+ pick"git-it-on.plugin.zsh" \
+    peterhurford/git-it-on.zsh #\
+
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+# # do not like this, also it has a bug, but it actually is nice (except the bug)
+# zinit ice wait"0b" lucid atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
+# zinit light zsh-users/zsh-history-substring-search
+# bindkey -M vicmd "$key[Up]" history-substring-search-up
+# bindkey -M vicmd "$key[Down]" history-substring-search-down
 # }}}
 
-# ------------------------------------------------------------------------
+
+
 # PYENV {{{
 if hash pyenv 2>/dev/null; then
     eval "$(pyenv init -)"
 fi
 # }}}
 
-# ------------------------------------------------------------------------
 # PERL {{{
 # PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
 # PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
@@ -230,3 +306,8 @@ fi
 # PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
 # PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 # }}}
+
+# Autoload and run for completions
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
+autoload -U compinit; compinit
