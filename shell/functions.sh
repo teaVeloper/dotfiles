@@ -188,3 +188,13 @@ binstall() {
   install $binary "$HOME/.local/bin"
 }
 
+
+cheat() {
+  command_=$1
+  curl "cheat.sh/${command_}"
+}
+
+weather() {
+  options_=$1
+  curl "wttr.in/${options_}"
+}

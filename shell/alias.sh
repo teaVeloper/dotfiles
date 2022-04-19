@@ -99,3 +99,8 @@ alias aptung='aptu && aptug -y'
 alias czsh='zsh -d -f -i'
 # clean bash
 alias cbash='bash --noprofile --norc'
+
+# databricks commands used more often
+alias dbs='databricks secrets'
+alias db='databricks'
+alias dbd='databricks clusters'
