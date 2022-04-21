@@ -154,6 +154,12 @@ export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:/usr/sbin"
 
+if [ -d "/opt/spark" ]; then
+  export SPARK_HOME="/opt/spark"
+  export PATH="$PATH:$SPARK_HOME/bin"
+  export PYTHONPATH=$(ZIPS=("$SPARK_HOME"/python/lib/*.zip); IFS=:; echo "${ZIPS[*]}"):$PYTHONPATH
+fi
+
 if hash pyenv 2>/dev/null; then
    eval "$(pyenv init --path)"
 fi

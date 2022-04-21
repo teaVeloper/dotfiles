@@ -39,7 +39,9 @@ export GITLAB_HOST="https://gitlab.plob.cz/"
 
 export PASSWORD_STORE_X_SELECTION="primary"
 
-export PYSPARK_PYTHON="$HOME/.local/bin/ptipython"
+if [ -f "$HOME/.local/bin/potipython" ]; then
+    export PYSPARK_DRIVER_PYTHON="$HOME/.local/bin/ptipython"
+fi
 
 export ZSH="$HOME/.oh-my-zsh"
 
