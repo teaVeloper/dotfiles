@@ -199,6 +199,10 @@ weather() {
   curl "wttr.in/${options_}"
 }
 
+work() {
+  cd "${WORKSPACE}/$1"
+}
+
 
 # from omz {{{
 
