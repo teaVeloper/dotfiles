@@ -105,4 +105,6 @@ Plug 'flazz/vim-colorschemes'
 " No leakage of passwords from pass
 Plug 'https://gitlab.com/craftyguy/vim-redact-pass.git'
 
+Plug 'easymotion/vim-easymotion'
+
 call plug#end()
