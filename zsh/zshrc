@@ -320,6 +320,6 @@ fi
 # }}}
 
 # Autoload and run for completions
-autoload -U +X bashcompinit && bashcompinit
+# autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 autoload -U compinit; compinit
