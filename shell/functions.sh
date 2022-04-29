@@ -203,9 +203,37 @@ work() {
   cd "${WORKSPACE}/$1"
 }
 
+pyf() {
+  if [ $# -eq 0 ]; then
+    folder="."
+  else
+    folder=$1
+  fi
+
+  fd -E "__init__.py" ".py" "$folder"
+}
+
+
+vpy() {
+  if [ $# -eq 0 ]; then
+    folder="."
+  else
+    folder=$1
+  fi
+
+  "$EDITOR" $(pyf "$folder")
+}
+
+# make v a function not an alias
+# v filenames -> nvim filenames
+# v -e extension foldername
+# v foldername -> all files from folder - recurse?
+# v exclude, include, etc. sensible defaults?
+# basically wrap fd or rg --files or such with nice
+# options and defaults as input for the nvim/$EDITOR command
+
 
 # from omz {{{
-
 # mkcd is equivalent to takedir
 function mkcd takedir() {
   mkdir -p $@ && cd ${@:$#}

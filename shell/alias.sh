@@ -218,7 +218,7 @@ alias gsu='git submodule update'
 # }}}
 
 
-# ls Versions with exa{{{
+# ls Versions with exa {{{
 # detailed version, but all alphabetically - no regards of dirs
 alias la='exa -Falh --git --time-style long-iso --icons'
 # detailed option - always used
@@ -230,12 +230,18 @@ alias l.="l -d .*"
 # simple version
 alias lsi='l --no-time --no-user'
 # show detailed with tree
-alias ltr='l --tree --git-ignore --ignore-glob=".git|__pycache__|.venv"'
-# deprecated, but  fallback
+alias lltr='l --tree --git-ignore --ignore-glob=".git|__pycache__|.venv"'
+# show also groups and links
 alias ll='l -Hg'
 # sort by modification date
 alias lt='l -s modified'
+# show a simple tree, but with all hidden files, ignore git and pychase and venv
+# sort alphabetically
+alias ltra='exa -a --tree --git-ignore --ignore-glob=".git|__pycache__|.venv"'
+# group dirs first
+alias ltr='ltra --group-directories-first'
 
+alias lbin='l /home/bertold/.local/bin'
 # TODO (Berti): l. only dotiles, ld only directories, ll - something usefull, lg maybe only git-wroktree, lig - git
 # ignored?
 
@@ -249,7 +255,7 @@ alias xcf='xcfile'
 alias xcp='xcpipe'
 alias xpp='xppipe'
 
-# python{{{
+# python  {{{
 alias py='ptipython --vi'
 alias pyt='python3 -m pytest' # pytest for locally running in folder
 alias pys='pyspark'
@@ -285,7 +291,7 @@ alias play='work playground'
 alias vim='nvim'
 
 # convenience
-alias vpy='v $(find . -name "*.py")'
+# alias vpy='v $(find . -name "*.py")'
 alias vgi='v $(git ls-files)'
 
 # edit configs
@@ -331,4 +337,4 @@ alias dbs='databricks secrets'
 alias db='databricks'
 alias dbd='databricks clusters'
 alias b='bat'
-alias lbin='l /home/bertold/.local/bin'
+alias cd{='cd {{cookiecutter.project_slug}}'
