@@ -131,12 +131,10 @@ nnoremap <Leader>v :vs<Enter>
 
 " Insert customized todo
 " " TODO (Berti): rething mappings!
-    nnoremap <Leader>td :call NERDComment(0, "append")<C-m>TODO (Berti):
-    inoremap <C-t> <Esc>:call NERDComment(0, "append")<C-m>TODO (Berti):
-
-" TODO (Berti): Review Vanity.. not really nice working..
-nnoremap <F8> :VanityNextCol<CR>
-nnoremap <F9> :VanityPrevCol<CR>
+    " nnoremap <Leader>td :call NERDComment(0, "append")<C-m>TODO (Berti):
+    " inoremap <C-t> <Esc>:call NERDComment(0, "append")<C-m>TODO (Berti):
+    " " no nerdcommenter anymore, use commentary.vim - rethink of a todo
+    " command
 
 " }}}
 
@@ -150,21 +148,14 @@ let g:syntastic_python_checker = ['flake8']
 let g:syntastic_python_checkers = ['python']
 let g:syntastic_python_python_exec = 'python3'
 
-" Comments (now NERDComment change to vim-comment)
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-" Use alternative Format for Python as default (no space as is added already)
-let g:NERDAltDelims_python = 1
-
-
 " ALE Settings
 " Allow longer lines .e.g. 120 can be changed later
 " ignore C0330 hanging indents, as black formats different
 let g:ale_python_flake8_options = '--max-line-length=120 --ignore=C0330'
+let g:ale_yaml_yamllint_options = '-d "{extends: relaxed, rules: {line-length: {max: 120}}}"'
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
 
-"  }}}
 
 let g:lightline = {
    \     'colorscheme': 'wombat',

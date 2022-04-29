@@ -20,7 +20,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'itchyny/lightline.vim'
 
 " Comments
-Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-commentary'
 
 " Edit surroundings
 Plug 'tpope/vim-surround'
