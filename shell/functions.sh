@@ -205,12 +205,12 @@ work() {
 
 pyf() {
   if [ $# -eq 0 ]; then
-    folder="."
+    folders="."
   else
-    folder=$1
+    folders=($@)
   fi
 
-  fd -E "__init__.py" ".py" "$folder"
+  fd -E "__init__.py" ".py" $folders
 }
 
 
@@ -218,10 +218,10 @@ vpy() {
   if [ $# -eq 0 ]; then
     folder="."
   else
-    folder=$1
+    folder=($@)
   fi
 
-  "$EDITOR" $(pyf "$folder")
+  "$EDITOR" $(pyf $folder)
 }
 
 # make v a function not an alias
