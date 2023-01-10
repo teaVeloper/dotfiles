@@ -110,6 +110,16 @@ python::venv::pactivate () {
 }
 
 
+python::venv::pdelete () {
+  if [ -z "$1" ]; then
+    python_version=python3.8
+  else
+    python_version=$1
+  fi
+  poetry env remove "${python_version}"
+
+}
+
 dbfsl () {
   dbfs ls dbfs:$1
 }
@@ -152,6 +162,9 @@ vplug () {
         nvim -c "PlugClean" -c "qa"
         ;;
       update)
+        nvim -c "PlugUpdate"
+        ;;
+      updateq)
         nvim -c "PlugUpdate" -c "qa"
         ;;
       edit)
@@ -179,7 +192,12 @@ linstall() {
   # force, create backup and use custom suffix .lbk
   # TODO (Berti): add a folder and database for linstalled binaries
   binary="${PWD}/$1"
-  ln -sfb -S .lbk "$binary" "$HOME/.local/bin"
+  if [ -z "$2" ]; then
+    name=$1
+  else
+    name=$2
+  fi
+  ln -sfb -S .lbk "$binary" "$HOME/.local/bin/${name}"
 }
 
 binstall() {
@@ -200,7 +218,14 @@ weather() {
 }
 
 work() {
-  cd "${WORKSPACE}/$1"
+  workdir="${WORKSPACE}/$1"
+  if [ -d  "$workdir" ]; then
+    cd "$workdir"
+  else
+    echo "creating $workdir"
+    mkdir -p "$workdir"
+    cd "$workdir"
+  fi
 }
 
 pyf() {
@@ -210,7 +235,7 @@ pyf() {
     folders=($@)
   fi
 
-  fd -E "__init__.py" ".py" $folders
+  fd -E "__init__.py" ".py$" $folders
 }
 
 
@@ -221,7 +246,7 @@ vpy() {
     folder=($@)
   fi
 
-  "$EDITOR" $(pyf $folder)
+  "$EDITOR" $(pyf $folder) # no "" around array, to expand appropriately
 }
 
 # make v a function not an alias
@@ -231,6 +256,85 @@ vpy() {
 # v exclude, include, etc. sensible defaults?
 # basically wrap fd or rg --files or such with nice
 # options and defaults as input for the nvim/$EDITOR command
+
+extract() {
+    case $1 in
+        *.tar.bz2)  tar xjf $1      ;;
+        *.tar.gz)   tar xzf $1      ;;
+        *.bz2)      bunzip2 $1      ;;
+        *.gz)       gunzip $1       ;;
+        *.tar)      tar xf $1       ;;
+        *.tbz2)     tar xjf $1      ;;
+        *.tgz)      tar xzf $1      ;;
+        *.zip)      unzip $1        ;;
+        *.7z)       7z x $1         ;; # require p7zip
+        *.rar)      7z x $1         ;; # require p7zip
+        *.iso)      7z x $1         ;; # require p7zip
+        *.Z)        uncompress $1   ;;
+        *)          echo "'$1' cannot be extracted" ;;
+    esac
+}
+
+screenshot () {
+    local DIR="$SCREENSHOT"
+    local DATE="$(date +%Y%m%d-%H%M%S)"
+    local NAME="${DIR}/screenshot-${DATE}.png"
+
+    # Check if the dir to store the screenshots exists, else create it:
+    if [ ! -d "${DIR}" ]; then mkdir -p "${DIR}"; fi
+
+    # Screenshot a selected window
+    if [ "$1" = "win" ]; then import -format png -quality 100 "${NAME}"; fi
+
+    # Screenshot the entire screen
+    if [ "$1" = "scr" ]; then import -format png -quality 100 -window root "${NAME}"; fi
+
+    # Screenshot a selected area
+    if [ "$1" = "area" ]; then import -format png -quality 100 "${NAME}"; fi
+
+    if [[ $1 =~ "^[0-9].*x[0-9].*$" ]]; then import -format png -quality 100 -resize $1 "${NAME}"; fi
+
+    if [[ $1 =~ "^[0-9]+$" ]]; then import -format png -quality 100 -resize $1 "${NAME}" ; fi
+
+    if [[ $# = 0 ]]; then
+        # Display a warning if no area defined
+        echo "No screenshot area has been specified. Please choose between: win, scr, area. Screenshot not taken."
+    fi
+}
+
+cdg () {
+  # cd into the git base path
+  git_base_path=$(_git_base_path)
+  cd "$git_base_path"
+
+}
+
+_git_or_python () { [ -d .git ] || [ -f pyproject.toml ] }
+
+cdp () {
+  # cd into the first directory including a pyproject.toml file
+  # or beeing the .git root folder
+  # if none is found it will cd up to $HOME and not further
+  if [ "$PWD" = "$HOME" ];
+  then
+    :
+  else
+    if _git_or_python;
+    then
+      :
+    else
+      cd ..
+      cdp
+    fi
+  fi
+}
+
+knew () {
+  # restart kde after crashing - happens quite regular
+        kquitapp5 plasmashell
+        kstart5 plasmashell
+}
+
 
 
 # from omz {{{
