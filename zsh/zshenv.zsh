@@ -154,6 +154,10 @@ export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:/usr/sbin"
 
+if [ -d "$HOME/anaconda3" ]; then
+  export PATH="$PATH:$HOME/anaconda3/bin"
+fi
+
 if [ -d "/opt/spark" ]; then
   export SPARK_HOME="/opt/spark"
   export PATH="$PATH:$SPARK_HOME/bin"
