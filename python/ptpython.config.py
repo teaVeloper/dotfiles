@@ -7,7 +7,6 @@ from prompt_toolkit.filters import ViInsertMode
 from prompt_toolkit.key_binding.key_processor import KeyPress
 from prompt_toolkit.keys import Keys
 from prompt_toolkit.styles import Style
-
 from ptpython.layout import CompletionVisualisation
 
 __all__ = ["configure"]
@@ -97,7 +96,7 @@ def configure(repl):
     repl.enable_system_bindings = True
 
     # Ask for confirmation on exit.
-    repl.confirm_exit = True
+    repl.confirm_exit = False
 
     # Enable input validation. (Don't try to execute when the input contains
     # syntax errors.)
