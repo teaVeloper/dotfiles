@@ -8,5 +8,3 @@ export TMOUT=30000
 
 
 . "$HOME/.cargo/env"
-
-export PATH="$HOME/.poetry/bin:$PATH"
