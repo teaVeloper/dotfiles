@@ -38,7 +38,7 @@ set expandtab
 set ruler
 
 " Add line numbers by default
-set number
+set nonumber
 
 
 set laststatus=2
@@ -109,9 +109,18 @@ noremap <Leader>w :write<CR>
 " Accidently running :W for saving shall create desired result
 " Also W command annoyed me
 command! W w
+" " Accidently running :Q for quitting shall create desired result
+" command! Q q
 
 " Shortcut for fuzzfinder
 nnoremap <Leader>e :FZF<CR>
+
+"Save on <Leader>w to not have to press :
+noremap <localleader>nn :set number!<CR>
+noremap <localleader>nr :set relativenumber!<CR>
+noremap <localleader>no :set nonumber norelativenumber<CR>
+
+
 
 "  Remap Windows Movements {{{
 inoremap <C-Left> <Esc><c-w>h
@@ -177,6 +186,9 @@ let g:lightline = {
 
 " let g:vanity_default_colors = {'allFiles': 'solarized'}
 
+" Slime vim
+let g:slime_target = "tmux"
+
 " }}}
 
 " Layout {{{
@@ -190,16 +202,31 @@ hi TabLineFill  guifg=#999 guibg=#222 gui=none ctermfg=254 ctermbg=238 cterm=non
 " Autocommand Groups {{{
 
 " delete trailiing whitespaces before saving py or yaml files
-augroup trailspace
-    autocmd!
-    autocmd BufWritePre *.py,*.yml,*.yaml :%s/\s\+$//e
-augroup END
+" augroup trailspace
+"     autocmd!
+"     autocmd BufWritePre *.py,*.yml,*.yaml :%s/\s\+$//e
+" augroup END
+" if not .editorconfig
+" https://stackoverflow.com/questions/46945493/disable-autocmd-project-specific-in-vim
+" but also other tricks here!
 
 " autoformat python
 augroup pyformat
     autocmd!
     autocmd BufWritePre *.py execute ':Black'
     autocmd BufWritePre *.py execute ':Isort'
+augroup END
+
+augroup cookiecutter
+    autocmd!
+    autocmd BufNewFile,BufRead /home/bertold/workspace/berti/databricks-ci-cookie/**/**/* autocmd! pyformat
+    autocmd BufWritePre /home/bertold/workspace/berti/databricks-ci-cookie/**/**/*.py execute ':Black'
+augroup END
+
+
+augroup jinja
+    autocmd!
+    autocmd BufRead,BufNewFile *.yml.j2,*.yaml.j2 set filetype=yaml
 augroup END
 
 " }}}

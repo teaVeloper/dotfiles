@@ -107,4 +107,20 @@ Plug 'https://gitlab.com/craftyguy/vim-redact-pass.git'
 
 Plug 'easymotion/vim-easymotion'
 
+Plug 'tpope/vim-eunuch'
+
+Plug 'michaeljsmith/vim-indent-object'
+
+Plug 'bkad/CamelCaseMotion'
+
+Plug 'raimon49/requirements.txt.vim'
+
+Plug 'tmux-plugins/vim-tmux'
+
+Plug 'hashivim/vim-terraform'
+
+Plug 'jpalardy/vim-slime'
+
+Plug 'rhysd/committia.vim'
+
 call plug#end()
