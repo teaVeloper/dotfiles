@@ -68,6 +68,7 @@
     dune = !git push upstream HEAD
     base-path = "rev-parse --show-toplevel"
     ctags = !.git/hooks/ctags
+    au = !git add $(git ls-files -o --exclude-standard)
 [help]
 	autocorrect = 20
 
@@ -76,3 +77,5 @@
 
 [pull]
 	rebase = true
+[commit]
+	verbose = true
