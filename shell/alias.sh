@@ -240,6 +240,8 @@ alias lt='l -s modified'
 alias ltra='exa -a --tree --git-ignore --ignore-glob=".git|__pycache__|.venv"'
 # group dirs first
 alias ltr='ltra --group-directories-first'
+# simple ls replacement
+alias lk='exa -F --icons --group-directories-first -a'
 
 alias lbin='l /home/bertold/.local/bin'
 # TODO (Berti): l. only dotiles, ld only directories, ll - something usefull, lg maybe only git-wroktree, lig - git
@@ -318,6 +320,7 @@ alias ct='countdown'
 alias vc="python::venv::create"
 alias va="python::venv::activate"
 alias vrm="python::venv::delete"
+alias vprm="python::venv::pdelete"
 alias vp="python::venv::pactivate"
 alias vd="deactivate"
 
@@ -336,5 +339,11 @@ alias cbash='bash --noprofile --norc'
 alias dbs='databricks secrets'
 alias db='databricks'
 alias dbd='databricks clusters'
-alias b='bat'
+alias b='bat -p'
+# rething maybe as -g {{ = {{cookie... and { { { = {{/{{ but maybe not.. so far below is good
+# in case a {{../src/{{.. layout will be used i rethink..
 alias cd{='cd {{cookiecutter.project_slug}}'
+alias cd{{='cd {{cookiecutter.project_slug}}/{{cookiecutter.project_slug}}'
+alias wiki='cd $WORKSPACE/wiki'
+alias pwx='printf $PWD | tee /dev/tty | xclip -i -selection clipboard'
+alias gmv='git mv'
