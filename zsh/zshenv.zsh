@@ -1,19 +1,24 @@
-# # ------------------------------
-# Environment Settings
-# # ------------------------------
+# =================================================================
+#  ______            _                                      _     |
+# |  ____|          (_)                                    | |    |
+# | |__   _ ____   ___ _ __ ___  _ __  _ __ ___   ___ _ __ | |_   |
+# |  __| | '_ \ \ / / | '__/ _ \| '_ \| '_ ` _ \ / _ \ '_ \| __|  |
+# | |____| | | \ V /| | | | (_) | | | | | | | | |  __/ | | | |_   |
+# |______|_| |_|\_/ |_|_|  \___/|_| |_|_| |_| |_|\___|_| |_|\__|  |
+#                                                                 |
+# =================================================================
 #
-# Most of the settings are for bash and zsh interchangebly
-# useable, where something more specific is defined it will
-# be pointed out, but almost surely, this will be sourced by
-# both Shells to provide a similar environment
 #
 # This file is symlinked or otherwise available at
 #   $HOME/.zshenv
+# probably the same file will be symlinked for other init processes
+# to setup the environment!
 # It will setup $ZDOTDIR and thus zsh know where to find other configs
 # Most settings make even for bash sense - identical, so it can
 # be sourced within .bash_profile or .bashrc
 
 
+# {{{ general and personal settings
 export DOTFILES="$HOME/dotfiles"
 export WORKSPACE="$HOME/workspace"
 
@@ -27,6 +32,14 @@ export GITCONF="$DOTFILES/git/gitconfig"
 export VCSIGNORE="$DOTFILES/git/globalignore"
 export EDITORCONFIG="$DOTFILES/.editorconfig"
 
+export EDITOR='nvim'
+export VISUAL='nvim'
+# export PAGER='batcat'
+export MANPAGER='nvim +Man!'
+
+# }}}
+
+# {{{ XDG base settings
 # Folder structure follows XDG - Standard
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 
@@ -40,15 +53,26 @@ export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 # More details on supported, partly or not supported tools
 # https://wiki.archlinux.org/title/XDG_Base_Directory
 
-# ------------
+# }}}
 
-export EDITOR='nvim'
-export VISUAL='nvim'
-# export PAGER='batcat'
-export MANPAGER='nvim +Man!'
+# {{{ Python Stack
+# Python
+export PYENV_ROOT=$HOME/.local/pyenv
+# export PYLINTHOME="$XDG_CACHE_HOME"/pylint.d
+# export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
+export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
+export PYTHON_VENVS="$XDG_CACHE_HOME"/python-venvs
+# Conda
+export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
+# Mypy
+export MYPY_CACHE_DIR="$XDG_CACHE_HOME"/mypy
+# venvs
+export WORKON_HOME="$XDG_DATA_HOME/virtualenvs"
+# }}}
 
-# -----------------------
-# Applications
+# {{{ Application Settings
+# some or most are not dependent on existence or installation of the applications
+# some are even helpfull beforehand
 
 # Docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
@@ -63,19 +87,6 @@ export GOBIN="$GOPATH"/bin
 # Pass & Gopass
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 
-# #--------- Python Stack
-# Python
-export PYENV_ROOT=$HOME/.local/pyenv
-# export PYLINTHOME="$XDG_CACHE_HOME"/pylint.d
-# export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
-export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
-export PYTHON_VENVS="$XDG_CACHE_HOME"/python-venvs
-# Conda
-export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
-# Mypy
-export MYPY_CACHE_DIR="$XDG_CACHE_HOME"/mypy
-# venvs
-export WORKON_HOME="$XDG_DATA_HOME/virtualenvs"
 
 # Readline
 export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
@@ -123,47 +134,44 @@ export NVM_DIR="$HOME/.config/nvm"
 export TMUX_PLUGIN_MANAGER_PATH="$XDG_CONFIG_HOME"/tmux/plugins/
 export TMUXP_CONFIGDIR="$XDG_CONFIG_HOME"/tmux/tmuxp
 
-# zsh + tools
+# TMUXP
+export DISABLE_AUTO_TITLE='true'
+# }}}
+
+# {{{ zsh + tools
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export _Z_DATA="$XDG_CACHE_HOME"/.z
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export HISTSIZE=1000000
 export SAVEHIST=$HISTSIZE
 
-# TMUXP
-export DISABLE_AUTO_TITLE='true'
+# }}}
 
-# zinit
-declare -A ZINIT
-ZINIT[HOME_DIR]="$ZDOTDIR"/.zinit
-ZINIT[BIN_DIR]="$ZDOTDIR"/.zinit/bin
-ZINIT[PLUGINS_DIR]="$ZDOTDIR"/.zinit/plugins
-ZINIT[COMPLETIONS_DIR]="$ZDOTDIR"/.zinit/completions
-ZINIT[SNIPPETS_DIR]="$ZDOTDIR"/.zinit/snippets
-ZINIT[ZCOMPDUMP_PATH]="$XDG_CACHE_HOME"/zcompdump/zcompdump-zinit
 
-export PATH="$PATH:$CARGO_HOME/bin"
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/bin"
-export PATH="$PATH:$HOME/.poetry/bin"
-# export PATH="$PATH:$HOME/Applications"
-export PATH="$PATH:/sbin"
-export PATH="$PATH:/usr/local"
-export PATH="$PATH:/usr/local/bin"
-export PATH="$PATH:/usr/local/sbin"
-export PATH="$PATH:/usr/sbin"
-
+# {{{ set up PATH
+export PATH="/sbin:$PATH"
+export PATH="/usr/sbin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 if [ -d "$HOME/anaconda3" ]; then
-  export PATH="$PATH:$HOME/anaconda3/bin"
+  export PATH="$HOME/anaconda3/bin:$PATH"
 fi
+export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="/usr/local:$PATH"
+export PATH="$CARGO_HOME/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
+# export PATH="$PATH:$HOME/Applications"
+# }}}
 
+# {{{ settings dependend on existence of installs
+# this section may also move somewhere else.. as this should probably be a static only settings file
+# only defining environment variables reusing others and not much more
 if [ -d "/opt/spark" ]; then
   export SPARK_HOME="/opt/spark"
   export PATH="$PATH:$SPARK_HOME/bin"
   export PYTHONPATH=$(ZIPS=("$SPARK_HOME"/python/lib/*.zip); IFS=:; echo "${ZIPS[*]}"):$PYTHONPATH
 fi
 
-if hash pyenv 2>/dev/null; then
-   eval "$(pyenv init --path)"
-fi
+# }}}
