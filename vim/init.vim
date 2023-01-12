@@ -5,41 +5,37 @@
 "   Plugins managed via vim-plug https://github.com/junegunn/vim-plug       |
 " ==========================================================================
 
+
+scriptencoding utf-8
+
 " Import Plugins {{{
 source $HOME/dotfiles/vim/vimplugins.vim
-
 " }}}
 
 " Basic Settings {{{
 
-" Not compatible with vi - open up more featues
-set nocompatible
-
-" Basic encoding
-set encoding=utf-8
-
-" allow hidden buffers
-set hidden
-
-" Enable termguicolors, as is more beautiful
-set termguicolors
-" Solarized theme works well in my terminal config
-colorscheme solarized8_dark_flat
-
-" Syntax Highlighting
 syntax enable
+set nocompatible          " do not run in legacy vi mode
+set encoding=utf-8
+set ruler                 " show line and column ruler on bottom
+set nonumber              " no line numbers on default
+set hidden                " Allow buffers to be backgrounded without being saved
+set noswapfile            " Prevent vim from creating swap files
+set scrolloff=999         " Keep the cursor centered in the screen
+set showmatch             " Highlight matching braces
+set splitbelow            " Splits show up below by default
+set splitright            " Splits go to the right by default
+set nohlsearch            " Startup with no search Highlighting - annoys me, can be toggled
+set incsearch             " Start showing results as you type
+set smartcase             " Be smart about case sensitivity when searching
+
+set termguicolors         " Enable termguicolors, as is more beautiful
+colorscheme solarized8_dark_flat
 
 " Tabsettings
 set tabstop=2
 set softtabstop=2
 set expandtab
-
-" Show ruler in statusline
-set ruler
-
-" Add line numbers by default
-set nonumber
-
 
 set laststatus=2
 let python_highlight_all=1
@@ -48,95 +44,70 @@ set wildmenu
 set showmatch
 set wrap
 
-" Prevent vim from creating swap files - most of the time they simply are
-" annoying
-set noswapfile
-
-" Startup with no search Highlighting - annoys me, can be toggled
-set nohlsearch
-
 let g:python3_host_prog = expand('/usr/bin/python3')
 
-" Set folding on markers by default
-set foldmethod=marker
+set foldmethod=marker     " Set folding on markers by default
 
 
-" Persisten Undo Files
-set undofile
+set undofile              " Persisten Undo Files
 if !has('nvim')
     set undodir=$XDG_DATA_HOME/nvim/undo
 endif
 augroup pers_undo
     autocmd!
+    " avoid cluttering with tmp files
     autocmd BufWritePre /tmp/* setlocal noundofile
 augroup END
 
 " }}}
 
-" Key Bindings / Mappings {{{
+" Key Bindings {{{
 
-" first \ is escape sequence, thus \ is leader
-let mapleader = "\\"
-" set - as localleader
+let mapleader = "\\"  " first \ is escape sequence, thus \ is leader
 let maplocalleader = "-"
 
 " Toggle HL Search
 nnoremap <silent> <Leader>h :set invhlsearch<CR>
-
 " Edit vim settings
 nnoremap <localleader>ev :split $MYVIMRC<cr>
-
 " Copy and Paste to system buffers
-nnoremap <leader>y "*y
-nnoremap <leader>p "*p
+nnoremap <leader>y "+y
+nnoremap <leader>p "+p
+" copy and paste with x window clipboard
+nnoremap <localleader>y "*y
+nnoremap <localleader>p "*p
+" annoyed me when pressing unintentional.. mauybe will change
+nnoremap Q <nop>
+"Save on <Leader>w to not have to press :
+noremap <Leader>w :write<CR>
+" Accidently running :W for saving shall create desired result
+" Also W command annoyed me
+command! W w
+" Shortcut for fuzzfinder
+nnoremap <Leader>e :FZF<CR>
+" Line number toggles and turn off
+noremap <localleader>nn :set number!<CR>
+noremap <localleader>nr :set relativenumber!<CR>
+noremap <localleader>no :set nonumber norelativenumber<CR>
+" vertical split
+nnoremap <Leader>v :vs<Enter>
 
-nnoremap <localleader>y "+y
-nnoremap <localleader>p "+p
-
-
+" -- Moving
 " switch visual line and per line movement
 nnoremap j gj
 nnoremap gj j
 nnoremap k gk
 nnoremap gk k
-
-" annoyed me when pressing unintentional.. mauybe will change
-nnoremap Q <nop>
-
-"Save on <Leader>w to not have to press :
-noremap <Leader>w :write<CR>
-
-" Accidently running :W for saving shall create desired result
-" Also W command annoyed me
-command! W w
-" " Accidently running :Q for quitting shall create desired result
-" command! Q q
-
-" Shortcut for fuzzfinder
-nnoremap <Leader>e :FZF<CR>
-
-"Save on <Leader>w to not have to press :
-noremap <localleader>nn :set number!<CR>
-noremap <localleader>nr :set relativenumber!<CR>
-noremap <localleader>no :set nonumber norelativenumber<CR>
-
-
-
-"  Remap Windows Movements {{{
+"  Remap Windows Movements
 inoremap <C-Left> <Esc><c-w>h
 inoremap <C-Down> <Esc><c-w>j
 inoremap <C-Up> <Esc><c-w>k
 inoremap <C-Right> <Esc><c-w>l
-
 inoremap <C-h> <Esc><c-w>h
 inoremap <C-j> <Esc><c-w>j
 inoremap <C-k> <Esc><c-w>k
 inoremap <C-l> <Esc><c-w>l
 
-" vertical split
-nnoremap <Leader>v :vs<Enter>
-
-"}}}
 
 " Insert customized todo
 " " TODO (Berti): rething mappings!
@@ -184,8 +155,6 @@ let g:lightline = {
 " IMPORTANT: :help Ncm2PopupOpen for more information
     set completeopt=noinsert,menuone,noselect
 
-" let g:vanity_default_colors = {'allFiles': 'solarized'}
-
 " Slime vim
 let g:slime_target = "tmux"
 
@@ -201,26 +170,14 @@ hi TabLineFill  guifg=#999 guibg=#222 gui=none ctermfg=254 ctermbg=238 cterm=non
 
 " Autocommand Groups {{{
 
-" delete trailiing whitespaces before saving py or yaml files
-" augroup trailspace
-"     autocmd!
-"     autocmd BufWritePre *.py,*.yml,*.yaml :%s/\s\+$//e
-" augroup END
-" if not .editorconfig
 " https://stackoverflow.com/questions/46945493/disable-autocmd-project-specific-in-vim
-" but also other tricks here!
+" somehow i copied this here
 
 " autoformat python
 augroup pyformat
     autocmd!
     autocmd BufWritePre *.py execute ':Black'
     autocmd BufWritePre *.py execute ':Isort'
-augroup END
-
-augroup cookiecutter
-    autocmd!
-    autocmd BufNewFile,BufRead /home/bertold/workspace/berti/databricks-ci-cookie/**/**/* autocmd! pyformat
-    autocmd BufWritePre /home/bertold/workspace/berti/databricks-ci-cookie/**/**/*.py execute ':Black'
 augroup END
 
 
