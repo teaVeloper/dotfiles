@@ -314,13 +314,11 @@ source $HOME/dotfiles/shell/functions.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 source ~/dotfiles/cli_modules/forgit/forgit.plugin.zsh
+
+. "$HOME/.asdf/asdf.sh"
+
 # }}}
 
-# PYENV {{{
-if hash pyenv 2>/dev/null; then
-    eval "$(pyenv init -)"
-fi
-# }}}
 
 # PERL {{{
 # PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;

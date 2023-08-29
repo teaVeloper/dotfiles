@@ -57,7 +57,6 @@ export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
 # {{{ Python Stack
 # Python
-export PYENV_ROOT=$HOME/.local/pyenv
 # export PYLINTHOME="$XDG_CACHE_HOME"/pylint.d
 # export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
 export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
@@ -155,9 +154,9 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-if [ -d "$HOME/anaconda3" ]; then
-  export PATH="$HOME/anaconda3/bin:$PATH"
-fi
+# if [ -d "$HOME/anaconda3" ]; then
+#   export PATH="$HOME/anaconda3/bin:$PATH"
+# fi
 export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="/usr/local:$PATH"
 export PATH="$CARGO_HOME/bin:$PATH"
