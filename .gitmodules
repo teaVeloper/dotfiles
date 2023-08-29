@@ -17,9 +17,6 @@
 [submodule "PathPicker"]
 	path = cli_modules/PathPicker
 	url = https://github.com/facebook/PathPicker.git
-[submodule "cli_modules/pyenv"]
-	path = cli_modules/pyenv
-	url = https://github.com/pyenv/pyenv.git
 [submodule "cli_modules/asdf"]
 	path = cli_modules/asdf
 	url = https://github.com/asdf-vm/asdf.git
