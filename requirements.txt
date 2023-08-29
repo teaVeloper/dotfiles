@@ -1,9 +1,4 @@
 pipx
 ipython
-isort
-black
-mypy
 neovim-remote
 ptpython
-yamllint
-yamlfix
