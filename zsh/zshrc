@@ -328,12 +328,17 @@ source ~/dotfiles/cli_modules/forgit/forgit.plugin.zsh
 # PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 # }}}
 
+# asdf
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+
 # Autoload and run for completions
 # autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
-autoload -Uz compinit; compinit
+autoload -Uz compinit && compinit
 
 # autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
+source virtualenvwrapper.sh
