@@ -1,18 +1,25 @@
 # Description
 
-In this Repository my configuration for UNIX Systems is tracked.
+This is my collection of dotfiles and related
 
-I am using Dotbot for managing my configs.
+This is work in progress and by far nohwere close I want it, but I can work with it quite well so far!
 
 ## Installation
 
-To get my configs up and running, just clone this repo including submodule on the target system and 
-change the softling
-`~/dofiles` to be created from cloned directory. Then run `./install` and everythin will be setup
+This is meant for my own usage and just copying my config is at your own risk!
 
+Currently I use dotbot, which is tracked as a submodule, nad thus cecked out when also checking
+submodules!
+To get my configs up and running, just clone this repo including submodule on the target system into 
+`~/dofiles`. Then run `./install` and everythin will hopefully be set up
 
-## Version
+# Roadmap
 
-This is work in progress and there have to done some more adaptions for adding the toolset as Git
-submodules
-
+- change project structure to better separate configs and project management
+- include Makefile for little tasks
+   - e.g. handling of lesskey compiling
+   - maybe bootsraping the install
+- add install script, I can run via rawlink in curl and it bootsraps config from terminal
+  - have a minimal option, so I can have a simple but usefull setup for remote machines or docker containers
+- change in neovim to lua config and some other modern options (LSP, lazy.nvim, .. )
+- add ansible playbooks to install and set up some usefull programs or options
