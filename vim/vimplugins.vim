@@ -123,4 +123,10 @@ Plug 'jpalardy/vim-slime'
 
 Plug 'rhysd/committia.vim'
 
+" Plug 'jiangmiao/auto-pairs'
+
+Plug 'vimwiki/vimwiki'
+
+Plug 'raimon49/requirements.txt.vim'
+
 call plug#end()

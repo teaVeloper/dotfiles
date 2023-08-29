@@ -21,7 +21,7 @@ set ruler                 " show line and column ruler on bottom
 set nonumber              " no line numbers on default
 set hidden                " Allow buffers to be backgrounded without being saved
 set noswapfile            " Prevent vim from creating swap files
-set scrolloff=999         " Keep the cursor centered in the screen
+" set scrolloff=999         " Keep the cursor centered in the screen
 set showmatch             " Highlight matching braces
 set splitbelow            " Splits show up below by default
 set splitright            " Splits go to the right by default
@@ -123,7 +123,7 @@ inoremap <C-l> <Esc><c-w>l
 " behaviour of FZF search
 let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
 
-" Linting {{{
+" Linting
 let g:syntastic_python_checker = ['flake8']
 let g:syntastic_python_checkers = ['python']
 let g:syntastic_python_python_exec = 'python3'
@@ -131,8 +131,9 @@ let g:syntastic_python_python_exec = 'python3'
 " ALE Settings
 " Allow longer lines .e.g. 120 can be changed later
 " ignore C0330 hanging indents, as black formats different
-let g:ale_python_flake8_options = '--max-line-length=120 --ignore=C0330'
-let g:ale_yaml_yamllint_options = '-d "{extends: relaxed, rules: {line-length: {max: 120}}}"'
+let g:ale_python_flake8_options = '--max-line-length=120 --inline-quotes '"''
+let g:ale_yaml_yamllint_options = '-d "{extends: relaxed, rules: {line-length: {max: 120}} }"'
+let g:ale_python_pylint_options = '-d E0401,C0112,C0103,C0116,C0115,C0114,R0903,R1705,W0621'
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
 
