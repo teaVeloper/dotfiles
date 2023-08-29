@@ -265,8 +265,6 @@ alias ipy='ipython'
 alias pym='pyhon3 -m'
 alias pyi='pyhon3 -i'
 alias fla='flake8 --ignore=C0330,E501'
-alias python='python3'
-alias pip='pip3'
 alias poetenv='poetry env info -p'
 #}}}
 
