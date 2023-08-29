@@ -9,3 +9,5 @@ Session.vim
 .projections.json
 # # tags file from ctags
 tags
+# asdf tool settings
+.tool-versions
