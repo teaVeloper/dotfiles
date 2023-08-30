@@ -35,9 +35,9 @@ alias gaa='git add --all'
 # gau='git add --update'
 # gav='git add --verbose'
 alias gb='git branch'
-# gbD='git branch -D'
+alias gbD='git branch -D'
 # gba='git branch -a'
-# gbd='git branch -d'
+alias gbd='git branch -d'
 # gbda='git branch --no-color --merged | command grep -vE "^([+*]|\s*($(git_main_branch)|$(git_develop_branch))\s*$)" | command xargs git branch -d 2>/dev/null'
 # gbl='git blame -b -w'
 # gbnm='git branch --no-merged'
@@ -176,7 +176,7 @@ alias grmc='git rm --cached'
 alias grs='git restore'
 # grset='git remote set-url'
 # grss='git restore --source'
-# grst='git restore --staged'
+alias grst='git restore --staged'
 # grt='cd "$(git rev-parse --show-toplevel || echo .)"'
 # gru='git reset --'
 # grup='git remote update'
@@ -220,6 +220,7 @@ alias gsu='git submodule update'
 
 # ls Versions with exa {{{
 # detailed version, but all alphabetically - no regards of dirs
+# TODO: describe options here
 alias la='exa -Falh --git --time-style long-iso --icons'
 # detailed option - always used
 alias l='la --group-directories-first'
@@ -228,6 +229,7 @@ alias ld='l -D'
 # list only dotted files and folders
 alias l.="l -d .*"
 # simple version
+# TODO: need? never use
 alias lsi='l --no-time --no-user'
 # show detailed with tree
 alias lltr='l --tree --git-ignore --ignore-glob=".git|__pycache__|.venv"'
@@ -235,7 +237,7 @@ alias lltr='l --tree --git-ignore --ignore-glob=".git|__pycache__|.venv"'
 alias ll='l -Hg'
 # sort by modification date
 alias lt='l -s modified'
-# show a simple tree, but with all hidden files, ignore git and pychase and venv
+# show a simple tree, but with all hidden files, ignore git and pycache and venv
 # sort alphabetically
 alias ltra='exa -a --tree --git-ignore --ignore-glob=".git|__pycache__|.venv"'
 # group dirs first
@@ -287,11 +289,7 @@ alias wkb='work berti'
 alias wkr='work rad'
 alias play='work playground'
 
-# I am used to type vim, but want nvim
-alias vim='nvim'
-
 # convenience
-# alias vpy='v $(find . -name "*.py")'
 alias vgi='v $(git ls-files)'
 
 # edit configs
