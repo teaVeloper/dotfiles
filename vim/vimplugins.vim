@@ -129,4 +129,10 @@ Plug 'vimwiki/vimwiki'
 
 Plug 'raimon49/requirements.txt.vim'
 
+Plug 'renerocksai/telekasten.nvim'
+
+Plug 'nvim-lua/plenary.nvim'
+
+Plug 'nvim-telescope/telescope.nvim'
+
 call plug#end()
