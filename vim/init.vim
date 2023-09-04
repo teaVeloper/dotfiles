@@ -7,6 +7,7 @@
 
 
 scriptencoding utf-8
+set mouse=
 
 " Import Plugins {{{
 source $HOME/dotfiles/vim/vimplugins.vim
