@@ -23,3 +23,4 @@ To get my configs up and running, just clone this repo including submodule on th
   - have a minimal option, so I can have a simple but usefull setup for remote machines or docker containers
 - change in neovim to lua config and some other modern options (LSP, lazy.nvim, .. )
 - add ansible playbooks to install and set up some usefull programs or options
+- move from dotbot to gnu stow (it is very simple, easy to use and follows the folder structure, so no config drift)
