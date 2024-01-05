@@ -35,7 +35,7 @@ require('lazy').setup("plugins")
 vim.o.hlsearch = false
 
 -- Make line numbers default
-vim.wo.number = true
+vim.wo.number = false
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -43,7 +43,11 @@ vim.o.mouse = 'a'
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
+-- vim.o.clipboard = 'unnamedplus'
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<localleader>y', '"*y', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<localleader>p', '"*p', { silent = true })
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -52,7 +56,7 @@ vim.o.breakindent = true
 vim.o.undofile = true
 
 -- Case-insensitive searching UNLESS \C or capital in search
-vim.o.ignorecase = true
+vim.o.ignorecase = false
 vim.o.smartcase = true
 
 -- Keep signcolumn on by default
@@ -304,16 +308,16 @@ lspconfig.pyright.setup({
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-require('luasnip.loaders.from_vscode').lazy_load()
-luasnip.config.setup {}
+-- local luasnip = require 'luasnip'
+-- require('luasnip.loaders.from_vscode').lazy_load()
+-- luasnip.config.setup {}
 
 cmp.setup {
-    snippet = {
-        expand = function(args)
-            luasnip.lsp_expand(args.body)
-        end,
-    },
+    -- snippet = {
+    --     expand = function(args)
+    --         luasnip.lsp_expand(args.body)
+    --     end,
+    -- },
     mapping = cmp.mapping.preset.insert {
         ['<C-n>'] = cmp.mapping.select_next_item(),
         ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -327,8 +331,8 @@ cmp.setup {
         ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif luasnip.expand_or_locally_jumpable() then
-                luasnip.expand_or_jump()
+            -- elseif luasnip.expand_or_locally_jumpable() then
+            --     luasnip.expand_or_jump()
             else
                 fallback()
             end
@@ -336,8 +340,8 @@ cmp.setup {
         ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif luasnip.locally_jumpable(-1) then
-                luasnip.jump(-1)
+            -- elseif luasnip.locally_jumpable(-1) then
+            --     luasnip.jump(-1)
             else
                 fallback()
             end
@@ -345,7 +349,7 @@ cmp.setup {
     },
     sources = {
         { name = 'nvim_lsp' },
-        { name = 'luasnip' },
+        -- { name = 'luasnip' },
     },
 }
 
@@ -355,6 +359,7 @@ require('telekasten').setup({
     weeklies = vim.fn.expand("~/workspace/zettelkasten/weekly"),     -- Put the name of your notes directory here
     templates = vim.fn.expand("~/workspace/zettelkasten/templates"), -- Put the name of your notes directory here
     new_note_location = 'smart',
+    template_new_daily = vim.fn.expand("~/workspace/zettelkasten/templates/daily.md"),
 })
 
 
@@ -363,6 +368,7 @@ require("lspconfig").clangd.setup {
     on_attach = on_attach
 }
 
+require('mini.align').setup()
 
 vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 vim.g.navic_silence = true
@@ -371,9 +377,12 @@ vim.g.navic_silence = true
 -- vim: ts=2 sts=2 sw=2 et
 vim.opt.number = false
 vim.opt.mouse = ""
-vim.opt.swapfile = false
 local data_home = vim.env.XDG_DATA_HOME or vim.fn.expand("~/.local/share")
 vim.opt.undodir = { data_home .. "/nvim/undo//" }
 vim.cmd [[colorscheme tokyonight]]
 vim.keymap.set('n', '<leader>v', ':vsplit<CR>')
 vim.keymap.set('n', '<leader>zk', ':Telekasten<CR>')
+
+vim.opt.swapfile = false
+-- save a file on leader w for convenience
+vim.keymap.set('n', '<leader>w', ':w<CR>')

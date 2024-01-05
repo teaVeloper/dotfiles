@@ -45,7 +45,7 @@ return {
     'rhysd/committia.vim',
 
     -- automatic insert or delete backets in pairs
-    'jiangmiao/auto-pairs',
+    -- 'jiangmiao/auto-pairs',
 
     -- "gc" to comment visual regions/lines
     { 'numToStr/Comment.nvim', opts = {} },
