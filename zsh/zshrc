@@ -289,7 +289,7 @@ zinit wait lucid for \
 
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-zinit light andydecleyre/zpy
+# zinit light andydecleyre/zpy
 
 # # do not like this, also it has a bug, but it actually is nice (except the bug)
 # zinit ice wait"0b" lucid atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'

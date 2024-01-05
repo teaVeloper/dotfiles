@@ -307,6 +307,7 @@ alias myeditorconfig='nvim "$EDITORCONFIG"'
 alias g='git'
 alias gs='git status'
 alias gc='git commit'
+alias gcn='git commit --no-verify' # sometimes I want to commit and push unclean work to share or save remotely
 alias gdo='git done'
 alias gdu='git dune'
 

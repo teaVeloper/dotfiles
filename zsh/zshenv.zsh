@@ -167,10 +167,15 @@ export PATH="$GOPATH/bin:$PATH"
 # {{{ settings dependend on existence of installs
 # this section may also move somewhere else.. as this should probably be a static only settings file
 # only defining environment variables reusing others and not much more
-if [ -d "/opt/spark" ]; then
-  export SPARK_HOME="/opt/spark"
-  export PATH="$PATH:$SPARK_HOME/bin"
-  export PYTHONPATH=$(ZIPS=("$SPARK_HOME"/python/lib/*.zip); IFS=:; echo "${ZIPS[*]}"):$PYTHONPATH
-fi
+# if [ -d "/opt/spark" ]; then
+#   export SPARK_HOME="/opt/spark"
+#   export PATH="$PATH:$SPARK_HOME/bin"
+#   export PYTHONPATH=$(ZIPS=("$SPARK_HOME"/python/lib/*.zip); IFS=:; echo "${ZIPS[*]}"):$PYTHONPATH
+# fi
+
+# SPARK_HOME and JAVA HOME for asdf
+. ~/.asdf/plugins/java/set-java-home.zsh
+# export SPARK_HOME=$(asdf where spark)
+export PATH="$PATH:$SPARK_HOME/bin"
 
 # }}}

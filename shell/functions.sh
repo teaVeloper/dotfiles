@@ -368,4 +368,13 @@ function take() {
   fi
 }
 
+# create __init__.py in all folders provided it not exist
+function initpy() {
+  for f in $@
+    do
+      touch $f/__init__.py
+    done
+}
+
+
 # }}}

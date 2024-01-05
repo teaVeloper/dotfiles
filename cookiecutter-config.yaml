@@ -1,5 +1,7 @@
 default_context:
     full_name: "Bertold Sedlak"
+    author: "Bertold Sedlak"
+    name: "Bertold Sedlak"
     email: "bertold.sedlak@cyansecurity.com"
     github_username: "teaVeloper"
 cookiecutters_dir: "/home/"
