@@ -1,9 +1,7 @@
 return {
     -- startup screen
     {
-        'goolord/alpha-nvim',
+        "goolord/alpha-nvim",
         lazy = true,
-
     },
 }
-
