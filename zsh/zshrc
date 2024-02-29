@@ -343,3 +343,4 @@ fpath+=~/.zfunc
 
 source virtualenvwrapper.sh
 
+. "/home/bertold/.local/share/cargo/env"
