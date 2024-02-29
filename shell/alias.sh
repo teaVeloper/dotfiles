@@ -344,3 +344,13 @@ alias cd{{='cd {{cookiecutter.project_slug}}/{{cookiecutter.project_slug}}'
 alias wiki='cd $WORKSPACE/wiki'
 alias pwx='printf $PWD | tee /dev/tty | xclip -i -selection clipboard'
 alias gmv='git mv'
+
+## aliases for working with pip
+alias pipi='pip install'
+alias pipiu='pipi --upgrade'
+# pip tools
+alias pipc='pip-compile --no-emit-index-url'
+alias pipcd='pipc --extra=dev --output-file=requirements-dev.txt'
+alias pipcu='pipc --upgrade'
+alias pipcdu='pipcd --upgrade'
+alias pips='pip-sync'
