@@ -91,3 +91,24 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
     end,
 })
+
+-- Autocommands to toggle line numbers
+local toggleNumbersGroup = augroup("ToggleNumbers")
+
+vim.api.nvim_create_autocmd("ModeChanged", {
+    group = toggleNumbersGroup,
+    pattern = "*:[vV\x16]*",
+    callback = function()
+        vim.opt.number = true
+        vim.opt.relativenumber = true
+    end,
+})
+
+vim.api.nvim_create_autocmd("Modechanged", {
+    group = toggleNumbersGroup,
+    pattern = "[vV\x16]*:*",
+    callback = function()
+        vim.opt.number = false
+        vim.opt.relativenumber = false
+    end,
+})

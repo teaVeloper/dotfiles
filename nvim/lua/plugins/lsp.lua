@@ -21,7 +21,25 @@ return {
 
             ---@diagnostic disable-next-line: missing-fields
             require("nvim-treesitter.configs").setup({
-                ensure_installed = { "bash", "c", "html", "lua", "markdown", "vim", "vimdoc" },
+                ensure_installed = {
+                    "bash",
+                    "c",
+                    "html",
+                    "lua",
+                    "markdown",
+                    "markdown_inline",
+                    "vim",
+                    "vimdoc",
+                    "python",
+                    "javascript",
+                    "regex",
+                    "yaml",
+                    "dockerfile",
+                    "make",
+                    "scala",
+                    "sql",
+                    "toml",
+                },
                 -- Autoinstall languages that are not installed
                 auto_install = true,
                 highlight = { enable = true },
@@ -359,11 +377,11 @@ return {
                             luasnip.expand_or_jump()
                         end
                     end, { "i", "s" }),
-                    ["<C-h>"] = cmp.mapping(function()
-                        if luasnip.locally_jumpable(-1) then
-                            luasnip.jump(-1)
-                        end
-                    end, { "i", "s" }),
+                    -- ["<C-h>"] = cmp.mapping(function()
+                    --     if luasnip.locally_jumpable(-1) then
+                    --         luasnip.jump(-1)
+                    --     end
+                    -- end, { "i", "s" }),
                 }),
                 sources = {
                     { name = "nvim_lsp" },

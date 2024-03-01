@@ -1,5 +1,9 @@
 local zettel_path = "~/workspace/zettelkasten"
 
+if true then
+    return {}
+end
+
 return {
 
     -- calendar usefull for telekasten
