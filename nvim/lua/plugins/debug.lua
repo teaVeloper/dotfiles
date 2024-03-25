@@ -13,6 +13,7 @@ return {
     dependencies = {
         -- Creates a beautiful debugger UI
         "rcarriga/nvim-dap-ui",
+        "nvim-neotest/nvim-nio",
 
         -- Installs the debug adapters for you
         "williamboman/mason.nvim",
@@ -81,6 +82,7 @@ return {
         dap.listeners.after.event_initialized["dapui_config"] = dapui.open
         dap.listeners.before.event_terminated["dapui_config"] = dapui.close
         dap.listeners.before.event_exited["dapui_config"] = dapui.close
+        require("dapui").setup()
 
         -- Install golang specific config
         require("dap-go").setup()
