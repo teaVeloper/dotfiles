@@ -35,9 +35,6 @@ return {
     -- tim pope sensible vim
     -- 'tpope/vim-sensible',
 
-    -- tim pope surroung vim editing
-    "tpope/vim-surround",
-
     -- https://github.com/tpope/vim-endwise add intelligent endings
     "tpope/vim-endwise",
 
