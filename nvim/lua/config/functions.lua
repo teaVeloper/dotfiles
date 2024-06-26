@@ -1,3 +1,5 @@
+-- my own function
+-- useful utilities I want available
 local function toggle_zoom_tab()
     local tab_count = vim.fn.tabpagenr("$") -- Get the total number of tabs
     if tab_count == 1 then

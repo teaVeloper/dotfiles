@@ -26,8 +26,10 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 -- use PRIMARY and SECONDARY clipboard with leader and localleader
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { silent = true })
 vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { silent = true })
 vim.keymap.set({ "n", "v" }, "<localleader>y", '"*y', { silent = true })
 vim.keymap.set({ "n", "v" }, "<localleader>p", '"*p', { silent = true })
+vim.keymap.set({ "n", "v" }, "<localleader>P", '"*P', { silent = true })
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`

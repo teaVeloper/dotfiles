@@ -1,14 +1,13 @@
 -- [[ Basic Autocommands ]]
 --  See :help lua-guide-autocommands
 
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-
 local function augroup(name)
     return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking (copying) text",
     group = augroup("kickstart-highlight-yank"),
@@ -92,9 +91,8 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     end,
 })
 
--- Autocommands to toggle line numbers
+-- Autocommands to toggle line numbers on visual mode
 local toggleNumbersGroup = augroup("ToggleNumbers")
-
 vim.api.nvim_create_autocmd("ModeChanged", {
     group = toggleNumbersGroup,
     pattern = "*:[vV\x16]*",
@@ -103,7 +101,6 @@ vim.api.nvim_create_autocmd("ModeChanged", {
         vim.opt.relativenumber = true
     end,
 })
-
 vim.api.nvim_create_autocmd("Modechanged", {
     group = toggleNumbersGroup,
     pattern = "[vV\x16]*:*",
