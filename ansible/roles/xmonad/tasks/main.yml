@@ -1,0 +1,15 @@
+# roles/xmonad/tasks/main.yml
+- name: Install XMonad
+  pacman:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - xmonad
+    - xmonad-contrib
+    - xmobar
+
+- name: Copy XMonad configuration
+  copy:
+    src: files/xmonad.hs
+    dest: ~/.xmonad/xmonad.hs
+

@@ -1,0 +1,10 @@
+# roles/binaries/tasks/main.yml
+- name: Install custom binaries
+  copy:
+    src: files/{{ item }}
+    dest: /usr/local/bin/{{ item }}
+    mode: '0755'
+  with_items:
+    - custom_tool
+    - another_tool
+

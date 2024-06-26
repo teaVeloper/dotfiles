@@ -1,0 +1,5 @@
+# inventory
+localhost ansible_connection=local
+popos ansible_host=pop-os.local
+arch ansible_host=arch.local
+

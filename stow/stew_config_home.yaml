@@ -1,0 +1,13 @@
+base_dir: ~/dotfiles
+target_dir: ~
+
+files:
+  bash:
+    - bash_profile: .bash_profile
+    - bashrc: .bashrc
+  zsh:
+    - zshrc.sh: .zshrc
+    - zshenv.sh: .zshenv
+  tmux:
+    - tmux.conf: .tmux.conf
+

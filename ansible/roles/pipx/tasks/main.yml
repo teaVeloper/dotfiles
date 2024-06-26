@@ -1,0 +1,10 @@
+# roles/pipx/tasks/main.yml
+- name: Install Pipx
+  pip:
+    name: pipx
+
+- name: Ensure pipx is in the PATH
+  lineinfile:
+    path: ~/.bashrc
+    line: 'export PATH=$HOME/.local/bin:$PATH'
+

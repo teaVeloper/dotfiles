@@ -1,0 +1,37 @@
+# site.yml
+- hosts: localhost
+  roles:
+    - common
+    - dotfiles
+    - asdf
+    - pipx
+    - binaries
+    - apt
+    - snap
+    - vpn
+    - ssh
+    - gnome
+
+- hosts: popos
+  roles:
+    - common
+    - asdf
+    - pipx
+    - binaries
+    - apt
+    - snap
+    - vpn
+    - ssh
+    - gnome
+
+- hosts: arch
+  roles:
+    - common
+    - asdf
+    - pipx
+    - binaries
+    - pacman
+    - vpn
+    - ssh
+    - xmonad
+
