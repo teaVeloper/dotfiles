@@ -35,15 +35,15 @@ fpath=($HOME/dotfiles/zsh/functions $fpath)
 
 export FPP_DISABLE_SPLIT=1
 
-export GITLAB_HOST="https://gitlab.plob.cz/"
+# export GITLAB_HOST="https://gitlab.plob.cz/"
 
 export PASSWORD_STORE_X_SELECTION="primary"
 
-if [ -f "$HOME/.local/bin/potipython" ]; then
-    export PYSPARK_DRIVER_PYTHON="$HOME/.local/bin/ptipython"
-fi
+# if [ -f "$HOME/.local/bin/ptipython" ]; then
+#     export PYSPARK_DRIVER_PYTHON="$HOME/.local/bin/ptipython"
+# fi
 
-export ZSH="$HOME/.oh-my-zsh"
+# export ZSH="$HOME/.oh-my-zsh"
 
 export FORGIT_COPY_CMD='xclip -selection clipboard'
 
@@ -320,14 +320,6 @@ source ~/dotfiles/cli_modules/forgit/forgit.plugin.zsh
 # }}}
 
 
-# PERL {{{
-# PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
-# PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-# PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-# PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
-# PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
-# }}}
-
 # asdf
 # append completions to fpath
 fpath=(${ASDF_DIR}/completions $fpath)
@@ -343,4 +335,5 @@ fpath+=~/.zfunc
 
 source virtualenvwrapper.sh
 
-. "/home/bertold/.local/share/cargo/env"
+
+. "$CARGO_HOME"

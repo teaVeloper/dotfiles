@@ -17,6 +17,20 @@
 # Most settings make even for bash sense - identical, so it can
 # be sourced within .bash_profile or .bashrc
 
+# {{{ XDG base settings
+# Folder structure follows XDG - Standard
+# https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_STATE_HOME=$HOME/.local/state
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+
+# More details on supported, partly or not supported tools
+# https://wiki.archlinux.org/title/XDG_Base_Directory
+
+# }}}
 
 # {{{ general and personal settings
 export DOTFILES="$HOME/dotfiles"
@@ -39,21 +53,6 @@ export MANPAGER='nvim +Man!'
 
 # }}}
 
-# {{{ XDG base settings
-# Folder structure follows XDG - Standard
-# https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
-
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_DATA_HOME=$HOME/.local/share
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_STATE_HOME=$HOME/.local/state
-export XDG_RUNTIME_DIR="/run/user/$(id -u)"
-# TODO (Berti): XDG_DATA_DIRS
-#
-# More details on supported, partly or not supported tools
-# https://wiki.archlinux.org/title/XDG_Base_Directory
-
-# }}}
 
 # {{{ Python Stack
 # Python
@@ -116,8 +115,9 @@ export K9SCONFIG="$XDG_CONFIG_HOME"/k9s
 export ACKRC="$XDG_CONFIG_HOME/ack/ackrc"
 
 # AWS CLI
-export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
-export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
+export AWS_CONFIG_HOME="$XDG_CONFIG_HOME"/aws
+export AWS_SHARED_CREDENTIALS_FILE="$AWS_CONFIG_HOME"/credentials
+export AWS_CONFIG_FILE="$AWS_CONFIG_HOME"/config
 
 # Node / npm
 # https://github.com/npm/npm/issues/6675#issuecomment-251049832
@@ -132,6 +132,7 @@ export NVM_DIR="$HOME/.config/nvm"
 # export TMUXP_CONFIGDIR="$XDG_CONFIG_HOME/tmuxp"
 export TMUX_PLUGIN_MANAGER_PATH="$XDG_CONFIG_HOME"/tmux/plugins/
 export TMUXP_CONFIGDIR="$XDG_CONFIG_HOME"/tmux/tmuxp
+# TODO: remove tmux plugin manager - no use
 
 # TMUXP
 export DISABLE_AUTO_TITLE='true'
@@ -148,22 +149,42 @@ export SAVEHIST=$HISTSIZE
 
 
 # {{{ set up PATH
+# PATH HIERARCHY:
+# shims and venvs
+# custom paths e.g. cargo, go, ..
+# .local/bin
+#     /usr/local/bin
+#     /usr/local/sbin
+#     /usr/bin
+#     /bin
+#     /sbin
+#
+#
+#
+#
+#
 export PATH="/sbin:$PATH"
 export PATH="/usr/sbin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+# TODO: handle anaconda nicely, with some prefix, but another file than here
+# and definitely append and not prepend to path
 # if [ -d "$HOME/anaconda3" ]; then
 #   export PATH="$HOME/anaconda3/bin:$PATH"
 # fi
 export PATH="$HOME/.poetry/bin:$PATH"
+# TODO: remove poetry from here!
 export PATH="/usr/local:$PATH"
 export PATH="$CARGO_HOME/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
-# export PATH="$PATH:$HOME/Applications"
+source "$HOME/.rye/env"
+
 # }}}
 
+# TODO: move these things out of this env file
+#
 # {{{ settings dependend on existence of installs
 # this section may also move somewhere else.. as this should probably be a static only settings file
 # only defining environment variables reusing others and not much more
@@ -174,7 +195,7 @@ export PATH="$GOPATH/bin:$PATH"
 # fi
 
 # SPARK_HOME and JAVA HOME for asdf
-. ~/.asdf/plugins/java/set-java-home.zsh
+#. ~/.asdf/plugins/java/set-java-home.zsh
 # export SPARK_HOME=$(asdf where spark)
 export PATH="$PATH:$SPARK_HOME/bin"
 
