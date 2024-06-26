@@ -239,14 +239,92 @@ pyf() {
 }
 
 
-vpy() {
-  if [ $# -eq 0 ]; then
-    folder="."
+# vpy() {
+#   if [ $# -eq 0 ]; then
+#     folder="."
+#   else
+#     folder=($@)
+#   fi
+#
+#   "$EDITOR" $(pyf $folder) # no "" around array, to expand appropriately
+# }
+
+# Function to find files with specified extensions, optionally excluding __init__.py
+find_files() {
+  local exclude_init=true
+  local extensions=("py")
+  local folders=(".")
+
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      --include-init)
+        exclude_init=false
+        shift
+        ;;
+      -t|--type)
+        shift
+        extensions=(${1//,/ })
+        shift
+        ;;
+      *)
+        folders+=("$1")
+        shift
+        ;;
+    esac
+  done
+
+  local ext_pattern=$(printf "|%s" "${extensions[@]}")
+  ext_pattern=${ext_pattern:1}  # Remove leading |
+
+  if $exclude_init; then
+    fd -E "__init__.py" -e $ext_pattern ${folders[@]}
   else
-    folder=($@)
+    fd -e $ext_pattern ${folders[@]}
+  fi
+}
+
+# Function to open files with the specified editor
+vpy() {
+  local editor=${EDITOR:-nvim}
+  local folders=(".")
+
+  if [[ $# -gt 0 ]]; then
+    folders=("$@")
   fi
 
-  "$EDITOR" $(pyf $folder) # no "" around array, to expand appropriately
+  "$editor" $(find_files "${folders[@]}")
+}
+
+# Generalized function for opening files with specified types
+ev() {
+  local editor=${EDITOR:-nvim}
+  local extensions=("py")
+  local include_init=false
+  local folders=(".")
+
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      --include-init)
+        include_init=true
+        shift
+        ;;
+      -t|--type)
+        shift
+        extensions=(${1//,/ })
+        shift
+        ;;
+      *)
+        folders+=("$1")
+        shift
+        ;;
+    esac
+  done
+
+  if $include_init; then
+    "$editor" $(find_files --include-init -t "${extensions[@]}" "${folders[@]}")
+  else
+    "$editor" $(find_files -t "${extensions[@]}" "${folders[@]}")
+  fi
 }
 
 # make v a function not an alias
@@ -302,32 +380,75 @@ screenshot () {
     fi
 }
 
-cdg () {
-  # cd into the git base path
-  git_base_path=$(_git_base_path)
-  cd "$git_base_path"
+# cdg() {
+#     git_base_path=$(git rev-parse --show-toplevel 2>/dev/null)
+#     if [ $? -ne 0 ]; then
+#         echo "Not a git repository"
+#         return 1
+#     fi
+#     cd "$git_base_path"
+# }
 
-}
-
-_git_or_python () { [ -d .git ] || [ -f pyproject.toml ] }
-
-cdp () {
-  # cd into the first directory including a pyproject.toml file
-  # or beeing the .git root folder
-  # if none is found it will cd up to $HOME and not further
-  if [ "$PWD" = "$HOME" ];
-  then
-    :
-  else
-    if _git_or_python;
-    then
-      :
+cdg() {
+    if [ $# -eq 0 ]; then
+        git_base_path=$(git rev-parse --show-toplevel 2>/dev/null)
+        if [ $? -ne 0 ]; then
+            echo "Not a git repository"
+            return 1
+        fi
+        cd "$git_base_path"
     else
-      cd ..
-      cdp
+        branch_name=$1
+        git_base_path=$(git rev-parse --show-toplevel 2>/dev/null)
+        if [ $? -ne 0 ]; then
+            echo "Not a git repository"
+            return 1
+        fi
+        worktree_path="${git_base_path}/worktrees/${branch_name}"
+
+        if [ -d "$worktree_path" ]; then
+            cd "$worktree_path"
+        else
+            echo "Worktree for branch '$branch_name' does not exist. Create it? (y/n)"
+            read answer
+            if [ "$answer" != "${answer#[Yy]}" ]; then
+                mkdir -p "$worktree_path"
+                git worktree add "$worktree_path" "$branch_name"
+                cd "$worktree_path"
+            else
+                echo "Operation canceled."
+                return 1
+            fi
+        fi
     fi
-  fi
 }
+
+# Autocompletion for branch names
+_cdg_complete() {
+    local cur branches
+    cur=${COMP_WORDS[COMP_CWORD]}
+    branches=$(git branch --all | grep -v '/HEAD' | grep -oE '[^ ]+$')
+    COMPREPLY=( $(compgen -W "$branches" -- "$cur") )
+}
+
+complete -F _cdg_complete cdg
+
+# Fzf integration for branch selection
+cdg_fzf() {
+    git_base_path=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [ $? -ne 0 ]; then
+        echo "Not a git repository"
+        return 1
+    fi
+    branch_name=$(git branch --all | grep -v '/HEAD' | grep -oE '[^ ]+$' | fzf)
+    if [ -z "$branch_name" ]; then
+        echo "No branch selected"
+        return 1
+    fi
+    cdg "$branch_name"
+}
+
+
 
 knew () {
   # restart kde after crashing - happens quite regular

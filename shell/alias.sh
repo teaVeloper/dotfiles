@@ -354,3 +354,8 @@ alias pipcd='pipc --extra=dev --output-file=requirements-dev.txt'
 alias pipcu='pipc --upgrade'
 alias pipcdu='pipcd --upgrade'
 alias pips='pip-sync'
+
+if [ "$TERM" = "xterm-kitty" ]; then
+  alias ssh='kitty +kitten ssh'
+  alias icat='kitty +kitten icat'
+fi
