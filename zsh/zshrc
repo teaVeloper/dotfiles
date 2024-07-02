@@ -79,14 +79,27 @@ alias -g XA='2>&1 | tee /dev/tty | xclip -i'
 # Automatically cd into folder - needed for .. and ... etc aliases to work globally
 setopt AUTO_CD
 
-#append into history file
-setopt INC_APPEND_HISTORY
-#save only one command if 2 common are same and consistent
-setopt HIST_IGNORE_DUPS
-#add timestamp for each entry
-setopt EXTENDED_HISTORY
 
-setopt share_history
+# ---  Prevent duplicate entries in the history ----
+setopt HIST_IGNORE_ALL_DUPS
+# When a new command is added to the history, any previous commands matching it are removed.
+setopt HIST_FIND_NO_DUPS
+# Do not display duplicate entries during completion or searching.
+setopt HIST_REDUCE_BLANKS
+# Remove superfluous blanks before storing a command in the history.
+setopt APPEND_HISTORY
+# Append history entries to the history file instead of overwriting it
+setopt SHARE_HISTORY
+# Share history between all sessions.
+setopt INC_APPEND_HISTORY
+# Write each command to the history file as it is entered.
+setopt HIST_SAVE_NO_DUPS
+# Do not write duplicate history entries to the history file.
+setopt HIST_IGNORE_DUPS
+# Prevents consecutive duplicate entries in the history.
+setopt EXTENDED_HISTORY
+# This option ensures that each entry in the history file includes a timestamp
+
 
 setopt AUTO_PUSHD           # Push the current directory visited on the stack.
 setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
@@ -337,3 +350,4 @@ source virtualenvwrapper.sh
 
 
 . "$CARGO_HOME"
+eval "$(/home/bertold/.local/bin/mise activate zsh)"
