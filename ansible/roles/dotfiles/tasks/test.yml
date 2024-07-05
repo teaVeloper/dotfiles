@@ -1,0 +1,29 @@
+# dotfiles.yml
+- hosts: localhost
+  tasks:
+    - name: Ensure XDG_CONFIG_HOME is set
+      ansible.builtin.set_fact:
+        xdg_config_home: "{{ lookup('env', 'XDG_CONFIG_HOME') | default('~/.config') }}"
+
+    # - name: Symlink .bashrc
+    #   ansible.builtin.file:
+    #     src: "~/path/to/dotfiles/bash/.bashrc"
+    #     dest: "~/.bashrc"
+    #     state: link
+    #
+    # - name: Symlink .vimrc
+    #   ansible.builtin.file:
+    #     src: "~/path/to/dotfiles/vim/.vimrc"
+    #     dest: "~/.vimrc"
+    #     state: link
+    #
+    # - name: Symlink gitconfig to XDG_CONFIG_HOME
+    #   ansible.builtin.file:
+    #     src: "~/path/to/dotfiles/git/.gitconfig"
+    #     dest: "{{ xdg_config_home }}/git/config"
+    #     state: link
+    - name: Symlink xmonad
+      ansible.builtin.file:
+        src: "~/dotfiles/xmonad"
+        dest: "{{ xdg_config_home }}/xmonad"
+        state: link

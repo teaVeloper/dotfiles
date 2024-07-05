@@ -1,47 +1,7 @@
 ---
-- name: Ensure GNU Stow is installed
-  apt:
-    name: stow
-    state: present
-
 - name: Clone dotfiles repository
   git:
     repo: 'https://github.com/yourusername/dotfiles.git'
     dest: '{{ ansible_user_dir }}/dotfiles'
     update: yes
-
-- name: Stow bash dotfiles
-  command: stow bash
-  args:
-    chdir: '{{ ansible_user_dir }}/dotfiles'
-
-- name: Stow zsh dotfiles
-  command: stow zsh
-  args:
-    chdir: '{{ ansible_user_dir }}/dotfiles'
-
-- name: Stow nvim dotfiles
-  command: stow nvim
-  args:
-    chdir: '{{ ansible_user_dir }}/dotfiles'
-
-- name: Stow git dotfiles
-  command: stow git
-  args:
-    chdir: '{{ ansible_user_dir }}/dotfiles'
-
-- name: Stow tmux dotfiles
-  command: stow tmux
-  args:
-    chdir: '{{ ansible_user_dir }}/dotfiles'
-
-- name: Stow kitty dotfiles
-  command: stow kitty
-  args:
-    chdir: '{{ ansible_user_dir }}/dotfiles'
-
-- name: Stow bin scripts
-  command: stow bin
-  args:
-    chdir: '{{ ansible_user_dir }}/dotfiles'
 

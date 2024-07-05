@@ -1,0 +1,168 @@
+---
+- name: Manage packages
+  hosts: all
+  become: yes
+  vars:
+    package_data: "{{ lookup('file', 'packages.yml') | from_yaml }}"
+    packages: "{{ package_data.packages }}"
+    action: "install"  # Can be set to "install" or "remove"
+
+  tasks:
+    - name: Determine package manager names
+      set_fact:
+        package_name: |
+          {% if ansible_distribution == 'Archlinux' %}
+            {{ item.pacman_name | default(item.name) }}
+          {% elif ansible_os_family == 'Debian' %}
+            {{ item.apt_name | default(item.name) }}
+          {% else %}
+            {{ item.name }}
+          {% endif %}
+      loop: "{{ packages }}"
+      register: package_names
+
+    - name: Check if system package is installed (Debian-based)
+      command: "dpkg-query -W -f='${{Status}}' {{ item.package_name }}"
+      register: apt_pkg_status
+      ignore_errors: yes
+      loop: "{{ package_names.results }}"
+      when:
+        - item.item.manager == 'system'
+        - ansible_os_family == 'Debian'
+
+    - name: Check if system package is installed (Arch-based)
+      command: "pacman -Qi {{ item.package_name }}"
+      register: pacman_pkg_status
+      ignore_errors: yes
+      loop: "{{ package_names.results }}"
+      when:
+        - item.item.manager == 'system'
+        - ansible_distribution == 'Archlinux'
+
+    - name: Check if AUR package is installed
+      command: "pacman -Qm {{ item.package_name }}"
+      register: aur_pkg_status
+      ignore_errors: yes
+      loop: "{{ package_names.results }}"
+      when:
+        - item.item.manager == 'user'
+        - ansible_distribution == 'Archlinux'
+
+    - name: Check if Homebrew package is installed
+      command: "brew list --versions {{ item.package_name }}"
+      register: brew_pkg_status
+      ignore_errors: yes
+      loop: "{{ package_names.results }}"
+      when:
+        - item.item.manager in ['user', 'brew']
+
+    - name: Skip installation if system package is installed (Debian-based)
+      debug:
+        msg: "Skipping installation of {{ item.item.name }} as it is already installed."
+      when:
+        - apt_pkg_status.stdout.find('install ok installed') != -1
+        - ansible_os_family == 'Debian'
+
+    - name: Install system package with apt (Debian-based)
+      apt:
+        name: "{{ item.package_name }}"
+        state: present
+        allow_unauthenticated: true
+        default_release: "{{ ansible_distribution_release }}"
+        install_recommends: no
+        version: "{{ item.item.version if item.item.version != 'latest' else omit }}"
+      loop: "{{ package_names.results }}"
+      when:
+        - apt_pkg_status.stdout.find('install ok installed') == -1
+        - ansible_os_family == 'Debian'
+
+    - name: Skip installation if system package is installed (Arch-based)
+      debug:
+        msg: "Skipping installation of {{ item.item.name }} as it is already installed."
+      when:
+        - pacman_pkg_status.stdout.find('Name') != -1
+        - ansible_distribution == 'Archlinux'
+
+    - name: Install system package with pacman (Arch-based)
+      pacman:
+        name: "{{ item.package_name }}"
+        state: present
+        update_cache: yes
+        version: "{{ item.item.version if item.item.version != 'latest' else omit }}"
+      loop: "{{ package_names.results }}"
+      when:
+        - pacman_pkg_status.stdout.find('Name') == -1
+        - ansible_distribution == 'Archlinux'
+
+    - name: Ensure base-devel is installed (required for AUR)
+      pacman:
+        name: base-devel
+        state: present
+        update_cache: yes
+      when:
+        - ansible_distribution == 'Archlinux'
+        - action == 'install'
+
+    - name: Install AUR helper (yay)
+      aur:
+        name: yay
+        state: present
+      when:
+        - ansible_distribution == 'Archlinux'
+        - action == 'install'
+
+    - name: Skip installation if AUR package is installed
+      debug:
+        msg: "Skipping installation of {{ item.item.name }} as it is already installed."
+      when:
+        - aur_pkg_status.stdout.find('Name') != -1
+        - ansible_distribution == 'Archlinux'
+
+    - name: Install user package with AUR (Arch-based)
+      aur:
+        name: "{{ item.package_name }}"
+        state: present
+        version: "{{ item.item.version if item.item.version != 'latest' else omit }}"
+      loop: "{{ package_names.results }}"
+      when:
+        - aur_pkg_status.stdout.find('Name') == -1
+        - ansible_distribution == 'Archlinux'
+
+    - name: Skip installation if Homebrew package is installed
+      debug:
+        msg: "Skipping installation of {{ item.item.name }} as it is already installed."
+      when:
+        - brew_pkg_status.stdout != ""
+        - item.item.manager in ['user', 'brew']
+
+    - name: Install package with Homebrew
+      homebrew:
+        name: "{{ item.package_name }}"
+        state: present
+        version: "{{ item.item.version if item.item.version != 'latest' else omit }}"
+      loop: "{{ package_names.results }}"
+      when:
+        - brew_pkg_status.stdout == ""
+        - item.item.manager in ['user', 'brew']
+
+    - name: Install custom packages
+      shell: |
+        wget "{{ item.item.url }}" -O /tmp/{{ item.item.name }}.tar.gz
+        echo "{{ item.item.sha256 }}  /tmp/{{ item.item.name }}.tar.gz" | sha256sum -c -
+        tar -xzf /tmp/{{ item.item.name }}.tar.gz -C /tmp
+        cd /tmp/{{ item.item.name }}-{{ item.item.version }} && ./configure && make && sudo make install
+      args:
+        creates: "/usr/local/bin/{{ item.item.name }}"
+      loop: "{{ package_names.results }}"
+      when:
+        - item.item.manager == 'custom'
+        - action == 'install'
+
+    - name: Remove custom packages
+      file:
+        path: "/usr/local/bin/{{ item.item.name }}"
+        state: absent
+      loop: "{{ package_names.results }}"
+      when:
+        - item.item.manager == 'custom'
+        - action == 'remove'
