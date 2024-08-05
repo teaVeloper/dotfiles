@@ -167,6 +167,15 @@ bindkey "^[[B" history-beginning-search-forward
 source $DOTFILES/zsh/functions/fg_bg.sh
 zle -N fg-bg
 bindkey '^Z' fg-bg
+
+
+# ------ Completion bindkeys ---------
+# Map Ctrl+N to menu complete next (like Tab)
+bindkey '^N' menu-select
+
+# Map Ctrl+P to menu complete previous (like Shift+Tab)
+bindkey '^P' reverse-menu-complete
+
 # }}}
 
 # OH MY ZSH Settings {{{
