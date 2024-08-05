@@ -67,3 +67,23 @@ vim.keymap.set("n", "<leader>f", ":Format<CR>")
 vim.keymap.set("n", "<leader>v", ":vsplit<CR>")
 -- save on <leader>w
 vim.keymap.set("n", "<leader>w", ":w<CR>")
+
+-- map Ctrl+N and Ctrl+P for completion in command mode
+-- vim.api.nvim_set_keymap("c", "<C-n>", "<C-z>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("c", "<C-p>", "<s-Tab>", { noremap = true, silent = true })
+
+-- Function to handle completion with Ctrl+N
+vim.api.nvim_set_keymap(
+    "c",
+    "<C-n>",
+    'pumvisible() ? "\\<C-n>" : "\\<C-z>"',
+    { expr = true, noremap = true, silent = true }
+)
+
+-- Function to handle completion with Ctrl+P
+vim.api.nvim_set_keymap(
+    "c",
+    "<C-p>",
+    'pumvisible() ? "\\<C-p>" : "\\<C-z>"',
+    { expr = true, noremap = true, silent = true }
+)

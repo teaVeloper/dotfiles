@@ -72,3 +72,7 @@ local data_home = vim.env.XDG_DATA_HOME or vim.fn.expand("~/.local/share")
 vim.opt.undodir = { data_home .. "/nvim/undo//" }
 
 vim.opt.swapfile = false
+
+-- use wildmenum thus show completions in command mode in a list (pop up)
+vim.o.wildmenu = true
+vim.o.wildmode = "longest:full,full"
