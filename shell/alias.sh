@@ -260,46 +260,51 @@ alias xcp='xcpipe'
 alias xpp='xppipe'
 
 # python  {{{
+# alias py='~/dotfiles/bin/repl.py'
 alias py='ptipython --vi'
-alias pyt='python3 -m pytest' # pytest for locally running in folder
+alias pyt='pytest'
 alias pys='pyspark'
 alias ipy='ipython'
-alias pym='pyhon3 -m'
-alias pyi='pyhon3 -i'
-alias fla='flake8 --ignore=C0330,E501'
+alias pym='pyhon -m'
+alias pyi='pyhon -i'
 alias poetenv='poetry env info -p'
 #}}}
 
 # tmux
-alias t="tmux"
-alias tp="tmuxp"
-alias tls="tmux ls"
+# not using tmux, so no shortcuts for when i use
+# umcomment if i want to start using again
+# alias t="tmux"
+# alias tp="tmuxp"
+# alias tls="tmux ls"
 
 # autocorrect typos
+# not needed i think...
 alias mc='echo "i hate midnight commander"'
 alias dc="cd"
 
 # shortcuts
 alias dot="cd ~/dotfiles"
-alias aa='addalias'
+alias aa='addalias' # never using..
 alias wh='which'
-alias v='nvim'
-alias wk='work'
-alias wkb='work berti'
-alias wkr='work rad'
+alias v='nvim' # should move to ev
+alias wk='work' # never using
+alias wkb='work berti' # never using
+alias wkr='work rad' # never using
 alias play='work playground'
+alias wtmp='work tmp'
 
 # convenience
-alias vgi='v $(git ls-files)'
+alias vgi='v $(git ls-files)' # never using
 
 # edit configs
-alias myvim='nvim "$VIMRC"'
 alias myzsh='nvim "$ZSHRC"'
 alias myalias='nvim "$MYALIAS"'
 alias myfunctions='nvim "$MYFUNCTIONS"'
 alias myenv='nvim "$MYENV"'
+# never use below
 alias mytmux='nvim "$TMUXCONF"'
 alias mygit='nvim "$GITCONF"'
+alias myvim='nvim "$VIMRC"'
 alias myvcsignore='nvim "$VCSIGNORE"'
 alias myeditorconfig='nvim "$EDITORCONFIG"'
 
@@ -310,15 +315,18 @@ alias gc='git commit'
 alias gcn='git commit --no-verify' # sometimes I want to commit and push unclean work to share or save remotely
 alias gdo='git done'
 alias gdu='git dune'
+alias gmv='git mv'
 
 
 #alias diff='colordiff'
 alias ct='countdown'
+# not using these - will be replaced by vmr
 alias vc="python::venv::create"
 alias va="python::venv::activate"
 alias vrm="python::venv::delete"
 alias vprm="python::venv::pdelete"
 alias vp="python::venv::pactivate"
+
 alias vd="deactivate"
 
 # Apt
@@ -337,13 +345,12 @@ alias dbs='databricks secrets'
 alias db='databricks'
 alias dbd='databricks clusters'
 alias b='bat -p'
-# rething maybe as -g {{ = {{cookie... and { { { = {{/{{ but maybe not.. so far below is good
+# rethink maybe as -g {{ = {{cookie... and { { { = {{/{{ but maybe not.. so far below is good
 # in case a {{../src/{{.. layout will be used i rethink..
 alias cd{='cd {{cookiecutter.project_slug}}'
 alias cd{{='cd {{cookiecutter.project_slug}}/{{cookiecutter.project_slug}}'
-alias wiki='cd $WORKSPACE/wiki'
+
 alias pwx='printf $PWD | tee /dev/tty | xclip -i -selection clipboard'
-alias gmv='git mv'
 
 ## aliases for working with pip
 alias pipi='pip install'
@@ -355,6 +362,7 @@ alias pipcu='pipc --upgrade'
 alias pipcdu='pipcd --upgrade'
 alias pips='pip-sync'
 
+# kitty specific
 if [ "$TERM" = "xterm-kitty" ]; then
   alias ssh='kitty +kitten ssh'
   alias icat='kitty +kitten icat'
