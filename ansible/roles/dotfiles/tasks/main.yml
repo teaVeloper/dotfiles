@@ -1,7 +1,4 @@
 ---
-- name: Clone dotfiles repository
-  git:
-    repo: 'https://github.com/yourusername/dotfiles.git'
-    dest: '{{ ansible_user_dir }}/dotfiles'
-    update: yes
+- name: Include dotfiles tasks
+  include_tasks: "{{ dotfiles_mode }}.yml"
 

@@ -1,0 +1,15 @@
+---
+- name: Install multimedia applications
+  pacman:
+    name:
+      - blender
+      - obs-studio
+      - inkscape
+      - lightworks
+    state: present
+
+- name: Install DaVinci Resolve (Flatpak)
+  flatpak:
+    name: com.blackmagicdesign.DaVinciResolve
+    state: present
+
