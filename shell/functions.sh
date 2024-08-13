@@ -431,7 +431,7 @@ _cdg_complete() {
     COMPREPLY=( $(compgen -W "$branches" -- "$cur") )
 }
 
-complete -F _cdg_complete cdg
+# complete -F _cdg_complete cdg
 
 # Fzf integration for branch selection
 cdg_fzf() {

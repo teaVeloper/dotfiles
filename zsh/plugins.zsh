@@ -41,8 +41,6 @@ changyuheng/fz
 changyuheng/zsh-interactive-cd
 # forgit
 wfxr/forgit
-# p10k
-romkatv/powerlevel10k
 
 
 ### Local Plugins
@@ -53,6 +51,15 @@ romkatv/powerlevel10k
 ###
 # $ZDOTDIR/.aliases
 # $ZDOTDIR/custom/plugins/example
+$DOTFILES/zsh/local_plugins/zleditor
+$DOTFILES/zsh/local_plugins/aliases
+$DOTFILES/zsh/local_plugins/dirs
+$DOTFILES/zsh/local_plugins/history
+$DOTFILES/zsh/local_plugins/global_alias
+$DOTFILES/zsh/local_plugins/cursor_mode
+$DOTFILES/zsh/local_plugins/functions
+$DOTFILES/zsh/local_plugins/mise
+
 
 
 ### Local Plugins with Variables
@@ -95,6 +102,8 @@ romkatv/powerlevel10k
 # Or, just load a prompt plugin the normal way.
 # very simple minimal prompt
 # sindresorhus/pure
+# p10k
+romkatv/powerlevel10k
 
 
 ### Utilities
@@ -148,10 +157,17 @@ ohmyzsh/ohmyzsh path:plugins/copyfile
 ohmyzsh/ohmyzsh path:plugins/copypath
 # extract, for most compressed files
 ohmyzsh/ohmyzsh path:plugins/extract
+# setup of fzf 'independent' of how installed
+ohmyzsh/ohmyzsh path:plugins/fzf
 # jump between marks on fs
-# ohmyzsh/ohmyzsh path:plugins/jump
-# sudo !! with Esc twice
 ohmyzsh/ohmyzsh path:plugins/jump
+# add completion for rust toolchain
+# so far not really working!
+ohmyzsh/ohmyzsh path:plugins/rust
+# sudo !! with Esc twice - not working as expected, only adds sudo if has
+# arguments (and not any arguments)
+# and also with vi mode its a bit annoying!
+# ohmyzsh/ohmyzsh path:plugins/sudo
 
 
 

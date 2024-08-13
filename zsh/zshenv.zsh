@@ -84,6 +84,11 @@ export GOBIN="$GOPATH"/bin
 
 # Pass & Gopass
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
+export PASSWORD_STORE_X_SELECTION="primary"
+
+# TODO: check better whats needed and how
+# FORGIT but maybe change config
+export FORGIT_COPY_CMD='xclip -selection clipboard'
 
 
 # Readline
@@ -139,11 +144,10 @@ export DISABLE_AUTO_TITLE='true'
 # }}}
 
 # {{{ zsh + tools
+# TODO: ZDOTDIR in dotfiles, so no symlinking needed?
+# but what about downloaded data and such.. rethink it!
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export _Z_DATA="$XDG_CACHE_HOME"/.z
-export HISTFILE="$XDG_STATE_HOME"/zsh/history
-export HISTSIZE=1000000
-export SAVEHIST=$HISTSIZE
 
 # }}}
 
@@ -159,9 +163,12 @@ export SAVEHIST=$HISTSIZE
 #     /bin
 #     /sbin
 #
-#
-#
-#
+# TODO: move path into separate file?
+# how to ideally organize it
+# anaconda late in path, so 'conda' works..
+# all other python related earlier
+# closer to user -> earlier
+# brew if exists -> also early, but not as early as .local or
 #
 export PATH="/sbin:$PATH"
 export PATH="/usr/sbin:$PATH"
@@ -184,20 +191,7 @@ export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
 
 # }}}
 
-# TODO: move these things out of this env file
-#
-# {{{ settings dependend on existence of installs
-# this section may also move somewhere else.. as this should probably be a static only settings file
-# only defining environment variables reusing others and not much more
-# if [ -d "/opt/spark" ]; then
-#   export SPARK_HOME="/opt/spark"
-#   export PATH="$PATH:$SPARK_HOME/bin"
-#   export PYTHONPATH=$(ZIPS=("$SPARK_HOME"/python/lib/*.zip); IFS=:; echo "${ZIPS[*]}"):$PYTHONPATH
-# fi
-
-# SPARK_HOME and JAVA HOME for asdf
-#. ~/.asdf/plugins/java/set-java-home.zsh
-# export SPARK_HOME=$(asdf where spark)
+# see if changes with mise
 export PATH="$PATH:$SPARK_HOME/bin"
 
 # }}}

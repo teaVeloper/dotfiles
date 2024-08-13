@@ -1,180 +1,43 @@
 # ==========================================================================
-#                                                                           |
-#   ZSH Config - after running ~/.zshenv for setting the base environment   |
-#                                                                           |
+#                                   _                                      |
+#                                  | |                                     |
+#                           _______| |__  _ __ ___                         |
+#                          |_  / __| '_ \| '__/ __|                        |
+#                           / /\__ \ | | | | | (__                         |
+#                          /___|___/_| |_|_|  \___|                        |
+#                                                                          |
 # ==========================================================================
 
 
-# Prompt powerlevel10k {{{
+# Preamble {{{
+
+# this makes sure my XDG configs are set, but respects previously set ones
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+export XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
+export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-"/run/user/$(id -u)"}
+
+export DOTFILES=${DOTFILES:-~/dotfiles}
+
+# }}}
+
+
+# Setup my prompt  {{{
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-#powerlevel custom settings
-POWERLEVEL9K_MODE='awesome-fontconfig'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(background_jobs context dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time command_execution_time)
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="yellow"
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND="black"
-
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# }}}
-
-# Configurations for Tools and Environment {{{
-
-# path and fpath adaptions
-fpath=($HOME/dotfiles/zsh/functions $fpath)
-
-
-export FPP_DISABLE_SPLIT=1
-
-
-export PASSWORD_STORE_X_SELECTION="primary"
-
-
-export FORGIT_COPY_CMD='xclip -selection clipboard'
+local instant_prompt_file=${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zshzledi
+[[ -r "$instant_prompt_file" ]] && source "$instant_prompt_file"
+# load p10k config if exists
+local p10k_config=${DOTFILES}/zsh/p10k.zsh
+[[ -r "$p10k_config" ]] && source "$p10k_config"
 
 # }}}
 
-# Global aliases {{{
-
-# pipe to less
-alias -g L='| less'
-# pipe to less with line numbers
-alias -g LN='| less -N'
-# Grep output
-alias -g G='| grep'
-# RipGrep output
-alias -g R='| rg'
-# send output to bat as json
-alias -g J='| bat -p -l json'
-# send output to bat
-alias -g B='| bat'
-# send output to bat with choosing language
-alias -g BL='| bat -l'
-# pipe output to xclip but keep stdout there
-alias -g X='| tee /dev/tty | xclip -i'
-# show helpmessage in manpager
-alias -g H='--help | nvim +Man!' # nice help viewer
-# pipe STDOUT + STDERR into xclip
-alias -g XA='2>&1 | tee /dev/tty | xclip -i'
-
-# }}}
-
-# ZSH Settings {{{
-
-# Automatically cd into folder - needed for .. and ... etc aliases to work globally
-setopt AUTO_CD
 
 
-# ---  Prevent duplicate entries in the history ----
-setopt HIST_IGNORE_ALL_DUPS
-# When a new command is added to the history, any previous commands matching it are removed.
-setopt HIST_FIND_NO_DUPS
-# Do not display duplicate entries during completion or searching.
-setopt HIST_REDUCE_BLANKS
-# Remove superfluous blanks before storing a command in the history.
-setopt APPEND_HISTORY
-# Append history entries to the history file instead of overwriting it
-setopt SHARE_HISTORY
-# Share history between all sessions.
-setopt INC_APPEND_HISTORY
-# Write each command to the history file as it is entered.
-setopt HIST_SAVE_NO_DUPS
-# Do not write duplicate history entries to the history file.
-setopt HIST_IGNORE_DUPS
-# Prevents consecutive duplicate entries in the history.
-setopt EXTENDED_HISTORY
-# This option ensures that each entry in the history file includes a timestamp
-
-
-setopt AUTO_PUSHD           # Push the current directory visited on the stack.
-setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
-setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
-
-# create nice aliases for jumping in the last folders
-# taken from https://thevaluable.dev/zsh-install-configure-mouseless/
-alias d='dirs -v'
-for index ({1..9}) alias "$index"="cd +${index}"; unset index
-
-bindkey -v
-export KEYTIMEOUT=1
-
-source $DOTFILES/zsh/functions/cursor_mode.zsh
-source $DOTFILES/zsh/completion.zsh
-
-zmodload zsh/complist
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
-
-
-# emacs keybindings in insert mode
-bindkey '^A' beginning-of-line
-bindkey '^E' end-of-line
-
-# use v for loading to vim instead visual mode
-autoload -Uz edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
-
-# vim commands like da" or ci(
-autoload -Uz select-bracketed select-quoted
-zle -N select-quoted
-zle -N select-bracketed
-for km in viopp visual; do
-  bindkey -M $km -- '-' vi-up-line-or-history
-  for c in {a,i}${(s..)^:-\'\"\`\|,./:;=+@}; do
-    bindkey -M $km $c select-quoted
-  done
-  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
-    bindkey -M $km $c select-bracketed
-  done
-done
-
-
-# mimic vim surroung in shell
-autoload -Uz surround
-zle -N delete-surround surround
-zle -N add-surround surround
-zle -N change-surround surround
-bindkey -M vicmd cs change-surround
-bindkey -M vicmd ds delete-surround
-bindkey -M vicmd ys add-surround
-bindkey -M visual S add-surround
-
-# incremental search with up and down as in omz
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
-# the below version only uses first command, but ignores later
-# bindkey '^[[A' up-line-or-search
-# bindkey '^[[B' down-line-or-search
-
-# source $DOTFILES/zsh/functions/fg_bg.sh
-# zle -N fg-bg
-# bindkey '^Z' fg-bg
-
-
-# ------ Completion bindkeys ---------
-#
-# Map Ctrl+N to menu complete next (like Tab)
-bindkey '^N' menu-select
-
-# Map Ctrl+P to menu complete previous (like Shift+Tab)
-bindkey '^P' reverse-menu-complete
-
-# }}}
-
-# {{{
 # Antidote
 # Set the root name of the plugins files (.txt and .zsh) antidote will use.
 zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
@@ -195,37 +58,3 @@ fi
 source ${zsh_plugins}.zsh
 
 # }}}
-
-
-
-# Source of other files {{{
-source $HOME/dotfiles/zsh/completion/*
-
-source $HOME/dotfiles/shell/alias.sh
-source $HOME/dotfiles/shell/functions.sh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
-. "$HOME/.asdf/asdf.sh"
-
-# }}}
-
-
-# asdf
-# append completions to fpath
-fpath=(${ASDF_DIR}/completions $fpath)
-
-# Autoload and run for completions
-complete -o nospace -C /usr/bin/terraform terraform
-# autoload -Uz compinit && compinit
-
-# autoload -Uz compinit
-zstyle ':completion:*' menu select
-fpath+=~/.zfunc
-
-source virtualenvwrapper.sh
-
-
-. "$CARGO_HOME"
-eval "$(/home/bertold/.local/bin/mise activate zsh)"
