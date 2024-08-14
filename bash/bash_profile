@@ -4,8 +4,3 @@
 
 PATH=$PATH:$HOME/.local/bin:$HOME/bin
 export PATH
-export TMOUT=30000
-
-
-. "$HOME/.cargo/env"
-. "/home/bertold/.local/share/cargo/env"
