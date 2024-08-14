@@ -42,12 +42,34 @@ local p10k_config=${DOTFILES}/zsh/p10k.zsh
 # Set the root name of the plugins files (.txt and .zsh) antidote will use.
 zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
 
+
 # Ensure the .zsh_plugins.txt file exists so you can add plugins.
 [[ -f ${zsh_plugins}.txt ]] || touch ${zsh_plugins}.txt
 
+# load antidote with same config on arch with aur/pacman install
+# and on other platforms with git and even brew install
+arch_antidote="/usr/share/zsh-antidote"
+git_antidote="${XDG_DATA_HOME:-${HOME}/.local/share}/antidote"
+brew_antidote="/home/linuxbrew/share/zsh-antidote"
+
+# Determine the Antidote installation directory
+if [[ -d "$arch_antidote" ]]; then
+  ANTIDOTE_DIR="$arch_antidote"
+elif [[ -d "$git_antidote" ]]; then
+  ANTIDOTE_DIR="$git_antidote"
+elif [[ -d "$brew_antidote" ]]; then
+  ANTIDOTE_DIR="$brew_antidote"
+else
+  echo "Antidote not found! Please install Antidote via your preferred method."
+  return
+fi
+# Cleanup intermediate variables
+unset arch_antidote git_antidote brew_antidot
+
 # Lazy-load antidote from its functions directory.
-fpath=(${ZDOTDIR}/.antidote/functions $fpath)
+fpath=(${ANTIDOTE_DIR}/functions $fpath)
 autoload -Uz antidote
+
 
 # Generate a new static file whenever .zsh_plugins.txt is updated.
 if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
