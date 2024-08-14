@@ -1,9 +1,0 @@
-# roles/snap/tasks/main.yml
-- name: Install Snap packages
-  snap:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - code
-    - spotify
-

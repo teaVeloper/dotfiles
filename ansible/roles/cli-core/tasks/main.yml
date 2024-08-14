@@ -1,0 +1,55 @@
+---
+- name: Install CLI core tools
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - git
+    - eza
+    - neovim
+    - ripgrep
+    - bat
+    - fzf
+    - delta
+    - asdf
+    - mise
+    - rust
+    - gnupg
+    - python-pip
+    - python-pipx
+    - netcat
+    - wget
+
+- name: Install Antidote Zsh plugin manager
+  yay:
+    name: zsh-antidote
+    state: present
+
+- name: Install Powerlevel10k
+  yay:
+    name: zsh-theme-powerlevel10k
+    state: present
+
+- name: Install Git Delta
+  yay:
+    name: git-delta
+    state: present
+
+- name: Configure Zsh without Oh My Zsh
+  block:
+    - name: Clone Powerlevel10k
+      git:
+        repo: 'https://github.com/romkatv/powerlevel10k.git'
+        dest: '{{ ansible_env.HOME }}/.powerlevel10k'
+
+    - name: Configure Zsh Plugins using Antidote
+      shell: |
+        echo "source $(antidote init)" >> ~/.zshrc
+        antidote bundle wfxr/forgit
+        antidote bundle zdharma-continuum/fast-syntax-highlighting
+        antidote bundle changyuheng/zsh-interactive-cd
+        antidote bundle rupa/z
+        antidote bundle changyuheng/fz
+  args:
+    executable: /bin/zsh
+

@@ -1,5 +1,5 @@
 # site.yml
-- hosts: localhost
+- hosts: ubunut
   roles:
     - common
     - dotfiles
@@ -24,7 +24,7 @@
     - ssh
     - gnome
 
-- hosts: arch
+- hosts: localhost
   roles:
     - common
     - asdf

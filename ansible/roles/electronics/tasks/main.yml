@@ -1,0 +1,18 @@
+---
+- name: Install electronics development tools
+  pacman:
+    name:
+      - gcc
+      - avr-gcc
+      - arm-none-eabi-gcc
+      - esptool
+      - openocd
+      - verilator
+      - gnuradio
+    state: present
+
+- name: Install PlatformIO
+  pipx:
+    name: platformio
+    state: present
+

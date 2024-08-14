@@ -1,0 +1,14 @@
+---
+- name: Install low-level development tools
+  pacman:
+    name:
+      - gdb
+      - valgrind
+      - cmake
+      - make
+      - ninja
+      - llvm
+      - gcc
+      - binaryen  # WebAssembly tools
+    state: present
+

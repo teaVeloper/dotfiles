@@ -1,7 +1,0 @@
-# roles/ssh/tasks/main.yml
-- name: Copy SSH config
-  copy:
-    src: files/ssh_config
-    dest: ~/.ssh/config
-    mode: '0600'
-
