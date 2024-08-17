@@ -1,0 +1,8 @@
+# XDG Base Directory Specification
+export XDG_CONFIG_HOME={{ lookup('env', 'XDG_CONFIG_HOME') | default('~/.config') }}
+export XDG_DATA_HOME={{ lookup('env', 'XDG_DATA_HOME') | default('~/.local/share') }}
+export XDG_CACHE_HOME={{ lookup('env', 'XDG_CACHE_HOME') | default('~/.cache') }}
+
+# Zsh Configuration Directory
+export ZDOTDIR={{ lookup('env', 'XDG_CONFIG_HOME') | default('~/.config') }}/zsh
+
