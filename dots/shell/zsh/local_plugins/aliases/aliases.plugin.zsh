@@ -221,7 +221,7 @@ alias gsu='git submodule update'
 # ls Versions with exa {{{
 # detailed version, but all alphabetically - no regards of dirs
 # TODO: describe options here
-alias la='exa -Falh --git --time-style long-iso --icons'
+alias la='eza -alh --git --time-style long-iso --icons'
 # detailed option - always used
 alias l='la --group-directories-first'
 # only directories
@@ -239,11 +239,11 @@ alias ll='l -Hg'
 alias lt='l -s modified'
 # show a simple tree, but with all hidden files, ignore git and pycache and venv
 # sort alphabetically
-alias ltra='exa -a --tree --git-ignore --ignore-glob=".git|__pycache__|.venv"'
+alias ltra='eza -a --tree --git-ignore --ignore-glob=".git|__pycache__|.venv"'
 # group dirs first
 alias ltr='ltra --group-directories-first'
 # simple ls replacement
-alias lk='exa -F --icons --group-directories-first -a'
+alias lk='eza -F --icons --group-directories-first -a'
 
 alias lbin='l /home/bertold/.local/bin'
 # TODO (Berti): l. only dotiles, ld only directories, ll - something usefull, lg maybe only git-wroktree, lig - git

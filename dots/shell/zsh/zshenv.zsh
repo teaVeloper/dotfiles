@@ -186,7 +186,6 @@ export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="/usr/local:$PATH"
 export PATH="$CARGO_HOME/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
-source "$HOME/.rye/env"
 export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
 
 # }}}
