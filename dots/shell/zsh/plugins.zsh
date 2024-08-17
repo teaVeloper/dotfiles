@@ -51,14 +51,14 @@ wfxr/forgit
 ###
 # $ZDOTDIR/.aliases
 # $ZDOTDIR/custom/plugins/example
-$DOTFILES/zsh/local_plugins/zleditor
-$DOTFILES/zsh/local_plugins/aliases
-$DOTFILES/zsh/local_plugins/dirs
-$DOTFILES/zsh/local_plugins/history
-$DOTFILES/zsh/local_plugins/global_alias
-$DOTFILES/zsh/local_plugins/cursor_mode
-$DOTFILES/zsh/local_plugins/functions
-$DOTFILES/zsh/local_plugins/mise
+$ZDOTDIR/local_plugins/zleditor
+$ZDOTDIR/local_plugins/aliases
+$ZDOTDIR/local_plugins/dirs
+$ZDOTDIR/local_plugins/history
+$ZDOTDIR/local_plugins/global_alias
+$ZDOTDIR/local_plugins/cursor_mode
+$ZDOTDIR/local_plugins/functions
+$ZDOTDIR/local_plugins/mise
 
 
 

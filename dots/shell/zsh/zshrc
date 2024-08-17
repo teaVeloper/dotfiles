@@ -31,7 +31,7 @@ export DOTFILES=${DOTFILES:-~/dotfiles}
 local instant_prompt_file=${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zshzledi
 [[ -r "$instant_prompt_file" ]] && source "$instant_prompt_file"
 # load p10k config if exists
-local p10k_config=${DOTFILES}/zsh/p10k.zsh
+local p10k_config=${ZDOTDIR}/p10k.zsh
 [[ -r "$p10k_config" ]] && source "$p10k_config"
 
 # }}}
