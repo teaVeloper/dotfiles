@@ -2,11 +2,17 @@
 - name: Main play
   hosts: all
   roles:
-    - { role: dotfiles }
+    - role: dotfiles 
+      tags: dotfiles
+    - role: peripherals 
+    - role: password_store 
+    - role: packages 
+      tags: install
+    - role: language
+      tags: language
     # - { role: 02_basics }
     # - { role: 03_x }
     # - { role: 04_desktop }
-    # - { role: 05_packages }
     # - { role: 06_microcode, when: install_microcode }
     # - { role: 07_users }
     # - { role: 08_printing_scanning, when: enable_printing }
