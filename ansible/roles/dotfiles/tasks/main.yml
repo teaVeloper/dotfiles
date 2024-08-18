@@ -73,6 +73,11 @@
       loop_control:
         label: "{{ item.key }}"
 
+- name: Create zsh state dir
+  ansible.builtin.file:
+    path: "{{ xdg_state_home }}/zsh"
+    state: directory
+
 # Create the .profile file
 - name: Create .profile with XDG variables
   ansible.builtin.copy:
@@ -81,4 +86,5 @@
       export XDG_CONFIG_HOME="{{ xdg_config_home }}"
       export XDG_DATA_HOME="{{ xdg_data_home }}"
       export XDG_CACHE_HOME="{{ xdg_cache_home }}"
+      export XDG_STATE_HOME="{{ xdg_state_home }}"
   when: ansible_env.SHELL.endswith('bash') or ansible_env.SHELL.endswith('zsh')

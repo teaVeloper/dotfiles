@@ -1,38 +1,9 @@
 ---
-- name: Install Oryx for keyboard customization
-  git:
-    repo: 'https://github.com/zsa/qmk_firmware.git'
-    dest: '{{ ansible_env.HOME }}/oryx'
-    update: yes
+- name: Install yubikey
+  ansible.builtin.import_tasks: yubikey.yml
 
-- name: Install necessary packages for Oryx
-  pacman:
-    name:
-      - avr-gcc
-      - avr-libc
-      - dfu-util
-      - dfu-programmer
-      - dfu-tool
-    state: present
+- name: Install keyboards
+  ansible.builtin.import_tasks: keyboard.yml
 
-- name: Install Plover for stenography
-  yay:
-    name: plover
-    state: present
-
-- name: Install Logitech Options for mouse support
-  yay:
-    name: logiops
-    state: present
-
-- name: Enable and start Logitech Options service
-  systemd:
-    name: logid
-    enabled: true
-    state: started
-
-- name: Install Flameshot for screenshots
-  pacman:
-    name: flameshot
-    state: present
-
+- name: Install mouse
+  ansible.builtin.import_tasks: mouse.yml
