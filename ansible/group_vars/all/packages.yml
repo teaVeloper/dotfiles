@@ -1,0 +1,210 @@
+---
+# set aur helper
+# supported helpers are here https://github.com/kewlfft/ansible-aur#kewlfftauraur-module
+
+aur_helper: yay
+
+packages:
+  # core-cli
+  - git
+  - eza
+  - neovim
+  - ripgrep
+  - bat
+  - fzf
+  - delta
+  - asdf
+  - mise
+  - rust
+  - gnupg
+  - python-pip
+  - python-pipx
+  - netcat
+  - wget
+  - fd
+  # cloud
+  - terraform
+  # engineering 
+  - gcc
+  - avr-gcc
+  - arm-none-eabi-gcc
+  - esptool
+  - openocd
+  - verilator
+  - kicad
+  - ros-melodic-desktop-full  # Example ROS package
+  - android-studio
+  - arduino
+  - gnuradio
+  # gui core
+  - firefox
+  - thunderbird
+  - chromium
+  - flameshot
+  - evince
+  # low level
+  - gdb
+  - valgrind
+  - cmake
+  - make
+  - ninja
+  - llvm
+  - gcc
+  - binaryen  # WebAssembly tools
+  # multimedia
+  - blender
+  - obs-studio
+  - inkscape
+  - lightworks
+  # networking
+  - gns3-gui
+  - gns3-server
+  - wireshark-qt
+  - tcpdump
+  - nmap
+  - openvpn
+  - wireshark-cli
+  - metasploit
+  - ettercap-gtk
+  - aircrack-ng
+  # nix
+  - nix
+  # scientific computing
+  - sagemath
+  - octave
+  - r
+  - texlive-most
+  # security research
+  - ghidra
+  - radare2
+  - wireshark-qt
+  - metasploit
+  - nmap
+  # sysadmin
+  - etckeeper
+  - firejail
+  - timeshift
+  - ufw
+  - fail2ban
+  - kitty
+  # dev
+  - git-filter-repo
+  # sound
+  - alsa-firmware
+  - alsa-plugins
+  - alsa-utils
+  # bash
+  - bash
+  - bash-completion
+  # for completeness
+  - code
+  # dev and core
+  - curl
+  - docker
+  - docker-compose
+  - dosfstools
+  - e2fsprogs
+  - exfatprogs
+  - flatpak
+  - gparted
+  - htop
+  - fwupd
+  - btrfs-progs
+  - grub-btrfs
+  - inetutils
+  - iotop
+  - iperf3
+  - iputils
+  - jq
+  - kubectl
+  - linux-firmware
+  - man
+  - man-db
+  - man-pages
+  - neofetch
+  - networkmanager
+  - ntfs-3g
+  - openresolv
+  - openssh
+  - pipewire
+  - pipewire-alsa
+  - pkgstats
+  - qbittorrent
+  - rsync
+  - solaar
+  - sudo
+  - texlive-latexextra
+  - tree
+  - unzip
+  - usbutils
+  - vim
+  - vlc
+  - wget
+  - wireguard-tools
+  - wireplumber
+  - wpa_supplicant
+  # Needed for GTK apps that run as Flatpaks
+  - xdg-desktop-portal-gtk
+  - xfsprogs
+  - zip
+  - zsh
+  - zsh-completions
+  - zstd
+  - tarsnap
+  - age
+  - pass
+  - gopass
+
+aur_packages:
+  - zsh-antidote
+  - git-delta
+  - miniconda3
+  - ida-free
+  - mise
+  - asdf-vm
+  - rpi-imager-bin
+  - svgo
+  - tomb
+
+pipx_packages:
+  - platformio
+  - httpie
+  - yamllint
+  - ansible
+  - ansible-lint
+  - keyring
+
+flatpaks:
+  - com.spotify.Client
+  - md.obsidian.Obsidian
+  # - com.microsoft.Teams
+  - com.blackmagicdesign.DaVinciResolve
+  - com.discordapp.Discord
+  - com.github.tchx84.Flatseal
+  - com.slack.Slack
+  - com.valvesoftware.Steam
+  - fr.handbrake.ghb
+  - org.bunkus.mkvtoolnix-gui
+  - org.freedesktop.Platform.ffmpeg-full/x86_64/23.08
+  - org.freedesktop.Platform.openh264/x86_64/2.3.0
+  - org.gimp.GIMP
+  - org.kde.kolourpaint
+  - org.kde.okular
+  - org.libreoffice.LibreOffice
+
+base_fonts:
+  - adobe-source-code-pro-fonts
+  - adobe-source-sans-pro-fonts
+  - adobe-source-serif-pro-fonts
+  - gnu-free-fonts
+  - noto-fonts
+  - noto-fonts-cjk
+  - noto-fonts-emoji
+  - powerline-fonts
+  - ttf-anonymous-pro
+  - ttf-dejavu
+  - otf-cascadia-code
+  - ttf-cascadia-code
+  - ttf-hack
+  - ttf-nerd-fonts-symbols
+
