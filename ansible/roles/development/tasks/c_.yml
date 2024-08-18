@@ -1,0 +1,6 @@
+- name: Install packages
+  community.general.pacman:
+    name: "{{ packages }}"
+    state: present
+  become: true
+# TODO: what comes into a C toolchain?

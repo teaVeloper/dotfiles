@@ -11,6 +11,8 @@ pass_aur_packages:
   - tomb
   - pass-tomb
   - pass-update
+  - pass-import
+  - pass-audit
   - tessen
   - pass-tessen
 

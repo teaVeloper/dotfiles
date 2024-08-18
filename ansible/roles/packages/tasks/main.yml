@@ -1,0 +1,25 @@
+---
+- name: Install packages
+  become: true
+  community.general.pacman:
+    name: "{{ packages }}"
+    state: present
+
+- name: Install font packages
+  ansible.builtin.import_tasks: fonts.yml
+
+- name: Install aur packages
+  ansible.builtin.import_tasks: aur.yml
+
+- name: Install flatpaks
+  ansible.builtin.import_tasks: flatpak.yml
+
+- name: Install pipx
+  ansible.builtin.import_tasks: pipx.yml
+
+- name: Start systemd service - systemd-modules-load.service
+  become: true
+  ansible.builtin.systemd:
+    name: systemd-modules-load.service
+    state: started
+    enabled: yes

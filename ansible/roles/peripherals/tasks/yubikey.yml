@@ -12,6 +12,7 @@
       - yubikey-personalization
       - gnupg
       - ccid
+      - pcsclite
     state: present
 
 - name: Configure YubiKey

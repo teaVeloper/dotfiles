@@ -1,0 +1,6 @@
+---
+- name: Install fonts
+  become: true
+  community.general.pacman:
+    name: "{{ base_fonts }}"
+    state: present
