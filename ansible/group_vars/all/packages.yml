@@ -12,10 +12,7 @@ packages:
   - ripgrep
   - bat
   - fzf
-  - delta
-  - asdf
-  - mise
-  - rust
+  - rustup
   - gnupg
   - python-pip
   - python-pipx
@@ -32,8 +29,6 @@ packages:
   - openocd
   - verilator
   - kicad
-  - ros-melodic-desktop-full  # Example ROS package
-  - android-studio
   - arduino
   - gnuradio
   # gui core
@@ -55,10 +50,7 @@ packages:
   - blender
   - obs-studio
   - inkscape
-  - lightworks
   # networking
-  - gns3-gui
-  - gns3-server
   - wireshark-qt
   - tcpdump
   - nmap
@@ -73,7 +65,7 @@ packages:
   - sagemath
   - octave
   - r
-  - texlive-most
+  - texlive
   # security research
   - ghidra
   - radare2
@@ -86,6 +78,8 @@ packages:
   - timeshift
   - ufw
   - fail2ban
+  - apparmor
+  - wezterm
   - kitty
   # dev
   - git-filter-repo
@@ -154,10 +148,12 @@ packages:
   - age
   - pass
   - gopass
+  - intellij-idea-community-edition
+  - git-delta
 
 aur_packages:
   - zsh-antidote
-  - git-delta
+  - anki
   - miniconda3
   - ida-free
   - mise
@@ -165,6 +161,11 @@ aur_packages:
   - rpi-imager-bin
   - svgo
   - tomb
+  - gns3-gui
+  - gns3-server
+  - android-studio
+  # - ros-melodic-desktop-full  # Example ROS package
+  # - lightworks
 
 pipx_packages:
   - platformio
@@ -178,7 +179,7 @@ flatpaks:
   - com.spotify.Client
   - md.obsidian.Obsidian
   # - com.microsoft.Teams
-  - com.blackmagicdesign.DaVinciResolve
+  # - com.blackmagicdesign.DaVinciResolve
   - com.discordapp.Discord
   - com.github.tchx84.Flatseal
   - com.slack.Slack

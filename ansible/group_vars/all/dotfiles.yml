@@ -25,4 +25,6 @@ dotfiles_to_symlink:
   kitty:
     src: "{{ playbook_dir }}/../dots/kitty"
     dest: "{{ xdg_config_home }}/kitty"
-
+  git:
+    src: "{{ playbook_dir }}/../dots/git"
+    dest: "{{ xdg_config_home }}/git"
