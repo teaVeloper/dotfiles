@@ -1,22 +1,22 @@
 [user]
-	email = bertold.sedlak@cyansecurity.com
-	name = Bertold Sedlak
+    email = bertold.sedlak@cyansecurity.com
+    name = Bertold Sedlak
 
 [credential]
-	helper = cache --timeout 7200000
+    helper = cache --timeout 7200000
 
 [merge]
-	tool = fugitive
+    tool = fugitive
 [mergetool]
     prompt = false
 [mergetool "nvim"]
     cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 [mergetool "fugitive"]
-	cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
+    cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 
 [core]
     editor = nvim
-    excludesfile = ~/.vcsignore
+    excludesfile = ./ignore
 
 [difftool]
     prompt = true
