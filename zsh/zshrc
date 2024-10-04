@@ -58,3 +58,5 @@ fi
 source ${zsh_plugins}.zsh
 
 # }}}
+
+. "$HOME/.local/share/cargo/env"

@@ -56,9 +56,9 @@ vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- Add undo break-points
-vim.keymap.set("i", ",", ",<c-g>u")
-vim.keymap.set("i", ".", ".<c-g>u")
-vim.keymap.set("i", ";", ";<c-g>u")
+-- vim.keymap.set("i", ",", ",<c-g>u")
+-- vim.keymap.set("i", ".", ".<c-g>u")
+-- vim.keymap.set("i", ";", ";<c-g>u")
 
 -- Format on <leader>f with lsp
 vim.keymap.set("n", "<leader>f", ":Format<CR>")
@@ -69,9 +69,6 @@ vim.keymap.set("n", "<leader>v", ":vsplit<CR>")
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 
 -- map Ctrl+N and Ctrl+P for completion in command mode
--- vim.api.nvim_set_keymap("c", "<C-n>", "<C-z>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("c", "<C-p>", "<s-Tab>", { noremap = true, silent = true })
-
 -- Function to handle completion with Ctrl+N
 vim.api.nvim_set_keymap(
     "c",
@@ -79,7 +76,6 @@ vim.api.nvim_set_keymap(
     'pumvisible() ? "\\<C-n>" : "\\<C-z>"',
     { expr = true, noremap = true, silent = true }
 )
-
 -- Function to handle completion with Ctrl+P
 vim.api.nvim_set_keymap(
     "c",

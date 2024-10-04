@@ -1,6 +1,8 @@
 export MISE_SHELL=zsh
 export __MISE_ORIG_PATH="$PATH"
 
+mise_path="/home/linuxbrew/.linuxbrew/bin/mise"
+
 mise() {
   local command
   command="${1:-}"
@@ -14,16 +16,16 @@ mise() {
   deactivate|s|shell)
     # if argv doesn't contains -h,--help
     if [[ ! " $@ " =~ " --help " ]] && [[ ! " $@ " =~ " -h " ]]; then
-      eval "$(command $HOME/.local/bin/mise "$command" "$@")"
+      eval "$(command "$mise_path" "$command" "$@")"
       return $?
     fi
     ;;
   esac
-  command $HOME/.local/bin/mise "$command" "$@"
+  command "$mise_path" "$command" "$@"
 }
 
 _mise_hook() {
-  eval "$($HOME/.local/bin/mise hook-env -s zsh)";
+  eval "$("$mise_path" hook-env -s zsh)";
 }
 typeset -ag precmd_functions;
 if [[ -z "${precmd_functions[(r)_mise_hook]+1}" ]]; then

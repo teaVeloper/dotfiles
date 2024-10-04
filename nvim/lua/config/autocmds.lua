@@ -109,3 +109,23 @@ vim.api.nvim_create_autocmd("Modechanged", {
         vim.opt.relativenumber = false
     end,
 })
+
+-- Function to get the base filetype from the filename
+local function get_base_filetype(filename)
+    -- Extract the base extension (e.g., 'toml' from 'config.toml.jinja2')
+    local base_ext = filename:match("^.+%.([^.]+)%.[^.]+$")
+    return base_ext
+end
+
+-- Autocommand to set the filetype if its a template
+local patterns = { "*.jinja2", "*.tpl" }
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = patterns,
+    group = augroup("TemplateFileType"),
+    callback = function(args)
+        local base_ft = get_base_filetype(args.file)
+        if base_ft then
+            vim.bo.filetype = base_ft
+        end
+    end,
+})
