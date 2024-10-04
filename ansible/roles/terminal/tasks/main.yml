@@ -1,0 +1,20 @@
+---
+- name: Install terminal emulators
+  pacman:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - kitty
+    - alacritty
+    - noto-fonts-emoji
+
+- name: Install Nerdfonts
+  yay:
+    name: nerd-fonts-complete
+    state: present
+
+- name: Install additional terminal dependencies
+  pacman:
+    name: ttf-nerd-fonts-symbols
+    state: present
+

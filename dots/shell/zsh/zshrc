@@ -34,9 +34,6 @@ local instant_prompt_file=${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zshzl
 local p10k_config=${ZDOTDIR}/p10k.zsh
 [[ -r "$p10k_config" ]] && source "$p10k_config"
 
-# }}}
-
-
 
 # Antidote
 # Set the root name of the plugins files (.txt and .zsh) antidote will use.
@@ -64,7 +61,7 @@ else
   return
 fi
 # Cleanup intermediate variables
-unset arch_antidote git_antidote brew_antidot
+unset arch_antidote git_antidote brew_antidote
 
 # Lazy-load antidote from its functions directory.
 fpath=(${ANTIDOTE_DIR}/functions $fpath)
