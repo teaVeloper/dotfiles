@@ -150,6 +150,8 @@ packages:
   - gopass
   - intellij-idea-community-edition
   - git-delta
+  - rofi
+  - pandoc
 
 aur_packages:
   - zsh-antidote
