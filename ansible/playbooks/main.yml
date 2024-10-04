@@ -1,51 +1,14 @@
----
-- name: Configure all machines
-  hosts: all
+- name: Configure Machine
+  hosts: localhost
   become: true
+  vars_files:
+    - "../group_vars/all/packages.yml"
+    - "../group_vars/{{ machine_type }}/packages.yml"
 
   roles:
+    - role: basics
     - role: dotfiles
-      tags: dotfiles
-      vars:
-        dotfiles_mode: full  # Options: full, lightweight
-
-    - role: terminal
-      tags: terminal
-
-    - role: cli-core
-      tags: cli
-
-    - role: gui-core
-      tags: gui
-
-    - role: gui-dev
-      when: "'workstations' in group_names"
-      tags: gui-dev
-
-    - role: dev-tools
-      tags: dev-tools
-
-    - role: low-level-dev
-      tags: low-level
-
-    - role: electronics
-      tags: electronics
-
-    - role: engineering
-      tags: engineering
-
-    - role: multimedia
-      tags: multimedia
-
-    - role: security-research
-      tags: security
-
-    - role: vm  # VM setup
-      tags: vm
-
-    - role: scientific-computing
-      tags: scientific
-
-    - role: sys-admin
-      tags: sysadmin
+    - role: packages
+    - { role: desktop_specific_role, when: machine_type == 'desktop' }
+    - { role: laptop_specific_role, when: machine_type == 'laptop' }
 

@@ -18,7 +18,6 @@ git:
 pacman:
   parallel_downloads: 10
 
-
 #  -- Services ---
 
 # if not using LVM, disable it
