@@ -73,7 +73,7 @@
 	autocorrect = 20
 
 [init]
-	templatedir = ~/dotfiles/git/git_template
+	; templatedir = ~/dotfiles/git/git_template
 	defaultBranch = main
 
 [pull]

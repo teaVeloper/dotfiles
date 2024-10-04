@@ -221,7 +221,7 @@ alias gsu='git submodule update'
 # ls Versions with exa {{{
 # detailed version, but all alphabetically - no regards of dirs
 # TODO: describe options here
-alias la='eza -alh --git --time-style long-iso --icons'
+alias la='eza -F -alh --git --time-style long-iso --icons'
 # detailed option - always used
 alias l='la --group-directories-first'
 # only directories
