@@ -14,6 +14,12 @@
       - ccid
       - pcsclite
     state: present
+- name: Install AUR packages
+  become: true
+  kewlfft.aur.aur:
+    name: yubikey-agent
+    state: present
+    use: "{{ aur_helper }}"
 
 - name: Configure YubiKey
   become: True
