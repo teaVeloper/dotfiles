@@ -23,6 +23,7 @@ package_categories:
   base:
     pacman:
       # **System Utilities**
+      - xclip                      # clipboard via CLI
       - vim                        # Text editor
       - unzip                      # Unzip utility
       - zip                        # Zip utility

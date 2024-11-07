@@ -1,6 +1,5 @@
-[user]
-    email = bertold.sedlak@cyansecurity.com
-    name = Bertold Sedlak
+[include]
+    path = ~/dotfiles/.private/git.user.conf
 
 [credential]
     helper = cache --timeout 7200000

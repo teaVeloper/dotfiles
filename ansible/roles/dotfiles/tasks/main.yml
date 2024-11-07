@@ -88,3 +88,18 @@
       export XDG_CACHE_HOME="{{ xdg_cache_home }}"
       export XDG_STATE_HOME="{{ xdg_state_home }}"
   when: ansible_env.SHELL.endswith('bash') or ansible_env.SHELL.endswith('zsh')
+
+- name: Decode email address
+  set_fact:
+    git_user_email: "{{ private_email_b64 | b64decode }}"
+
+- name: Create git-user file
+  copy:
+    dest: '{{ ansible_env.HOME }}/dotfiles/.private/git.user.conf'
+    content: |
+      [user]
+          name = {{ full_name }}
+          email = {{ git_user_email }}
+    mode: '0600'
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
